@@ -11,7 +11,8 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
+app.engine('html', require('ejs-mate'));
 
 app.use(logger('dev'));
 app.use(express.json());
