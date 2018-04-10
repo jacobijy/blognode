@@ -1,6 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 var store = require('../../store/main');
+import logo from './logo.svg';
+require('../../../css/App.css')
 
 class MessageList extends React.Component {
   constructor(props) {
@@ -12,20 +14,32 @@ class MessageList extends React.Component {
   }
 
   render() {
-    var self = this;
-    var messages = this.state.messageList;
-    var arr = [];
+    // var self = this;
+    // var messages = this.state.messageList;
+    // var arr = [];
 
-    messages
-      .forEach(function (em) {
-        arr.push(<li key={em}> {em} </li>);
-      });
-    return <section className="pageContentInner">
-      <div className="head-section"><h1>MessageList: </h1></div>
-      <ul>
-        {arr}
-      </ul>
-    </section>;
+    // messages
+    //   .forEach(function (em) {
+    //     arr.push(<li key={em}> {em} </li>);
+    //   });
+    console.log({logo});
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a href='true'>
+        test
+        </a>
+        <button className="App-login">
+          Login
+        </button>
+      </div>
+    );
   }
 
   getData() {

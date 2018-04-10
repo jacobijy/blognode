@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app.js",
-    "pack": "webpack --config ./client/public/webpack.config.js"
+    "start": "nodemon ./app.js",
+    "pack": "webpack --config ./client/public/webpack.config.js",
+    "babel": "babel ./client/public/javascripts/view/index.js"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -23,9 +24,16 @@
     "nodemon": "^1.17.3",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "style-loader": "^0.20.3"
+    "style-loader": "^0.20.3",
+    "svg-loader": "0.0.2"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "file-loader": "^1.1.11",
+    "raw-loader": "^0.5.1",
+    "svg-inline-loader": "^0.8.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14"
   }
