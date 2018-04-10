@@ -22,7 +22,6 @@ class MessageList extends React.Component {
     //   .forEach(function (em) {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
-    console.log({logo});
     return (
       <div className="App">
         <header className="App-header">
@@ -32,9 +31,6 @@ class MessageList extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <a href='true'>
-        test
-        </a>
         <button className="App-login">
           Login
         </button>

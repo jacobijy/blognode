@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./app.js",
-    "pack": "webpack --config ./client/public/webpack.config.js",
-    "babel": "babel ./client/public/javascripts/view/index.js"
+    "pack": "webpack --config ./client/public/webpack.config.js --watch",
+    "babel": "babel ./client/public/javascripts/view/main/index.js"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
