@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 var store = require('../../store/main');
 import logo from './logo.svg';
 require('../../../css/App.css')
 
-class MessageList extends React.Component {
+class MessageList extends Component {
   constructor(props) {
     super(props);
     this.state = {

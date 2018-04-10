@@ -1,15 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import createError from 'http-errors';
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from "morgan";
+import http from 'http';
+import config from './config'
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var debug = require('debug')('blognode:server');
-var http = require('http');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
@@ -17,6 +17,7 @@ app.engine('html', require('ejs-mate'));
 
 // 新增接口路由
 app.get('/data/:module', function (req, res, next) {
+  console.log('fecth success');
   var c_path = req.params.module;
   var Action = require('./server/action/data/' + c_path);
   Action.execute(req, res);
