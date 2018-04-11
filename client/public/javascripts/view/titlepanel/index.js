@@ -15,7 +15,12 @@ export default class TitlePanel extends Component {
         <div className="Title-navbar">
           <ul className="site-menu">
             <li className="menu-item"><a href="/">首页</a></li>
-            <li className="menu-item"><a href="">技术分享</a></li>
+            <li className="menu-item"><span><a href="/">技术分享</a></span>
+              <div className="menu-item-seconary">
+                <a href="">test</a>
+                <a href="">test</a>
+              </div>
+            </li>
             <li className="menu-item"><a href="">随记</a></li>
             <li className="menu-item"><a href="">归档</a></li>
             <li className="menu-item"><a href="">友情链接</a></li>
