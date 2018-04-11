@@ -2,7 +2,7 @@
   "appenders": {
     "access": {
       "type": "dateFile",
-      "filename": "log/access.log",
+      "filename": "logs/access.log",
       "pattern": "-yyyy-MM-dd"
     },
     "rule-console": {
@@ -10,7 +10,7 @@
     },
     "rule-file": {
       "type": "dateFile",
-      "filename": "log/server-",
+      "filename": "logs/server-",
       "encoding": "utf-8",
       "maxLogSize": 10000000,
       "numBackups": 3,
@@ -19,7 +19,7 @@
     },
     "rule-error": {
       "type": "dateFile",
-      "filename": "log/error-",
+      "filename": "logs/error-",
       "encoding": "utf-8",
       "maxLogSize": 1000000,
       "numBackups": 3,

@@ -7,32 +7,16 @@ var _ = require('lodash');
 var UserSchema = new Schema({
   name: { type: String },
   loginname: { type: String },
-  pass: { type: String },
+  password: { type: String },
   email: { type: String },
   url: { type: String },
   profile_image_url: { type: String },
-  location: { type: String },
-  signature: { type: String },
   profile: { type: String },
   avatar: { type: String },
-  githubId: { type: String },
-  githubUsername: { type: String },
-  githubAccessToken: { type: String },
   is_block: { type: Boolean, default: false },
 
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
-  is_star: { type: Boolean },
-  level: { type: String },
-  active: { type: Boolean, default: false },
-
-  receive_reply_mail: { type: Boolean, default: false },
-  receive_at_mail: { type: Boolean, default: false },
-  from_wp: { type: Boolean },
-
-  retrieve_time: { type: Number },
-  retrieve_key: { type: String },
-
   accessToken: { type: String },
 });
 
@@ -54,11 +38,6 @@ UserSchema.virtual('avatar_url').get(function () {
   }
 
   return url;
-});
-
-UserSchema.virtual('isAdvanced').get(function () {
-  // 积分高于 700 则认为是高级用户
-  return this.score > 700 || this.is_star;
 });
 
 UserSchema.index({ loginname: 1 }, { unique: true });

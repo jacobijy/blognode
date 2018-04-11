@@ -14,6 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
+app.locals._layoutFile = 'layout.html';
 
 // 新增接口路由
 app.get('/data/:module', function (req, res, next) {

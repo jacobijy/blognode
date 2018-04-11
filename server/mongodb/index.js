@@ -3,7 +3,7 @@ import logger from "../../utils/logger";
 import config from '../../config';
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
-}, function (err) {
+}, err => {
   if (err) {
     logger.log(config.mongodb_conf);
     logger.error('connect to %s error: ', config.mongodb_conf, err.message);
