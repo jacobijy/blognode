@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import titlePanel from "../titlepanel";
 var store = require('../../store/main');
-require('../../../css/App.css')
+require('./App.css')
 
 class MainContainer extends Component {
   constructor(props) {

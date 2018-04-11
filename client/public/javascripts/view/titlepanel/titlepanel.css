@@ -1,0 +1,23 @@
+#Title-header {
+  background-color: bisque;
+  height: 150px;
+  padding: 0px;
+  color: white;
+  text-align: center;
+}
+
+/* .Title-navbar {
+
+} */
+
+.site-menu {
+  text-align: center;
+}
+
+.menu-item {
+  text-align: center;
+  float: left;
+  color: black;
+  margin: 10px;
+  padding-bottom: 0px;
+}
