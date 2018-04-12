@@ -16,5 +16,3 @@ export default class ArticlePanel extends Component {
     )
   }
 }
-
-render(<ArticlePanel />, document.getElementById("article-panel"));

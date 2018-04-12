@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-var store = require('../../store/main');
-require('./App.css')
+var store = require.ensure('../../store/main');
+import './App.css'
 
-class MainContainer extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,11 +13,11 @@ class MainContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('maincontainer mounted');
+    console.log('App mounted');
   }
 
   componentWillUnmount() {
-    console.log('maincontainer unmouted');
+    console.log('App unmouted');
   }
 
   render() {

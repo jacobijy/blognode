@@ -17,6 +17,7 @@ export default class TitlePanel extends Component {
   }
 
   render() {
+    var self = this;
     return (
       <div id="title-header">
         <div id="title-name">
@@ -37,7 +38,10 @@ export default class TitlePanel extends Component {
             <li class="menu-item"><a href="#about">关于我</a></li>
           </ul>
         </div>
+        <div>{self.props.children}</div>
       </div>
     )
   }
 }
+
+render(<TitlePanel />, document.getElementById("title-panel"))

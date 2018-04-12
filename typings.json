@@ -1,6 +1,10 @@
 {
   "globalDependencies": {
     "moment": "registry:dt/moment#2.11.1+20161010105546",
-    "mongoose": "registry:dt/mongoose#4.7.0+20170322192047"
+    "mongoose": "registry:dt/mongoose#4.7.0+20170322192047",
+    "react-router": "registry:dt/react-router#4.0.0+20170323201651"
+  },
+  "globalDevDependencies": {
+    "webpack-dev-server": "registry:dt/webpack-dev-server#1.12.1+20170117213337"
   }
 }
