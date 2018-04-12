@@ -1,31 +1,34 @@
 #title-header {
   background-color: bisque;
-  height: 150px;
+  /* height: 150px; */
   padding: 0px;
+  margin: 0px;
   color: white;
   text-align: center;
+  position: relative;
 }
 
-#title-navbar {
-  text-align: center;
-  margin:auto;
+#title-name {
+  height: 104px;
+}
+
+ul, #title-navbar {
   list-style-type: none;
+  margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
 }
 
-li .menu-item{
-  margin: auto;
-  text-align: center;
-  color: black;
-  display: inline;
-  background-color: black;
-  color: white;
-  padding: 16px;
+li, .menu-item{
+  /* float: left; */
+  width: 100px;
+  background-color: #333;
   font-size: 16px;
-  border: none;
-  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  display: inline-block;
+  /* cursor: pointer; */
 }
 
 li a, .dropbtn {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import logo from "../../../images/logo.svg"
-import "./titlepanel.css";
+// import "./titlepanel.css";
 
 export default class TitlePanel extends Component {
   constructor(props) {
