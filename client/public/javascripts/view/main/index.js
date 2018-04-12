@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import titlePanel from "../titlepanel";
 var store = require('../../store/main');
 require('./App.css')
 
@@ -11,6 +10,14 @@ class MainContainer extends Component {
       messageList: []
     };
     this.getData();
+  }
+
+  componentDidMount() {
+    console.log('maincontainer mounted');
+  }
+
+  componentWillUnmount() {
+    console.log('maincontainer unmouted');
   }
 
   render() {

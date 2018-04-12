@@ -1,11 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
 import { User } from "../server/mongodb";
-var router = express.Router();
+import main from "./main";
+import users from "./users";
+import sign from "./sign";
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  
-  res.render('index', { title: 'Jacobi\'s Blog' });
-});
+var router = Router();
+router.get('/', main.index);
+router.get('/signup', sign.signup)
 
 module.exports = router;

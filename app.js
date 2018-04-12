@@ -5,8 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from "morgan";
 import http from 'http';
 import config from './config'
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+import Router from "./routes";
 var debug = require('debug')('blognode:server');
 
 var app = express();
@@ -111,8 +110,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', Router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

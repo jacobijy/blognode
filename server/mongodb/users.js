@@ -5,6 +5,7 @@ import utility from 'utility';
 var _ = require('lodash');
 
 var UserSchema = new Schema({
+  id: { type: Number },
   name: { type: String },
   loginname: { type: String },
   password: { type: String },
