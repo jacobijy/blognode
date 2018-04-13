@@ -1,14 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import { render } from "react-dom";
-import { Route, Router } from "react-router";
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import TitlePanel from "../titlepanel";
 import MainContainer from "../App";
 import SignPanel from "../signpanel";
 
-// render((
-//   <Router history={hashHistory}>
-//     <Route path="/" component={TitlePanel}>
-//       <Route path="/signup" component={SignPanel} />
-//     </Route>
-//   </Router>), document.getElementById("title-panel")
-// );
+class MainRouter extends Component {
+  render() {
+    return (
+      <Router forceRefresh={false}>
+        <Switch>
+          <Route exact path="/" component={MainContainer} />
+          <Route path="/signup" component={SignPanel} />
+        </Switch>
+      </Router>
+    )
+  }
+}
+
+render(<TitlePanel />, document.getElementById("title-panel"));
+render(<MainRouter />, document.getElementById("main-container"));

@@ -16,10 +16,10 @@ app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
 
 // 新增接口路由
-app.get('/data/:module', function (req, res, next) {
+app.get('/data/:module', (req, res, next) => {
   console.log('fecth success');
-  var c_path = req.params.module;
-  var Action = require('./server/action/data/' + c_path);
+  let c_path = req.params.module;
+  let Action = require('./server/action/data/' + c_path);
   Action.execute(req, res);
 });
 
@@ -49,7 +49,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -73,7 +73,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -97,8 +97,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
@@ -113,12 +113,12 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use('/', Router);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

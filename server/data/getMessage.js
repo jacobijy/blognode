@@ -5,6 +5,6 @@ var MessageList = [
   { "Message": "Hello Express" }
 ];
 
-exports.getMessageList = function (callback) {
+exports.getMessageList = (callback) => {
   callback(MessageList);
 };

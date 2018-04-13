@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../images/logo.svg"
 import "./titlepanel.css";
 
@@ -24,18 +25,18 @@ export default class TitlePanel extends Component {
         </div>
         <div>
           <ul id="title-navbar">
-            <li class="menu-item"><a class="active" href="#home">主页</a></li>
-            <li class="dropdown"><a class="dropbtn" href="#share">技术分享</a>
-              <div class="dropdown-content">
+            <li className="menu-item"><Link to="/about" className="active" >主页</Link></li>
+            <li className="dropdown"><a className="dropbtn" href="#share">技术分享</a>
+              <div className="dropdown-content">
                 <a href="/signup">注册</a>
                 <a href="#">链接 2</a>
                 <a href="#">链接 3</a>
               </div>
             </li>
-            <li class="menu-item"><a href="#note">随记</a></li>
-            <li class="menu-item"><a href="#archive">归档</a></li>
-            <li class="menu-item"><a href="#linkx">友情链接</a></li>
-            <li class="menu-item"><a href="#about">关于我</a></li>
+            <li className="menu-item"><a href="#note">随记</a></li>
+            <li className="menu-item"><a href="#archive">归档</a></li>
+            <li className="menu-item"><a href="#linkx">友情链接</a></li>
+            <li className="menu-item"><a href="#about">关于我</a></li>
           </ul>
         </div>
         <div>{self.props.children}</div>

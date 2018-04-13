@@ -8,7 +8,8 @@ module.exports = {
   },
   // 入口文件输出配置
   output: {
-    path: __dirname + '/client/output/js/',
+    path: __dirname + '/public/output/js/',
+    publicPath: '/public/output/js/',
     filename: '[name].bundle.js'
   },
 
@@ -40,7 +41,13 @@ module.exports = {
   optimization: {
 
   },
-  // 插件项
+
+  devServer: {
+    contentBase: "./client",//本地服务器所加载的页面所在的目录
+    historyApiFallback: true,//不跳转
+    inline: true//实时刷新
+  },
+
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]

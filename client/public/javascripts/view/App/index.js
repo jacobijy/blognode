@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-var store = require.ensure('../../store/main');
+import store from '../../store/main';
 import './App.css'
 
 class App extends Component {
@@ -29,9 +29,9 @@ class App extends Component {
     //   .forEach(function (em) {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
+    var self = this;
     return (
-      <div className="App">
-      </div>
+      <div>{self.props.children}</div>
     );
   }
 
@@ -51,4 +51,4 @@ class App extends Component {
   }
 }
 
-export default MainContainer;
+export default App;

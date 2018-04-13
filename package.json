@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./main.js",
-    "pack": "webpack --config ./configweb/webpack.config.js --watch --progress --colors",
-    "dev": "webpack-dev-server --config ./configweb/webpack.dev.config.js --watch --progress --colors --open --port 3000",
+    "pack": "webpack --config ./client/webpack.config.js --watch --progress --colors",
+    "dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '172.26.164.243' --mode 'development'",
     "babel": "babel ./client/public/javascripts/view/main/index.js"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "style-loader": "^0.20.3",
     "svg-loader": "0.0.2",
     "utility": "^1.13.1"
