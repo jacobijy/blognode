@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Link } from "react-router-dom";
-import logo from "../../../images/logo.svg"
-import "./titlepanel.css";
+import logo from "../../images/logo.svg"
+import "./css/titlepanel.css";
 
 export default class TitlePanel extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class TitlePanel extends Component {
         </div>
         <div>
           <ul id="title-navbar">
-            <li className="menu-item"><Link to="/about" className="active" >主页</Link></li>
+            <li className="menu-item"><a className="active" href="/">主页</a></li>
             <li className="dropdown"><a className="dropbtn" href="#share">技术分享</a>
               <div className="dropdown-content">
                 <a href="/signup">注册</a>

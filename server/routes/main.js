@@ -1,4 +1,4 @@
-import { User } from "../server/mongodb";
+import { User } from "../mongodb";
 
 /* GET home page. */
 exports.index = (req, res, next) => {

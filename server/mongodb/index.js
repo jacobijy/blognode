@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import logger from "../../utils/logger";
-import config from '../../config';
+import { config } from '../../config';
+
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
 }, (err) => {

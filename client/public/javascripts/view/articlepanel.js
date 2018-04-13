@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
-import "./article.css";
+import "./css/article.css";
 
 export default class ArticlePanel extends Component {
   render() {

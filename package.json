@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./main.js",
     "pack": "webpack --config ./client/webpack.config.js --watch --progress --colors",
-    "dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '172.26.164.243' --mode 'development'",
+    "dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '192.168.137.78' --mode 'development'",
     "babel": "babel ./client/public/javascripts/view/main/index.js"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.20.3",
+    "superagent": "^3.8.2",
     "svg-loader": "0.0.2",
     "utility": "^1.13.1"
   },
@@ -42,6 +43,8 @@
     "babel-preset-eslatest-node6": "^1.0.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "raw-loader": "^0.5.1",

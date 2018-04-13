@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import store from '../../store/main';
-import './App.css'
+import store from '../store/main';
+import './css/App.css'
 
 class App extends Component {
   constructor(props) {
