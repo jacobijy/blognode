@@ -5,14 +5,9 @@ import { ApiClientPost } from "../../../../utils/apiClient";
 export default class SignPanel extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    console.log('signpanel mounted');
-  }
-
-  componentWillUnmount() {
-    console.log('signpanel unmouted');
+    this.state={
+      message: ''
+    }
   }
 
   render() {
@@ -36,11 +31,10 @@ export default class SignPanel extends Component {
               <td>邮箱</td>
               <td><input className="input-message" id="email" type="email" name="email" /></td>
             </tr>
-            <tr>
-              <th colSpan="2"><input className="option" type="submit" onClick={this.submitSignup} value="注册" /></th>
-            </tr>
           </tbody>
         </table>
+        <p className='error-message'>{this.state.message}</p>
+        <div><input className="option" type="submit" onClick={this.submitSignup.bind(this)} value="注册" /></div>
       </div>
     )
   }
@@ -50,12 +44,18 @@ export default class SignPanel extends Component {
     let password = document.getElementById('password').value;
     let passwordex = document.getElementById('passwordex').value;
     let email = document.getElementById('email').value;
+    const signupresult = (err, res) => {
+      if (err) {
+        this.setState({message:err.response.text})
+      } else {
+        this.setState({message:res.text})
+      }
+    }
     ApiClientPost({
       username: username,
       password: password,
       passwordex: passwordex,
       email: email
-    }, '/signup');
-
+    }, '/signup', signupresult);
   }
 }

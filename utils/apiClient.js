@@ -47,13 +47,10 @@ export default class ApiClient {
   empty() { }
 }
 
-export function ApiClientPost(params, path) {
-  console.log('send start')
+export function ApiClientPost(params, path, callback) {
   superagent
     .post(formatUrl(path))
+    .set('Accept', 'application/json')
     .send(params)
-    .end(res => {
-      console.log(res);
-    })
-
+    .end(callback);
 }

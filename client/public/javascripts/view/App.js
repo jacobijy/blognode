@@ -31,7 +31,9 @@ class App extends Component {
     //   });
     var self = this;
     return (
-      <div>{self.props.children}</div>
+      <div>
+        {self.props.children}
+      </div>
     );
   }
 

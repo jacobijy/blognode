@@ -8,15 +8,25 @@ import SignPanel from "../signpanel";
 class MainRouter extends Component {
   render() {
     return (
-      <Router forceRefresh={false}>
+      <main>
         <Switch>
-          <Route exact path="/" component={MainContainer} />
-          <Route path="/signup" component={SignPanel} />
+          <Route exact path='/' component={MainContainer} />
+          <Route path='/signup' component={SignPanel} />
         </Switch>
-      </Router>
+      </main>
     )
   }
 }
 
-render(<TitlePanel />, document.getElementById("title-panel"));
-render(<MainRouter />, document.getElementById("main-container"));
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <TitlePanel />
+        <MainRouter />
+      </div>
+    )
+  }
+}
+
+render(<Router><App /></Router>, document.getElementById("main-container"));

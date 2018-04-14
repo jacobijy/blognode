@@ -27,12 +27,13 @@ li, .menu-item{
   margin: 0px;
   padding: 0px;
   border: 0px;
-  display: inline-block;
+  display: inline-flex;
   /* cursor: pointer; */
 }
 
 li a, .dropbtn {
-  display: inline-block;
+  margin: auto;
+  display: inline-flex;
   color: white;
   text-align: center;
   padding: 14px 16px;
