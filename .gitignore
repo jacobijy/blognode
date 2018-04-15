@@ -64,3 +64,5 @@ typings/
 .idea/
 *.code-workspace
 test/
+*hot-update*
+client/public/output/
