@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path')
 
 module.exports = {
 	// 页面入口文件配置
@@ -7,7 +8,7 @@ module.exports = {
 	},
 	// 入口文件输出配置
 	output: {
-		path: __dirname + '/public/output/js/',
+		path: path.join(__dirname, 'public/output/js'),
 		publicPath: '/public/output/js/',
 		filename: '[name].bundle.js'
 	},

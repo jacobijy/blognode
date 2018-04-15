@@ -11,10 +11,9 @@ var debug = require('debug')('blognode:server');
 
 var app = express();
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-app.engine('html', require('ejs-mate'));
-app.locals._layoutFile = 'layout.html';
+// app.set('views', path.join(__dirname, '../views'));
+// app.set('view engine', 'html');
+// app.engine('html', require('ejs-mate'));
 
 // 新增接口路由
 app.get('/data/:module', (req, res, next) => {
@@ -109,7 +108,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, '../client')));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -125,7 +124,8 @@ app.use((req, res, next) => {
   // console.log(next);
   // next(createError(404));
   // logger.error(res);
-  res.send('404 NOT FOUND');
+  // res.send('404 NOT FOUND');
+  next(createError(404))
 });
 
 // error handler

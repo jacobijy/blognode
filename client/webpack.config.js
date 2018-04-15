@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
   },
   // 入口文件输出配置
   output: {
-    path: __dirname + '/public/output/js/',
+    path: path.join(__dirname, 'public/output/js'),
     filename: '[name].bundle.js'
   },
 
@@ -42,6 +43,7 @@ module.exports = {
   },
   // 插件项
   plugins: [
+    new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
 }

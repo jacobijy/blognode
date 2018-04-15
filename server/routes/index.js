@@ -1,15 +1,15 @@
 import express from "express";
-// import { User } from "../mongodb";
 import main from "./main";
 // import users from "./users";
 import sign from "./sign";
-
 import * as tools from "../../utils/tools";
 import { trim, isEmail } from "validator";
+import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
+import { User } from "../mongodb";
 
 var router = express.Router();
 router.get('/', main.index);
-router.get('/signup', sign.signup);
+
 router.post('/signup', (req, res, next) => {
 	const signuperror = function (msg) {
 		res.status(422);
@@ -37,6 +37,28 @@ router.post('/signup', (req, res, next) => {
 		return signuperror('两次密码输入不一致。');
 	}
 
+	let query = { "$or": [{ "username": username }, { "email": email }] };
+	getUsersByQuery(query, {}, (err, users) => {
+		if (err) {
+			return signuperror('query err');
+		}
+		if (users.length > 0) {
+			return signuperror('用户名或邮箱已被使用。');
+		}
+
+		tools.bhash(password, (err, passhash) => {
+			if (err) {
+				return next(err);
+			}
+
+			let avatarurl = makerAvatarUrl(email);
+			newAndSave(username, username, passhash, email, avatarurl, false, (err) => {
+				if (err) {
+					return signuperror('save err')
+				}
+			})
+		})
+	})
 });
 
 module.exports = router;

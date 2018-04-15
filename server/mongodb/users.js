@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var UserSchema = new Schema({
   id: { type: Number },
-  name: { type: String },
+  username: { type: String },
   loginname: { type: String },
   password: { type: String },
   email: { type: String },
@@ -15,6 +15,7 @@ var UserSchema = new Schema({
   profile: { type: String },
   avatar: { type: String },
   is_block: { type: Boolean, default: false },
+  active: { type: Boolean },
 
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },

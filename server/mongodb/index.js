@@ -16,4 +16,4 @@ mongoose.connect(config.mongodb_conf, {
 // models
 require('./users');
 
-exports.User = mongoose.model('User');
+export var User = mongoose.model('User');
