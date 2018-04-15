@@ -30,6 +30,7 @@ class App extends Component {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
     var self = this;
+    console.log(this.props.children);
     return (
       <div>
         {self.props.children}

@@ -9,7 +9,7 @@ module.exports = {
 	// 入口文件输出配置
 	output: {
 		path: path.join(__dirname, 'public/output/js'),
-		publicPath: '/public/output/js/',
+		publicPath: '/assets/',
 		filename: '[name].bundle.js'
 	},
 

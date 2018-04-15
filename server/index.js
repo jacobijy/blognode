@@ -11,9 +11,10 @@ var debug = require('debug')('blognode:server');
 
 var app = express();
 // view engine setup
-// app.set('views', path.join(__dirname, '../views'));
-// app.set('view engine', 'html');
-// app.engine('html', require('ejs-mate'));
+console.log(path.join(__dirname, '../views'))
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'html');
+app.engine('html', require('ejs-mate'));
 
 // 新增接口路由
 app.get('/data/:module', (req, res, next) => {

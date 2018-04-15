@@ -6,9 +6,13 @@ import * as tools from "../../utils/tools";
 import { trim, isEmail } from "validator";
 import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
 import { User } from "../mongodb";
+import { join } from "path";
 
 var router = express.Router();
 router.get('/', main.index);
+router.get('/*', (req, res, next) => {
+	res.sendFile(join(__dirname, '../../views/index.html'));
+})
 
 router.post('/signup', (req, res, next) => {
 	const signuperror = function (msg) {

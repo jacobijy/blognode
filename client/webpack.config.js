@@ -1,12 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
   // 页面入口文件配置
-  entry: {
-    main: './client/public/javascripts/view/router/index.js'
-  },
+  entry: ['./client/public/javascripts/view/router/index.js'],
   // 入口文件输出配置
   output: {
     path: path.join(__dirname, 'public/output/js'),
@@ -45,5 +44,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
-  ]
+    // new OpenBrowserPlugin({
+    // })
+  ],
+
+	devServer: {
+		contentBase: "./client",//本地服务器所加载的页面所在的目录
+		historyApiFallback: true,//不跳转
+		inline: true//实时刷新
+	},
 }
