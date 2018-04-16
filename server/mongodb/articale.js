@@ -14,7 +14,7 @@ const ArticleSchema = new Schema({
 
 ArticleSchema.plugin(BaseModel);
 
-ArticleSchema.index({postdate:-1});
+ArticleSchema.index({ postdate: -1 });
 ArticleSchema.index({ author_id: 1 }, { unique: true });
 
 mongoose.model('Article', ArticleSchema);
