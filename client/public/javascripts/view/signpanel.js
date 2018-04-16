@@ -34,7 +34,7 @@ export default class SignPanel extends Component {
           </tbody>
         </table>
         <p className='error-message'>{this.state.message}</p>
-        <div><input className="option" type="submit" onClick={this.submitSignup.bind(this)} value="注册" /></div>
+        <div><button className="option" onClick={this.submitSignup.bind(this)}>注册</button></div>
       </div>
     )
   }

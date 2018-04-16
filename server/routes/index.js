@@ -56,7 +56,9 @@ router.post('/signup', (req, res, next) => {
 			}
 
 			let avatarurl = makerAvatarUrl(email);
-			newAndSave(username, username, passhash, email, avatarurl, false, (err) => {
+			newAndSave(username, username, passhash, email, avatarurl, false, (err, product) => {
+        console.log(product);
+        console.log(err);
 				if (err) {
 					return signuperror('save err')
 				}

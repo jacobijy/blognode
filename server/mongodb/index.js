@@ -14,6 +14,10 @@ mongoose.connect(config.mongodb_conf, {
 );
 
 // models
-require('./users');
+import './users';
+import './articale';
+import './attachment';
 
 export var User = mongoose.model('User');
+export var Articale = mongoose.model('Article');
+// export var Attachment = mongoose.model('Attachment');

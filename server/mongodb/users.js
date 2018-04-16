@@ -2,9 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import BaseModel from './base_model';
 import utility from 'utility';
 
-var _ = require('lodash');
-
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   id: { type: Number },
   username: { type: String },
   loginname: { type: String },
@@ -48,7 +46,7 @@ UserSchema.index({ score: -1 });
 UserSchema.index({ githubId: 1 });
 UserSchema.index({ accessToken: 1 });
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
   var now = new Date();
   this.update_at = now;
   next();

@@ -5,11 +5,11 @@
 import { formatDate } from "../../utils/tools";
 
 module.exports = (schema) => {
-  schema.methods.create_at_ago = () => {
+  schema.methods.create_at_ago = function() {
     return formatDate(this.create_at, true);
   };
 
-  schema.methods.update_at_ago = () => {
+  schema.methods.update_at_ago = function() {
     return formatDate(this.update_at, true);
   };
 };
