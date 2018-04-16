@@ -42,7 +42,7 @@ module.exports = {
   },
   // 插件项
   plugins: [
-    new HtmlWebpackPlugin(),
+    // new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
     // new OpenBrowserPlugin({
     // })

@@ -16,10 +16,10 @@ export default class TitlePanel extends Component {
 				<div>
 					<ul id="title-navbar">
 						<li className="menu-item"><a className="active" href="/">主页</a></li>
-						<li className="dropdown"><a className="dropbtn" href="#share">技术分享</a>
+						<li className="dropdown"><a className="dropbtn" href="/signup">技术分享</a>
 							<div className="dropdown-content">
 								<a href="/signup">注册</a>
-								<a href="#">链接 2</a>
+								<a href="/editor">写文章</a>
 								<a href="#">链接 3</a>
 							</div>
 						</li>

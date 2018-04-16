@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import mongoose_gridfs from "mongoose-gridfs";
-import { createReadStream } from "fs";
-import { config } from "../../config";
+// import mongoose from "mongoose";
+// import { Grid } from "gridfs-stream";
+// import { createReadStream } from "fs";
+// import { config } from "../../config";
 
 /**
  * length: {type: Number},
@@ -13,15 +13,18 @@ import { config } from "../../config";
  * aliases: [{type: String}],
  * metadata: {type: Mixed}
  */
-mongoose.connect(config.mongodb_conf, {}, (err) => {
-  if (err) {
 
-  } else {
-    let gridfs = require('mongoose-gridfs')({
-      collection: 'attachments',
-      model: 'Attachment'
-    })
-    let AttachmentSchema = gridfs.schema;
-    mongoose.model('Attachment', AttachmentSchema);
-  }
-});
+// const gridfs = new Grid();
+
+// mongoose.connect(config.mongodb_conf, {}, (err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     let gridfs = require('mongoose-gridfs')({
+//       collection: 'attachments',
+//       model: 'Attachment'
+//     })
+//     let AttachmentSchema = gridfs.schema;
+//     mongoose.model('Attachment', AttachmentSchema);
+//   }
+// });

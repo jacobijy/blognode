@@ -1,5 +1,5 @@
 import fs from 'fs';
 
-exports.jsonParser = function (url) {
+export function UploadFile (path, callback) {
   
 }

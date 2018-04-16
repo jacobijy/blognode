@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import logger from "../../utils/logger";
 import { config } from '../../config';
+import { Grid } from "gridfs-stream";
 
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
@@ -12,12 +13,15 @@ mongoose.connect(config.mongodb_conf, {
   }
 }
 );
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+  
+})
 
 // models
 import './users';
 import './articale';
-import './attachment';
 
 export var User = mongoose.model('User');
 export var Articale = mongoose.model('Article');
-// export var Attachment = mongoose.model('Attachment');

@@ -1,0 +1,17 @@
+#editor-upload-image {
+  margin: auto;
+  width: auto;
+  background-color: dimgrey;
+  display: inline-block;
+}
+
+div.upload-image {
+  width: 200px;
+  margin: auto;
+  background-color: dimgrey;
+}
+
+label {
+  display: inline-block;
+  margin: auto;
+}

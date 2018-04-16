@@ -1,3 +1,6 @@
+div.container {
+  width: 300px;
+}
 #signup-list {
   margin: auto;
 }
