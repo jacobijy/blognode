@@ -16,27 +16,22 @@ export default class SignPanel extends Component {
         <h3>用户注册</h3>
         <form>
           <div className="form-group">
-            <label for="email">username:</label>
-            <input type="email" className="form-control" id="username" placeholder="Enter email" />
+            <label for="name">username:</label>
+            <input type="text" className="form-control" id="username" placeholder="Enter username" />
           </div>
           <div className="form-group">
             <label for="pwd">Password:</label>
             <input type="password" className="form-control" id="pwd" placeholder="Enter password" />
           </div>
           <div className="form-group">
-            <label for="pwd">Password Again:</label>
+            <label for="pwdex">Password Again:</label>
             <input type="password" className="form-control" id="pwdex" placeholder="Enter password" />
           </div>
           <div className="form-group">
-            <label for="pwd">Email:</label>
-            <input type="password" className="form-control" id="email" placeholder="Enter password" />
+            <label for="email">Email:</label>
+            <input type="email" className="form-control" id="email" placeholder="Enter email" />
           </div>
-          <div className="form-check">
-            <label className="form-check-label">
-            <input className="form-check-input" type="checkbox" /> Remember me
-            </label>
-          </div>
-          <button type="submit" className="btn btn-primary">注册</button>
+          <button type="button" className="btn btn-primary" onClick={this.submitSignup.bind(this)}>注册</button>
         </form>
       </div>
     )

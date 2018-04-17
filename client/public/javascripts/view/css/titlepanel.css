@@ -1,6 +1,6 @@
 #title-header {
   background-color: bisque;
-  /* height: 150px; */
+  height: 150px;
   padding: 0px;
   margin: 0px;
   color: white;
@@ -9,10 +9,10 @@
 }
 
 #title-name {
-  height: 104px;
+  height: 112px;
 }
-
-ul, #title-navbar {
+/*
+ul#title-navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -20,7 +20,7 @@ ul, #title-navbar {
 }
 
 li, .menu-item{
-  /* float: left; */
+  float: left;
   width: 100px;
   background-color: #333;
   font-size: 16px;
@@ -28,7 +28,7 @@ li, .menu-item{
   padding: 0px;
   border: 0px;
   display: inline-flex;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 
 li a, .dropbtn {
@@ -48,7 +48,15 @@ li a:hover, .dropdown:hover .dropbtn {
   display: inline-block;
 }
 
-.dropdown-content {
+
+
+.dropdown-content a:hover {background-color: #f1f1f1} */
+
+li {
+  display: inline;
+}
+
+.dropdown-menu {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -56,15 +64,13 @@ li a:hover, .dropdown:hover .dropbtn {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-.dropdown-content a {
+.dropdown-menu a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
+#dropdown-btn:hover .dropdown-menu {
   display: block;
 }

@@ -61,6 +61,7 @@ typings/
 # next.js build output
 .next
 .vscode/
+.vs/
 .idea/
 *.code-workspace
 test/

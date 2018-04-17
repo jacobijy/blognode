@@ -20,6 +20,7 @@ router.post('/signup', (req, res, next) => {
 		res.send(msg);
 	}
 
+	console.log(req.body);
 	let username = trim(req.body.username).toLowerCase();
 	let password = trim(req.body.password);
 	let passwordex = trim(req.body.passwordex);
