@@ -7,8 +7,10 @@ import { trim, isEmail } from "validator";
 import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
 import { User } from "../mongodb";
 import { join } from "path";
+import multer from "multer";
 
-var router = express.Router();
+const upload = multer({ dest: 'images/' });
+const router = express.Router();
 router.get('/', main.index);
 router.get('/*', (req, res, next) => {
 	res.sendFile(join(__dirname, '../../views/index.html'));
@@ -58,8 +60,8 @@ router.post('/signup', (req, res, next) => {
 
 			let avatarurl = makerAvatarUrl(email);
 			newAndSave(username, username, passhash, email, avatarurl, false, (err, product) => {
-        console.log(product);
-        console.log(err);
+				console.log(product);
+				console.log(err);
 				if (err) {
 					return signuperror('save err')
 				}
@@ -67,5 +69,9 @@ router.post('/signup', (req, res, next) => {
 		})
 	})
 });
+
+router.post('/upload', upload.single('article_image'), (req, res, next) => {
+	console.log(req.files, req.file);
+})
 
 module.exports = router;

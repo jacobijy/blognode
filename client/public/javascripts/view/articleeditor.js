@@ -26,7 +26,8 @@ class ArticleEditor extends Component {
         <Dropzone
           multiple={true}
           accept='image/gif,image/jpeg,image/jpg,image/png,image/svg'
-          onDrop={this.onImageDrop}>
+          onDrop={this.onImageDrop}
+          name='article_image'>
         </Dropzone>
         {
           this.state.files.length > 0 ? null :
@@ -39,40 +40,38 @@ class ArticleEditor extends Component {
   }
 
   onImageDrop(files) {
-    let self = this;
-    let previews = [];
-    let promise = 
-    new Promise(function (resolve, reject) {
-      for (const file of files) {
-        previews.push(file.preview);
+    // let self = this;
+    // let previews = [];
+    const fileReader = new FileReader();
+    let upload = request.post(formatUrl('/upload'))
+      .set('Content-Type', 'image/jpeg')
+      .send(files[0]);
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
       }
-      resolve();
-    });
-    promise
-      .then(function () {
-        self.setState({
-          files: previews
-        })
-      })
-      .then(function () {
-        self.forceUpdate();
-        console.log("111",self.state.files[0])
-      })
-    for (const file of files) {
-      console.log('test', file);
-      let upload = request.post(formatUrl('/upload'))
-        .field('file', file);
-
-      upload.end((err, response) => {
-        if (err) {
-          console.error(err);
-        }
-        console.log(response);
-        if (response.body.secure_url !== '') {
-          // console.log(re)
-        }
-      });
-    }
+      console.log(response);
+    })
+    // fileReader.onload = ()=> {
+    //   console.log(fileReader.result);
+    // }
+    // fileReader.readAsArrayBuffer(files[0]);
+    // let promise =
+    //   new Promise(function (resolve, reject) {
+    //     for (const file of files) {
+    //       previews.push(file.preview);
+    //     }
+    //     resolve();
+    //   });
+    // promise
+    //   .then(function () {
+    //     self.setState({
+    //       files: previews
+    //     })
+    //   })
+    //   .then(function () {
+    //     self.forceUpdate();
+    //   })
   }
 
   uploadImages() {
