@@ -7,9 +7,8 @@ import { trim, isEmail } from "validator";
 import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
 import { User } from "../mongodb";
 import { join } from "path";
-import multer from "multer";
+import { readFile, writeFile } from "fs";
 
-const upload = multer({ dest: 'images/' });
 const router = express.Router();
 router.get('/', main.index);
 router.get('/*', (req, res, next) => {
@@ -70,8 +69,27 @@ router.post('/signup', (req, res, next) => {
 	})
 });
 
-router.post('/upload', upload.single('article_image'), (req, res, next) => {
-	console.log(req.files, req.file);
+router.post('/upload', function (req, res) {
+
+  console.log(req.files);  // 上传的文件信息
+
+  var des_file = "/tmp/" + req.files[0].originalname;
+  console.log(des_file);
+  readFile(req.files[0].path, function (err, data) {
+    writeFile(des_file, data, function (err) {
+      let response = {};
+      if (err) {
+        console.log(err);
+      } else {
+        response = {
+          message: 'File uploaded successfully',
+          filename: req.files[0].originalname
+        };
+      }
+      console.log(response);
+      // res.end(JSON.stringify(response));
+    });
+  });
 })
 
 module.exports = router;

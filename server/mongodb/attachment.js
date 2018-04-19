@@ -1,30 +1,23 @@
-// import mongoose from "mongoose";
-// import { Grid } from "gridfs-stream";
-// import { createReadStream } from "fs";
-// import { config } from "../../config";
+import mongoose, { Schema } from "mongoose";
+import GridFs from "gridfs-stream";
+import { config } from "../../config";
 
-/**
- * length: {type: Number},
- * chunkSize: { type: Number},
- * uploadDate: {type: Date},
- * md5: {type: String},
- * filename: {type: String},
- * contentType: {type: String},
- * aliases: [{type: String}],
- * metadata: {type: Mixed}
- */
+var connection = mongoose.createConnection(config.mongodb_conf);
+GridFs.mongo = mongoose.mongo;
 
-// const gridfs = new Grid();
+var gfs = connection.once('open', () => {
+  return GridFs(connection.db)
+})
 
-// mongoose.connect(config.mongodb_conf, {}, (err) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     let gridfs = require('mongoose-gridfs')({
-//       collection: 'attachments',
-//       model: 'Attachment'
-//     })
-//     let AttachmentSchema = gridfs.schema;
-//     mongoose.model('Attachment', AttachmentSchema);
-//   }
-// });
+var attachmentSchema = new Schema({
+  length: { type: Number },
+  chunkSize: { type: Number },
+  uploadDate: { type: Date },
+  md5: { type: String },
+  filename: { type: String },
+  contentType: { type: String },
+  aliases: [{ type: String }],
+  metadata: { type: Mixed }
+}, { collection: "fs.files", versionKey: "" });
+
+mongoose.model('Attachment', attachmentSchema);
