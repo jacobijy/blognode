@@ -8,6 +8,7 @@ import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
 import { User } from "../mongodb";
 import { join } from "path";
 import { readFile, writeFile } from "fs";
+import { saveFileToDb } from "../proxy/attachment";
 
 const router = express.Router();
 router.get('/', main.index);
@@ -75,16 +76,21 @@ router.post('/upload', function (req, res) {
 
   var des_file = "/tmp/" + req.files[0].originalname;
   console.log(des_file);
-  readFile(req.files[0].path, function (err, data) {
-    writeFile(des_file, data, function (err) {
+  readFile(req.files[0].path, (err, data) => {
+    writeFile(des_file, data, (err) => {
+			console.log(data);
       let response = {};
       if (err) {
         console.log(err);
       } else {
         response = {
           message: 'File uploaded successfully',
-          filename: req.files[0].originalname
-        };
+					filename: req.files[0].originalname,
+					filepath: '/tmp/'
+				};
+				saveFileToDb(response, (err, result) => {
+					res.sendFile(join(__dirname, '../../views/index.html'))
+				})
       }
       console.log(response);
       // res.end(JSON.stringify(response));

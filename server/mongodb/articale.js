@@ -3,6 +3,7 @@ import BaseModel from './base_model';
 
 const ArticleSchema = new Schema({
   id: { type: Number },
+  article_id: {type: Number},
   author_id: { type: Number },
   figure: { type: Array },
   maintext: { type: String },

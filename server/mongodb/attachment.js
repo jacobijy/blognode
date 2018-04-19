@@ -5,10 +5,6 @@ import { config } from "../../config";
 var connection = mongoose.createConnection(config.mongodb_conf);
 GridFs.mongo = mongoose.mongo;
 
-var gfs = connection.once('open', () => {
-  return GridFs(connection.db)
-})
-
 var attachmentSchema = new Schema({
   length: { type: Number },
   chunkSize: { type: Number },
@@ -17,7 +13,8 @@ var attachmentSchema = new Schema({
   filename: { type: String },
   contentType: { type: String },
   aliases: [{ type: String }],
-  metadata: { type: Mixed }
+  metadata: { type: String },
+  article_id: {type : Number}
 }, { collection: "fs.files", versionKey: "" });
 
 mongoose.model('Attachment', attachmentSchema);
