@@ -1,14 +1,14 @@
 import express from "express";
 import main from "./main";
-// import users from "./users";
 import sign from "./sign";
 import * as tools from "../../utils/tools";
 import { trim, isEmail } from "validator";
 import { getUsersByQuery, newAndSave, makerAvatarUrl } from "../proxy/users";
 import { User } from "../mongodb";
 import { join } from "path";
-import { readFile, writeFile } from "fs";
-import { saveFileToDb } from "../proxy/attachment";
+import { readFile, writeFile, unlink } from "fs";
+import { saveFileToDb, getFilebyName, getFilebyMd5 } from "../proxy/attachment";
+import { config } from "../../config";
 
 const router = express.Router();
 router.get('/', main.index);
@@ -72,30 +72,35 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/upload', function (req, res) {
 
-  console.log(req.files);  // 上传的文件信息
+	console.log(req.files);  // 上传的文件信息
 
-  var des_file = "/tmp/" + req.files[0].originalname;
-  console.log(des_file);
-  readFile(req.files[0].path, (err, data) => {
-    writeFile(des_file, data, (err) => {
-			console.log(data);
-      let response = {};
-      if (err) {
-        console.log(err);
-      } else {
-        response = {
-          message: 'File uploaded successfully',
+	var des_file = config.tmpFileDir + req.files[0].originalname;
+	readFile(req.files[0].path, (err, data) => {
+		writeFile(des_file, data, (err) => {
+			let response = {};
+			if (err) {
+				console.log(err);
+			}
+			else {
+				response = {
+					message: 'File uploaded successfully',
 					filename: req.files[0].originalname,
-					filepath: '/tmp/'
-				};
-				saveFileToDb(response, (err, result) => {
-					res.sendFile(join(__dirname, '../../views/index.html'))
+					filepath: config.tmpFileDir
+				}
+				getFilebyName(req.files[0].originalname, (attachment) => {
+					console.log(attachment);
+					saveFileToDb(response, (err, result) => {
+						if (err) {
+							res.send(err);
+							return;
+						}
+						unlink(des_file)
+						res.sendFile(join(__dirname, '../../views/index.html'))
+					})
 				})
-      }
-      console.log(response);
-      // res.end(JSON.stringify(response));
-    });
-  });
+			}
+		});
+	});
 })
 
 module.exports = router;

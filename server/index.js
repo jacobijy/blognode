@@ -115,7 +115,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client')));
-app.use(multer({ dest: '/tmp/' }).array('image'));
+app.use(multer({ dest: config.tmpFileDir }).array('image'));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

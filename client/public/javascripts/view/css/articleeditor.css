@@ -5,10 +5,11 @@
   display: inline-block;
 }
 
-div.upload-image {
-  width: 200px;
+div.edit-sheet {
+  width: 400px;
   margin: auto;
-  background-color: dimgrey;
+  padding: 30px;
+  background-color: beige;
 }
 
 label {

@@ -16,12 +16,24 @@ connection.once('open', () => {
  * 根据图片名字，查找图片
  * Callback:
  * - err, 数据库异常
- * - user, 用户
+ * - filename, 图片名称
  * @param {String} filename 图片名称
  * @param {Function} callback 回调函数
  */
 export function getFilebyName(filename, callback) {
   Attachment.findOne({ filename: filename }, callback);
+}
+
+/**
+ * 根据Md5，查找图片
+ * Callback:
+ * - err, 数据库异常
+ * - user, 用户
+ * @param {String} md5 md5
+ * @param {Function} callback 回调函数
+ */
+export function getFilebyMd5(md5, callback) {
+  Attachment.findOne({ md5: md5 }, callback);
 }
 
 export function saveFileToDb(fileinfo, callback) {
