@@ -2,7 +2,7 @@ import { Attachment } from "../mongodb";
 import mongoose from "mongoose";
 import GridFs from "gridfs-stream";
 import { config } from "../../config";
-import { createReadStream } from "fs";
+import { createReadStream, unlink } from "fs";
 
 var connection = mongoose.connection;
 GridFs.mongo = mongoose.mongo;
@@ -38,7 +38,15 @@ export function getFilebyMd5(md5, callback) {
 
 export function saveFileToDb(fileinfo, callback) {
   const writestream = gfs.createWriteStream({
-    filename: fileinfo.filename
+    filename: fileinfo.originalname
   })
   createReadStream(fileinfo.filepath + fileinfo.filename).pipe(writestream);
+  writestream.on('close', (file) => {
+    unlink(fileinfo.filepath + fileinfo.filename, (err) => {
+      if (err) {
+        return callback(err, null);
+      };
+      callback(null, file)
+    });
+  })
 }
