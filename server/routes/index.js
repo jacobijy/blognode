@@ -10,6 +10,7 @@ import { join } from "path";
 import { readFile, writeFile, unlink } from "fs";
 import { saveFileToDb, getFilebyName, getFilebyMd5 } from "../proxy/attachment";
 import { config } from "../../config";
+import { createHash } from "crypto";
 
 const router = express.Router();
 router.get('/', main.index);
@@ -23,7 +24,6 @@ router.post('/signup', (req, res, next) => {
     res.send(msg);
   }
 
-  console.log(req.body);
   let username = trim(req.body.username).toLowerCase();
   let password = trim(req.body.password);
   let passwordex = trim(req.body.passwordex);
@@ -72,21 +72,24 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/upload', function (req, res) {
-
+  let files = req.files;
+  let message = req.body;
   // console.log(req.files);  // 上传的文件信息
-
-  var des_file = config.tmpFileDir + req.files[0].originalname;
-  readFile(req.files[0].path, (err, data) => {
+  var des_file = config.tmpFileDir + files[0].originalname;
+  readFile(files[0].path, (err, data) => {
     if (data === 'undefine') {
       res.send(err);
       return;
     }
+    let md5sum = createHash('md5').update(data);
+    let md5 = md5sum.digest('hex').toLowerCase();
     let response = {
-      originalname: req.files[0].originalname,
-      filename: req.files[0].filename,
-      filepath: config.tmpFileDir
+      originalname: files[0].originalname,
+      filename: files[0].filename,
+      filepath: config.tmpFileDir,
+      article_id: message.article_id
     }
-    getFilebyName(req.files[0].originalname, (err, attachment) => {
+    getFilebyMd5(md5, (err, attachment) => {
       console.log('query result:', attachment);
       if (attachment != null) {
         let tmpfile = config.tmpFileDir + req.files[0].filename;
@@ -102,7 +105,7 @@ router.post('/upload', function (req, res) {
           res.send(err);
           return;
         }
-        console.log(req.files[0].path)
+        console.log(files[0].path)
         res.sendFile(join(__dirname, '../../views/index.html'))
       })
     })

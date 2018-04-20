@@ -8,14 +8,15 @@ import './css/articleeditor.css'
 class ArticleEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       files: [],
-      article_id : 1
-     };
+      article_id: 1,
+      image_src: ''
+    };
   }
 
   componentWillMount() {
-    
+
   }
 
   render() {
@@ -30,6 +31,11 @@ class ArticleEditor extends Component {
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}>
         </Dropzone>
+        {
+          this.state.image_src !== '' ?
+          <image src={this.state.image_src}></image> : null
+        }
+        
         <div className='edit-sheet' contentEditable='true'>
           <p onChange={this.onArticleEditted.bind(this)}></p>
         </div>
@@ -38,13 +44,7 @@ class ArticleEditor extends Component {
   }
 
   onImageDrop(files) {
-    // let form = document.forms.namedItem("upload-image");
-    // var files = form[0].files;
-    // console.log(files);
-    // form.submit(() => {
-    //   console.log('success')
-    // });
-    
+    console.log(files);
     request.post(formatUrl('/upload'))
       .attach('image', files[0], files[0].name)
       .field('article_id', 1)
@@ -53,7 +53,7 @@ class ArticleEditor extends Component {
           console.log(err);
         }
         else {
-          console.log(result);
+          
         }
       })
   }
