@@ -26,3 +26,9 @@ export function bhash(str, callback) {
 export function bcompare(str, hash, callback) {
   compare(str, hash, callback);
 }
+
+export function getFileSuffix(str) {
+  var index1 = str.lastIndexOf(".");
+  var index2 = str.length;
+  return str.substring(index1 + 1, index2);
+}

@@ -21,7 +21,7 @@ class ArticleEditor extends Component {
 
   render() {
     /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-    console.log(this.state.files);
+    console.log(this.state);
     return (
       <div>
         {/* <form action="/upload" method="post" enctype="multipart/form-data" name='upload-image'>
@@ -35,7 +35,6 @@ class ArticleEditor extends Component {
           this.state.image_src !== '' ?
           <image src={this.state.image_src}></image> : null
         }
-        
         <div className='edit-sheet' contentEditable='true'>
           <p onChange={this.onArticleEditted.bind(this)}></p>
         </div>
@@ -44,16 +43,16 @@ class ArticleEditor extends Component {
   }
 
   onImageDrop(files) {
-    console.log(files);
     request.post(formatUrl('/upload'))
       .attach('image', files[0], files[0].name)
       .field('article_id', 1)
-      .then((err, result) => {
+      .end((err, result) => {
         if (err) {
-          console.log(err);
+          console.log('err', err);
         }
         else {
-          
+          let json = JSON.parse(result.text);
+          this.setState({image_src: json.path});
         }
       })
   }

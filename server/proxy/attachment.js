@@ -38,7 +38,7 @@ export function getFilebyMd5(md5, callback) {
 
 export function saveFileToDb(fileinfo, callback) {
   const writestream = gfs.createWriteStream({
-    filename: fileinfo.originalname,
+    filename: fileinfo.filename,
     article_id: fileinfo.article_id
   })
   console.log(fileinfo);
