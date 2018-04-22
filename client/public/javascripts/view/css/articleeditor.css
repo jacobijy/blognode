@@ -12,6 +12,10 @@ div.edit-sheet {
   background-color: beige;
 }
 
+div.edit-sheet.p {
+  height: fit-content;
+}
+
 label {
   display: inline-block;
   margin: auto;

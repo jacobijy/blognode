@@ -14,7 +14,7 @@ export default class TitlePanel extends Component {
 				<div id="title-name">
 				</div>
 				<div className='btn-group'>
-					<button type='button' className="btn btn-primary">主页</button>
+					<button type='button' className="btn btn-primary"><a href='/'>主页</a></button>
 					<div id='dropdown-btn' className='btn-group'>
 						<button type='button' className="btn btn-primary" data-toggle="dropdown">技术分享</button>
 						<div className='dropdown-menu'>

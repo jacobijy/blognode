@@ -56,6 +56,11 @@ li {
   display: inline;
 }
 
+.btn.btn-primary.a {
+  margin: 0px;
+  padding: 0px;
+}
+
 .dropdown-menu {
   display: none;
   position: absolute;

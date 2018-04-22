@@ -15,10 +15,11 @@ mongoose.connect(config.mongodb_conf, {
 
 
 // models
+import './counter'
 import './users';
-import './articale';
+import './article';
 import './attachment';
 
 export var User = mongoose.model('User');
-export var Articale = mongoose.model('Article');
+export var Article = mongoose.model('Article');
 export var Attachment = mongoose.model('Attachment');

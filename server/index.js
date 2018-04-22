@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import logger from '../utils/logger';
 import http from 'http';
 import { config } from '../config';
-import Router from './routes';
+import { router } from './routes';
 import { connect } from "mongoose";
 import multer from "multer";
 import bodyParser from "body-parser";
@@ -124,7 +124,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', Router);
+app.use('/', router);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

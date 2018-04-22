@@ -5,6 +5,7 @@ import TitlePanel from "../titlepanel";
 import MainContainer from "../App";
 import SignPanel from "../signpanel";
 import ArticleEditor from "../articleeditor";
+import ArticlePage from "../articlepage"
 
 class MainRouter extends Component {
   render() {
@@ -13,7 +14,8 @@ class MainRouter extends Component {
         <Switch>
           <Route exact path='/' component={MainContainer} />
           <Route path='/signup' component={SignPanel} />
-          <Route path='/editor' component={ArticleEditor}/>
+          <Route path='/article' component={ArticlePage} />
+          <Route path='/editor' component={ArticleEditor} />
         </Switch>
       </main>
     )

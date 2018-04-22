@@ -5,7 +5,10 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
   // 页面入口文件配置
-  entry: ['./client/public/javascripts/view/router/index.js'],
+  entry: {
+    main: ['./client/public/javascripts/view/router/index.js'],
+    vender: ['react', 'react-dom', 'react-router-dom', 'react-router']
+  },
   // 入口文件输出配置
   output: {
     path: path.join(__dirname, 'public/output/js'),
@@ -40,6 +43,7 @@ module.exports = {
   optimization: {
 
   },
+  devtool: 'source-map',
   // 插件项
   plugins: [
     // new HtmlWebpackPlugin(),
@@ -48,9 +52,9 @@ module.exports = {
     // })
   ],
 
-	devServer: {
-		contentBase: "./client",//本地服务器所加载的页面所在的目录
-		historyApiFallback: true,//不跳转
-		inline: true//实时刷新
-	},
+  devServer: {
+    contentBase: "./client",//本地服务器所加载的页面所在的目录
+    historyApiFallback: true,//不跳转
+    inline: true//实时刷新
+  },
 }
