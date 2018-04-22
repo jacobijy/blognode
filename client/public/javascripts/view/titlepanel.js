@@ -3,8 +3,8 @@ import { render } from "react-dom";
 import "./css/titlepanel.css";
 
 export default class TitlePanel extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 	}
 
 	render() {
@@ -20,7 +20,7 @@ export default class TitlePanel extends Component {
 						<div className='dropdown-menu'>
 							<a className="dropdown-item" href="/signup">注册</a>
 							<a className="dropdown-item" href="/editor">写文章</a>
-							<a className="dropdown-item" href="#">链接 3</a>
+							<a className="dropdown-item" href="/signin">登陆</a>
 						</div>
 					</div>
 					<button type='button' className="btn btn-primary">随记</button>

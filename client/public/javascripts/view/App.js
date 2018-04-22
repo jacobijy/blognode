@@ -4,8 +4,8 @@ import store from '../store/main';
 import './css/App.css'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       messageList: []
     };

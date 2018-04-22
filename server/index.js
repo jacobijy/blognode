@@ -112,7 +112,7 @@ function onListening() {
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(config.session_secret));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(multer({ dest: config.tmpFileDir }).array('image'));

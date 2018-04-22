@@ -12,6 +12,18 @@ function getArticleList(req, res, next) {
   })
 }
 
+function onOpenEditor(req, res, next) {
+  let article_id = req.body.article_id;
+  article.getArtileByArticleid(article_id, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    if (result == null)
+      res.send({ status: 0 });
+    else
+      res.json({ article: result.maintext, figure: result.images });
+  })
+}
+
 function uploadImage(req, res, next) {
   let files = req.files;
   let message = req.body;
@@ -36,7 +48,7 @@ function uploadImage(req, res, next) {
         unlink(tmpfile, err => {
           if (err) console.log(err);
         })
-        
+
         let response = {
           filename: files[0].originalname,
           filepath: config.tmpFileDir,
@@ -77,4 +89,4 @@ function saveArticle(req, res, next) {
   })
 }
 
-export { uploadImage, newArticle, saveArticle };
+export { uploadImage, newArticle, saveArticle, onOpenEditor };

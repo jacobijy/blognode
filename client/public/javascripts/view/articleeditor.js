@@ -6,8 +6,8 @@ import { formatUrl } from "../../../../utils/apiClient";
 import './css/articleeditor.css'
 
 class EditorToolBar extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   render() {
@@ -38,9 +38,8 @@ class EditorToolBar extends Component {
 }
 
 class ArticleEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.articleStatus = false;
+  constructor() {
+    super();
     this.state = {
       files: [],
       article_id: 1,
@@ -53,11 +52,11 @@ class ArticleEditor extends Component {
     this.timer = setInterval(() => this.saveArticle(), 5000);
     let sheet = document.getElementsByClassName('edit-sheet')[0];
     request
-      .get('/editor')
+      .post('/editor')
       .field('article_id', 1)
       .end((err, res) => {
         if (err) throw err;
-        console.log(res);
+        console.log('did', res.body);
 
         // sheet.innerHTML = 
       })
@@ -105,7 +104,7 @@ class ArticleEditor extends Component {
         <div className='edit-sheet' contentEditable={true}>
           <p><br /></p>
         </div>
-        <button onClick={this.saveArticle.bind(this)}>test</button>
+        <button onClick={this.createNewArticle.bind(this)}>test</button>
       </div>
     )
   }
@@ -121,9 +120,15 @@ class ArticleEditor extends Component {
         else {
           let json = JSON.parse(result.text);
           this.setState({ image_src: json.path, files: Array.from(files, value => value.name) });
-          this.articleStatus = true;
         }
       })
+  }
+
+  createNewArticle() {
+    request
+      .post('/new_article')
+      .field('author_id', this.props.author_id)
+      .end('')
   }
 }
 

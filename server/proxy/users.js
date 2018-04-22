@@ -15,6 +15,18 @@ export function getUserByid(id, callback) {
 }
 
 /**
+ * 根据用户名称，查找用户
+ * Callback:
+ * - err, 数据库异常
+ * - user, 用户
+ * @param {String} name 用户名称
+ * @param {Function} callback 回调函数
+ */
+export function getUserByName(name, callback) {
+  User.findOne({ loginname: name }, callback);
+}
+
+/**
  * 根据关键字，获取一组用户
  * Callback:
  * - err, 数据库异常

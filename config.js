@@ -8,5 +8,7 @@ export const config = {
   log_dir: join(__dirname, 'logs'),
   apiPort: 3000,
   apiHost: '192.168.137.100',
-  tmpFileDir: join(__dirname, 'client/public/images/tmp/')
+  tmpFileDir: join(__dirname, 'client/public/images/tmp/'),
+  session_secret: 'blog_node_secret',
+  auth_cookiename: 'blog_node',
 };

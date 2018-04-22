@@ -13,10 +13,13 @@ router.get('/*', (req, res, next) => {
 })
 
 // Article
+router.post('/editor', article.onOpenEditor);
 router.post('/upload_image', article.uploadImage);
 router.post('/save_article', article.saveArticle);
+router.post('/new_article', article.newArticle);
 
 //User
+router.post('/signin', users.userSignin);
 router.post('/signup', users.userSignUp);
 
 export { router as router}

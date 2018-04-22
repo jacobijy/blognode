@@ -3,15 +3,14 @@ import "./css/signpanel.css"
 import { ApiClientPost } from "../../../../utils/apiClient";
 
 export default class SignPanel extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       message: ''
     }
   }
 
   render() {
-    console.log(this.state.message);
     return (
       <div className="container">
         <h3>用户注册</h3>
@@ -32,7 +31,9 @@ export default class SignPanel extends Component {
             <label for="email">Email:</label>
             <input type="email" className="form-control" id="email" placeholder="Enter email" />
           </div>
-          <p className='error-message'>{this.state.message}</p>
+          {
+            this.state.message === '' ? null : <p className='error-message'>{this.state.message}</p>
+          }
           <button type="button" className="btn btn-primary" onClick={this.submitSignup.bind(this)}>注册</button>
         </form>
       </div>

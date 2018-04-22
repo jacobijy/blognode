@@ -7,7 +7,7 @@ const ArticleSchema = new Schema({
   article_id: { type: Number },
   author_id: { type: Number },
   figure: { type: Array },
-  maintext: { type: String, default: "<p><br /></p>" },
+  maintext: { type: String, default: "<p><br></p>" },
   postdate: { type: Date, default: Date.now },
   readtime: { type: Number, default: 0 },
   commitsnumber: { type: Number, default: 0 },
