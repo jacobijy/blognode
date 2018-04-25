@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./css/signpanel.css"
-import { ApiClientPost } from "../../../../utils/apiClient";
+import superagent from "superagent";
 
 export default class SignPanel extends Component {
   constructor() {
@@ -17,19 +17,19 @@ export default class SignPanel extends Component {
         <form>
           <div className="form-group">
             <label for="name">username:</label>
-            <input type="text" className="form-control" id="username" placeholder="Enter username" />
+            <input type="text" className="form-control" ref="username" placeholder="Enter username" />
           </div>
           <div className="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" className="form-control" id="pwd" placeholder="Enter password" />
+            <input type="password" className="form-control" ref="pwd" placeholder="Enter password" />
           </div>
           <div className="form-group">
             <label for="pwdex">Password Again:</label>
-            <input type="password" className="form-control" id="pwdex" placeholder="Enter password" />
+            <input type="password" className="form-control" ref="pwdex" placeholder="Enter password" />
           </div>
           <div className="form-group">
             <label for="email">Email:</label>
-            <input type="email" className="form-control" id="email" placeholder="Enter email" />
+            <input type="email" className="form-control" ref="email" placeholder="Enter email" />
           </div>
           {
             this.state.message === '' ? null : <p className='error-message'>{this.state.message}</p>
@@ -41,10 +41,11 @@ export default class SignPanel extends Component {
   }
 
   submitSignup() {
-    let username = document.getElementById('username').value;
-    let password = document.getElementById('pwd').value;
-    let passwordex = document.getElementById('pwdex').value;
-    let email = document.getElementById('email').value;
+    let username = this.refs.username.value;
+    let password = this.refs.pwd.value;
+    let passwordex = this.refs.pwdex.value;
+    let email = this.refs.email.value;
+    console.log(username, password, passwordex, email)
     const signupresult = (err, res) => {
       if (err) {
         this.setState({ message: err.response.text })
@@ -52,11 +53,10 @@ export default class SignPanel extends Component {
         this.setState({ message: res.text })
       }
     }
-    ApiClientPost({
-      username: username,
-      password: password,
-      passwordex: passwordex,
-      email: email
-    }, '/signup', signupresult);
+    superagent.post('/signup')
+      .field({username, password, passwordex, email})
+      .end((err, result) => {
+        console.log(result);
+      })
   }
 }

@@ -12,6 +12,7 @@ import multer from "multer";
 import bodyParser from "body-parser";
 
 var debug = require('debug')('blognode:server');
+global.__SERVER__ = true;
 
 var app = express();
 // view engine setup

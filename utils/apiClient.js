@@ -1,38 +1,38 @@
-import superagent, { Request } from "superagent";
-import { config } from "../config";
+import superagent from 'superagent';
+import { config } from '../config';
 
-const methods = ['get', 'post', 'put', 'patch', 'del'];
+const methods = ['get', 'post', 'put', 'patch', 'del']
 
 export function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  if (true) {
+  if (__SERVER__) {
     // Prepend host and port of the API server to the path.
-    return 'http://' + config.apiHost + ':' + config.apiPort + adjustedPath;
+    return 'http://' + config.apiHost + ':' + config.apiPort + adjustedPath
   }
   // Prepend `/api` to relative URL, to proxy to API server.
-  return '/api' + adjustedPath;
+  return '/api' + adjustedPath
 }
 
 export default class ApiClient {
   constructor(req) {
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
-        const request = superagent[method](formatUrl(path));
+        const request = superagent[method](formatUrl(path))
 
         if (params) {
-          request.query(params);
+          request.query(params)
         }
 
         if (__SERVER__ && req.get('cookie')) {
-          request.set('cookie', req.get('cookie'));
+          request.set('cookie', req.get('cookie'))
         }
 
         if (data) {
-          request.send(data);
+          request.send(data)
         }
 
-        request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
-      }));
+        request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body))
+      }))
   }
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only
@@ -45,12 +45,4 @@ export default class ApiClient {
    * Remove it at your own risk.
    */
   empty() { }
-}
-
-export function ApiClientPost(params, path, callback) {
-  superagent
-    .post(formatUrl(path))
-    .set('Accept', 'application/json')
-    .send(params)
-    .end(callback);
 }

@@ -128,7 +128,9 @@ class ArticleEditor extends Component {
     request
       .post('/new_article')
       .field('author_id', this.props.author_id)
-      .end('')
+      .end((err, res) => {
+        
+      })
   }
 }
 

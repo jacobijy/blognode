@@ -1,3 +1,8 @@
+const G = {
+  __SERVER__: false,
+  __DEVELOPMENT__: true,
+  __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
+}
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -47,7 +52,8 @@ module.exports = {
   // 插件项
   plugins: [
     // new HtmlWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin(G)
     // new OpenBrowserPlugin({
     // })
   ],

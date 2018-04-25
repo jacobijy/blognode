@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import TitlePanel from "../titlepanel";
-import MainContainer from "../App";
-import SignPanel from "../signpanel";
-import ArticleEditor from "../articleeditor";
-import ArticlePage from "../articlepage"
-import SigninPanel from "../signinpanel";
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import TitlePanel from '../titlepanel'
+import MainContainer from '../App'
+import SignPanel from '../signpanel'
+import ArticleEditor from '../articleeditor'
+import ArticlePage from '../articlepage'
+import SigninPanel from '../signinpanel'
+import {Store, createProvider} from 'react-redux'
 
 class MainRouter extends Component {
-  render() {
+  render () {
     return (
       <main>
         <Switch>
@@ -25,7 +26,7 @@ class MainRouter extends Component {
 }
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <TitlePanel />
@@ -35,4 +36,4 @@ class App extends Component {
   }
 }
 
-render(<Router><App /></Router>, document.getElementById("main-container"));
+render(<Router><App /></Router>, document.getElementById('main-container'))
