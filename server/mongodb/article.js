@@ -22,7 +22,7 @@ ArticleSchema.index({ postdate: -1 });
 ArticleSchema.index({ author_id: 1 }, { unique: true });
 ArticleSchema.pre('save', function (next) {
   var self = this;
-  Conuter.findByIdAndUpdate({ _id: 'entityid' }, { $inc: { seq: 1 } }, (err, counter) => {
+  Conuter.findOneAndUpdate({ _id: "entityid" }, { $inc: { seq: 1 } }, (err, counter) => {
     if (err) return next(err);
     console.log(counter);
     self.article_id = counter.seq;

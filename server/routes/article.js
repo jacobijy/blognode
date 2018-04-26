@@ -72,17 +72,22 @@ function newArticle(req, res, next) {
   console.log(req.body);
   console.log(req.files)
   let articleInfo = {
-
+    maintext:req.body.maintext,
+    
   }
   article.newAndSave(articleInfo, (err, result) => {
-
+    if (err) return;
+    if (result) {
+      console.log(result);
+      res.send('success')
+    }
   })
 }
 
 function saveArticle(req, res, next) {
   let article_id = req.body.article_id;
   let maintext = req.body.maintext;
-  let images = req.body.images;
+  console.log(req.body);
   article.updateArtileByAritcleid(article_id, article, images, (err, doc, result) => {
     if (err) throw err;
     res.send({});

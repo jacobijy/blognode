@@ -1,6 +1,7 @@
 import { User } from "../mongodb";
 import { v4 } from "uuid";
 import utility from "utility";
+import { Promise } from "mongoose";
 
 /**
  * 根据用户ID，查找用户
@@ -23,7 +24,15 @@ export function getUserByid(id, callback) {
  * @param {Function} callback 回调函数
  */
 export function getUserByName(name, callback) {
-  User.findOne({ loginname: name }, callback);
+  const promise = new Promise((resolve, reject) => {
+    User.findOne({loginname:name}, (err, res) => {
+      if (err)
+        reject(err);
+      if (res)
+        resolve(res);
+    });
+  })
+  return promise;
 }
 
 /**
@@ -39,7 +48,7 @@ export function getUsersByQuery(query, opt, callback) {
   User.find(query, '', opt, callback);
 }
 
-export function newAndSave(username, loginname, passhash, email, avatar_url, active, callback) {
+export function newAndSave(username, loginname, passhash, email, avatar_url, active) {
   let user = new User();
   user.name = username;
   user.loginname = loginname;
@@ -49,7 +58,7 @@ export function newAndSave(username, loginname, passhash, email, avatar_url, act
   user.active = active || false;
   user.accessToken = v4();
   console.log(username, passhash, email, avatar_url, user);
-  user.save(callback);
+  return user.save();
 }
 
 export function makerAvatarUrl(email) {

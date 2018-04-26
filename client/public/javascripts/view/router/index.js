@@ -36,4 +36,4 @@ class App extends Component {
   }
 }
 
-render(<Router><App /></Router>, document.getElementById('main-container'))
+render(<Router><App cookie = {document.cookie}/></Router>, document.getElementById('main-container'))

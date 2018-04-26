@@ -42,9 +42,9 @@ class ArticleEditor extends Component {
     super();
     this.state = {
       files: [],
-      article_id: 1,
+      article_id: 0,
       image_src: '',
-      article: '<p><br></p>'
+      article: '<p><br /></p>'
     };
   }
 
@@ -67,9 +67,12 @@ class ArticleEditor extends Component {
   }
 
   saveArticle() {
-    let sheet = document.getElementsByClassName('edit-sheet')[0];
+    console.log(this.props.ccokie)
+    if (this.state.article_id === 0)
+      return;
+    let sheet = this.refs.editorsheet;
     if (sheet.innerHTML === this.state.article)
-      return console.log('Not Changed');
+      return;
     this.setState({ article: sheet.innerHTML });
     console.log(sheet.innerHTML);
     let formData = new FormData();
@@ -77,7 +80,7 @@ class ArticleEditor extends Component {
       console.log(file);
       formData.append('image', file);
     }
-    formData.append('article_id', 1);
+    formData.append('article_id', this.state.article_id);
     formData.append('article', sheet.innerHTML)
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/save_article');
@@ -101,7 +104,7 @@ class ArticleEditor extends Component {
           this.state.image_src !== '' ?
             <img src={this.state.image_src} /> : null
         }
-        <div className='edit-sheet' contentEditable={true}>
+        <div className='edit-sheet' contentEditable={true} ref='editorsheet'>
           <p><br /></p>
         </div>
         <button onClick={this.createNewArticle.bind(this)}>test</button>
@@ -110,7 +113,7 @@ class ArticleEditor extends Component {
   }
 
   onImageDrop(files) {
-    request.post(formatUrl('/upload'))
+    request.post(formatUrl('/upload_image'))
       .attach('image', files[0], files[0].name)
       .field('article_id', 1)
       .end((err, result) => {
@@ -118,6 +121,7 @@ class ArticleEditor extends Component {
           console.log('err', err);
         }
         else {
+          console.log(json)
           let json = JSON.parse(result.text);
           this.setState({ image_src: json.path, files: Array.from(files, value => value.name) });
         }
@@ -125,11 +129,12 @@ class ArticleEditor extends Component {
   }
 
   createNewArticle() {
+    console.log('new_article', this.state.article)
     request
       .post('/new_article')
-      .field('author_id', this.props.author_id)
+      .send({ maintext: this.refs.editorsheet.innerHTML })
       .end((err, res) => {
-        
+        console.log(err, res);
       })
   }
 }

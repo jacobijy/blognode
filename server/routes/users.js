@@ -16,7 +16,6 @@ function userSignUp(req, res, next) {
   let password = trim(req.body.password);
   let passwordex = trim(req.body.passwordex);
   let email = trim(req.body.email).toLowerCase();
-  console.log(username, password, passwordex, email);
   if ([username, password, passwordex, email].some((item) => { return item === ''; })) {
     return signuperror('信息不完整。', res);
   }
@@ -49,13 +48,14 @@ function userSignUp(req, res, next) {
       }
 
       let avatarurl = Users.makerAvatarUrl(email);
-      Users.newAndSave(username, username, passhash, email, avatarurl, false, (err, product) => {
-        console.log(product);
-        console.log(err);
-        if (err) {
-          return signuperror('save err')
-        }
-      })
+      Users.newAndSave(username, username, passhash, email, avatarurl, false).then(
+        (result) => { 
+          res.redirect('/signin');
+          console.log(result) 
+        }, 
+        (error) => { 
+          console.log(error) 
+        })
     })
   })
 }
@@ -63,28 +63,30 @@ function userSignUp(req, res, next) {
 function userSignin(req, res, next) {
   let username = trim(req.body.username).toLowerCase();
   let password = trim(req.body.password);
-  console.log(username);
-  Users.getUserByName(username, (err, user) => {
-    console.log(user);
-    tools.bcompare(password, user.password, (err, result) => {
+  console.log(username, password);
+  Users.getUserByName(username).then(function (json) {
+    console.log(json);
+    tools.bcompare(password, json.password, (err, result) => {
       if (err) throw err;
       console.log(result)
       if (result) {
-        let auth_token = user.userid + '$$$$' + user.username; // 以后可能会存储更多信息，用 $$$$ 来分隔
+        let auth_token = json._id + '$$$$' + json.loginname; // 以后可能会存储更多信息，用 $$$$ 来分隔
         let opts = {
-          path: '/chat',
           maxAge: 1000 * 60 * 60 * 24 * 30,
-          signed: true,
-          httpOnly: true
+          httpOnly: false
         };
+        // res.send(config.auth_cookiename, auth_token, opts);
         res.cookie(config.auth_cookiename, auth_token, opts);
-        res.redirect('/editor');
+        res.send('login success');
+        // res.redirect('/');
       }
       else {
-        return signuperror('用户名或密码错误', res);
+        return signuperror('用户名密码不匹配', res);
       }
     })
-  })
+  }, function (error) {
+    console.log(error);
+  });
 }
 
 export { userSignUp, userSignin }

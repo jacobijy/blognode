@@ -1,7 +1,7 @@
 var getMessageList = require('../../data/getMessage');
 
 exports.execute = function (req, res) {
-  getMessageList.getMessageList(function (data) {
+  getMessageList.getMessageList( (data) => {
     res.send(data);
   });
 };
