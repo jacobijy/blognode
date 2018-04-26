@@ -3,11 +3,13 @@ import { render } from "react-dom";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../utils/apiClient";
+import { getInfoFromCookies } from "../../../../utils/tools";
 import './css/articleeditor.css'
+import { decodeURIComponent } from "utility/lib/web";
 
 class EditorToolBar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -40,6 +42,9 @@ class EditorToolBar extends Component {
 class ArticleEditor extends Component {
   constructor() {
     super();
+    console.log(getInfoFromCookies(decodeURIComponent(document.cookie)))
+    this.author_id = getInfoFromCookies(decodeURIComponent(document.cookie))[1];
+    this.authod_name = getInfoFromCookies(decodeURIComponent(document.cookie))[2]
     this.state = {
       files: [],
       article_id: 0,
@@ -67,7 +72,6 @@ class ArticleEditor extends Component {
   }
 
   saveArticle() {
-    console.log(this.props.ccokie)
     if (this.state.article_id === 0)
       return;
     let sheet = this.refs.editorsheet;
@@ -132,7 +136,7 @@ class ArticleEditor extends Component {
     console.log('new_article', this.state.article)
     request
       .post('/new_article')
-      .send({ maintext: this.refs.editorsheet.innerHTML })
+      .send({ maintext: this.refs.editorsheet.innerHTML, author_id: this.author_id })
       .end((err, res) => {
         console.log(err, res);
       })

@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import Request from "superagent";
+import { Redirect } from "react-router-dom";
 
 export default class SigninPanel extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToMain: false
+    }
   }
 
   render() {
+    const { dest } = this.props.location.state || { dest: { pathname: '/' } }
+    const { redirectToMain } = this.state;
+    if (redirectToMain) {
+      return <Redirect to={dest} />
+    }
     return (
       <div className="container">
         <h3>用户登陆</h3>
@@ -35,6 +44,9 @@ export default class SigninPanel extends Component {
       .end((err, res) => {
         if (err) throw err;
         console.log(res);
+        this.setState({
+          redirectToMain: true
+        })
       })
   }
 }

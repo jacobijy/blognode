@@ -32,3 +32,10 @@ export function getFileSuffix(str) {
   var index2 = str.length;
   return str.substring(index1 + 1, index2);
 }
+
+export function getInfoFromCookies(cookie) {
+  let array = cookie.split('=');
+  let new_array = array[1].split('$$$$');
+  new_array.unshift(array[0]);
+  return new_array;
+}

@@ -1,16 +1,24 @@
 import React, { Component } from "react";
 import "./css/signpanel.css"
 import superagent from "superagent";
+import { Redirect } from "react-router-dom";
 
 export default class SignPanel extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props)
     this.state = {
-      message: ''
+      message: '',
+      redirectToLogin: false
     }
   }
 
   render() {
+    const { dest } = this.props.location.state || { dest: { pathname: '/signin' } }
+    const { redirectToLogin } = this.state;
+    if (redirectToLogin) {
+      return <Redirect to= {dest} />
+    }
     return (
       <div className="container">
         <h3>用户注册</h3>
@@ -54,9 +62,12 @@ export default class SignPanel extends Component {
       }
     }
     superagent.post('/signup')
-      .field({username, password, passwordex, email})
+      .field({ username, password, passwordex, email })
       .end((err, result) => {
         console.log(result);
+        this.setState({
+          redirectToLogin : true
+        })
       })
   }
 }

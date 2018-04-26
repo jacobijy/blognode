@@ -1,4 +1,5 @@
 import { Article } from "../mongodb";
+import { Types } from "mongoose";
 
 /**
  * 根据ID，查找文章
@@ -72,8 +73,8 @@ export function getArticlesByAuthorId(author_id, callback) {
 
 export function newAndSave(articleinfo, callback) {
   let article = new Article();
-  article.author_id = articleinfo.author_id;
-  article.figure = articleinfo.figure;
+  article.author_id = Types.ObjectId(articleinfo.author_id);
+  article.figure = [];
   article.maintext = articleinfo.maintext;
   article.save(callback);
 }

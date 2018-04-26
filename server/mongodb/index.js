@@ -23,3 +23,4 @@ import './attachment';
 export var User = mongoose.model('User');
 export var Article = mongoose.model('Article');
 export var Attachment = mongoose.model('Attachment');
+export var Counter = mongoose.model('Counter');

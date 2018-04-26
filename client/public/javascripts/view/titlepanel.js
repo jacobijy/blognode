@@ -3,8 +3,8 @@ import { render } from "react-dom";
 import "./css/titlepanel.css";
 
 export default class TitlePanel extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	render() {

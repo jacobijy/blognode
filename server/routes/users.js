@@ -68,14 +68,14 @@ function userSignin(req, res, next) {
     console.log(json);
     tools.bcompare(password, json.password, (err, result) => {
       if (err) throw err;
-      console.log(result)
+      console.log(result, json)
       if (result) {
         let auth_token = json._id + '$$$$' + json.loginname; // 以后可能会存储更多信息，用 $$$$ 来分隔
         let opts = {
           maxAge: 1000 * 60 * 60 * 24 * 30,
           httpOnly: false
         };
-        // res.send(config.auth_cookiename, auth_token, opts);
+        console.log(auth_token)
         res.cookie(config.auth_cookiename, auth_token, opts);
         res.send('login success');
         // res.redirect('/');

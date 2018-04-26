@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 
 class ArticlePanel extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title : "",
       images : [],
