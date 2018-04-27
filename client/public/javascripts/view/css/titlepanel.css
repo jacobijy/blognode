@@ -56,7 +56,7 @@ li {
   display: inline;
 }
 
-.btn.btn-primary.a {
+.btn.btn-primary>button {
   margin: 0px;
   padding: 0px;
 }

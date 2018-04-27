@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../utils/apiClient";
@@ -63,8 +62,7 @@ class ArticleEditor extends Component {
         .end((err, res) => {
           if (err) throw err;
           console.log('did', res.body);
-
-          // sheet.innerHTML = 
+          sheet.innerHTML = res.body.article;
         })
     }
   }
@@ -93,27 +91,6 @@ class ArticleEditor extends Component {
     xhr.send(formData);
   }
 
-  render() {
-    /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-    console.log(this.state);
-    return (
-      <div>
-        <EditorToolBar />
-        {/* <form action="/upload" method="post" enctype="multipart/form-data" name='upload-image'>
-          <input type="file" name="image" onChange={this.onImageDrop.bind(this)}/>
-        </form> */}
-        <Dropzone multiple={true}
-          accept='image/*'
-          onDrop={this.onImageDrop.bind(this)}>
-        </Dropzone>
-        <div className='edit-sheet' contentEditable={true} ref='editorsheet'>
-          <p><br /></p>
-        </div>
-        <button onClick={this.createNewArticle.bind(this)}>test</button>
-      </div>
-    )
-  }
-
   onImageDrop(files) {
     request.post(formatUrl('/upload_image'))
       .attach('image', files[0], files[0].name)
@@ -123,7 +100,6 @@ class ArticleEditor extends Component {
           console.log('err', err);
         }
         else {
-          console.log(json)
           let json = JSON.parse(result.text);
           let sheet = this.refs.editorsheet;
           sheet.innerHTML += `<img src=${json.path} />`
@@ -143,6 +119,31 @@ class ArticleEditor extends Component {
           article_id: JSON.parse(res.text).article_id
         })
       })
+  }
+
+  render() {
+    /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
+    console.log(this.state);
+    return (
+      <div>
+        <EditorToolBar />
+        {/* <form action="/upload" method="post" enctype="multipart/form-data" name='upload-image'>
+          <input type="file" name="image" onChange={this.onImageDrop.bind(this)}/>
+        </form> */}
+        <Dropzone multiple
+          accept='image/*'
+          onDrop={this.onImageDrop.bind(this)}
+        />
+        {/* <div className='container' contentEditable ref='editorsheet'>
+          <p><br /></p>
+        </div> */}
+        <div className="row">
+          <div className="col-4">Title</div>
+          <div className="col-8" contentEditable ref='editorsheet'>Maintext</div>
+        </div>
+        <button onClick={this.createNewArticle.bind(this)}>test</button>
+      </div>
+    )
   }
 }
 

@@ -1,32 +1,34 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
-import "./css/titlepanel.css";
+import './css/titlepanel.css';
 
 export default class TitlePanel extends Component {
 	constructor(props) {
 		super(props);
 	}
 
+	goToPage = ()=> {
+
+	}
+
 	render() {
-		var self = this;
 		return (
 			<div id="title-header">
 				<div id="title-name">
 				</div>
 				<div className='btn-group'>
-					<button type='button' className="btn btn-primary"><a href='/'>主页</a></button>
-					<div id='dropdown-btn' className='btn-group'>
-						<button type='button' className="btn btn-primary" data-toggle="dropdown">技术分享</button>
+					<a className="btn btn-primary" href="/">主页</a>
+					<div className='btn-group' id='dropdown-btn' >
+					<button className="btn btn-primary" data-toggle="dropdown" type='button' >账号</button>
 						<div className='dropdown-menu'>
 							<a className="dropdown-item" href="/signup">注册</a>
 							<a className="dropdown-item" href="/editor">写文章</a>
 							<a className="dropdown-item" href="/signin">登陆</a>
 						</div>
 					</div>
-					<button type='button' className="btn btn-primary">随记</button>
-					<button type='button' className="btn btn-primary">归档</button>
-					<button type='button' className="btn btn-primary">友情链接</button>
-					<button type='button' className="btn btn-primary">关于我</button>
+					<a className="btn btn-primary" href="/">随记</a>
+					<a className="btn btn-primary" href="/archieve">归档</a>
+					<a className="btn btn-primary" href="/friendlink">友情链接</a>
+					<a className="btn btn-primary" href="/about">关于我</a>
 				</div>
 			</div>
 		)

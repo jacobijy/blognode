@@ -101,13 +101,15 @@ function newArticle(req, res, next) {
 
 function saveArticle(req, res, next) {
   let article_id = req.body.article_id;
-  let maintext = req.body.maintext;
+  let maintext = req.body.article;
   let images = req.body.files;
+  if (images === undefined)
+    images = [];
   console.log(req.body);
-  article.updateArtileByAritcleid(article_id, article, images, (err, doc, result) => {
+  article.updateArtileByAritcleid(article_id, maintext, images, (err, doc, result) => {
     if (err) throw err;
     res.send('save succeeded');
   })
 }
 
-export { uploadImage, newArticle, saveArticle, onOpenEditor };
+export { uploadImage, newArticle, saveArticle, onOpenEditor, getArticleList };

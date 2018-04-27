@@ -7,7 +7,6 @@ import logger from '../utils/logger';
 import http from 'http';
 import { config } from '../config';
 import { router } from './routes';
-import { connect } from "mongoose";
 import multer from "multer";
 import bodyParser from "body-parser";
 
@@ -30,27 +29,6 @@ app.get('/data/:module', (req, res, next) => {
 });
 
 /**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort(process.env.PORT || config.port);
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
  * Normalize a port into a number, string, or false.
  */
 
@@ -69,6 +47,19 @@ function normalizePort(val) {
 
   return false;
 }
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || config.port);
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
 
 /**
  * Event listener for HTTP server "error" event.
@@ -109,6 +100,15 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 app.use(morgan('dev'));
 app.use(express.json());

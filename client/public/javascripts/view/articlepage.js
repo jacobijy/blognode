@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 
 export default class ArticlePanel extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export default class ArticlePanel extends Component {
       <div>
         <h1>{this.state.title}</h1>
         <div>
-          <image src ={this.state.images[0]}></image>
+          <image src={this.state.images[0]}></image>
           <p>{this.state.maintext}</p>
         </div>
       </div>

@@ -20,3 +20,16 @@ label {
   display: inline-block;
   margin: auto;
 }
+
+.row {
+  min-height: 100%;
+}
+.row .col-4 {
+  background-color: orange
+}
+
+.row .col-8 {
+  border-radius: 5px;
+  background-color: lavender;
+  border: orangered
+}

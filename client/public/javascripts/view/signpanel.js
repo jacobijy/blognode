@@ -6,46 +6,10 @@ import { Redirect } from "react-router-dom";
 export default class SignPanel extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
     this.state = {
       message: '',
       redirectToLogin: false
     }
-  }
-
-  render() {
-    const { dest } = this.props.location.state || { dest: { pathname: '/signin' } }
-    const { redirectToLogin } = this.state;
-    if (redirectToLogin) {
-      return <Redirect to= {dest} />
-    }
-    return (
-      <div className="container">
-        <h3>用户注册</h3>
-        <form>
-          <div className="form-group">
-            <label for="name">username:</label>
-            <input type="text" className="form-control" ref="username" placeholder="Enter username" />
-          </div>
-          <div className="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" className="form-control" ref="pwd" placeholder="Enter password" />
-          </div>
-          <div className="form-group">
-            <label for="pwdex">Password Again:</label>
-            <input type="password" className="form-control" ref="pwdex" placeholder="Enter password" />
-          </div>
-          <div className="form-group">
-            <label for="email">Email:</label>
-            <input type="email" className="form-control" ref="email" placeholder="Enter email" />
-          </div>
-          {
-            this.state.message === '' ? null : <p className='error-message'>{this.state.message}</p>
-          }
-          <button type="button" className="btn btn-primary" onClick={this.submitSignup.bind(this)}>注册</button>
-        </form>
-      </div>
-    )
   }
 
   submitSignup() {
@@ -54,20 +18,49 @@ export default class SignPanel extends Component {
     let passwordex = this.refs.pwdex.value;
     let email = this.refs.email.value;
     console.log(username, password, passwordex, email)
-    const signupresult = (err, res) => {
-      if (err) {
-        this.setState({ message: err.response.text })
-      } else {
-        this.setState({ message: res.text })
-      }
-    }
     superagent.post('/signup')
       .field({ username, password, passwordex, email })
       .end((err, result) => {
-        console.log(result);
-        this.setState({
-          redirectToLogin : true
-        })
+        if (err) {
+          this.setState({ message: err.response.text })
+        } else {
+          this.setState({ message: result.text, redirectToLogin: true })
+        }
       })
+  }
+
+  render() {
+    const { dest } = this.props.location.state || { dest: { pathname: '/signin' } }
+    const { redirectToLogin } = this.state;
+    if (redirectToLogin) {
+      return <Redirect to={dest} />
+    }
+    return (
+      <div className="container">
+        <h3>用户注册</h3>
+        <form>
+          <div className="form-group">
+            <label htmlFor="name">username:</label>
+            <input className="form-control" placeholder="Enter username" ref="username" type="text" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="pwd">Password:</label>
+            <input className="form-control" placeholder="Enter password" ref="pwd" type="password" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="pwdex">Password Again:</label>
+            <input className="form-control" placeholder="Enter password" ref="pwdex" type="password" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input className="form-control" placeholder="Enter email" ref="email" type="email" />
+          </div>
+          {
+            this.state.message === '' ? null : <p className='error-message'>{this.state.message}</p>
+          }
+          <button className="btn btn-primary" onClick={this.submitSignup.bind(this)} type="button">注册</button>
+        </form>
+      </div>
+    )
   }
 }

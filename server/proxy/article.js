@@ -41,7 +41,7 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
     callback = images;
   }
   else {
-    option = { article: article, figure: images }
+    option = { maintext: article, figure: images }
   }
   Article.findOneAndUpdate({ article_id: article_id }, { $set: option }, callback);
 }
@@ -49,7 +49,7 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
 /**
  * 根据用户名称，查找文章id列表
  * @param {ObjectId} author_id 用户id
- * @param {Function} callback 回调 
+ * @param {Function} callback 回调
  */
 
 export function getArticlesByAuthorId(author_id, callback) {
@@ -63,7 +63,7 @@ export function getArticlesByAuthorId(author_id, callback) {
  * author_id: number
  * figure: []//image names
  * maintext: ''//innerhtml
- * postdate: Date, default: Date.now 
+ * postdate: Date, default: Date.now
  * readtime: Number
  * commitsnumber: Number
  * likedtime: Number
