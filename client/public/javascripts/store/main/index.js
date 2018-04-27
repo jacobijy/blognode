@@ -26,4 +26,4 @@ class Store_MessageList extends EventEmitter {
   }
 }
 
-module.exports = new Store_MessageList();
+export var store = new Store_MessageList();

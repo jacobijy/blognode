@@ -47,13 +47,13 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
 }
 
 /**
- * 根据用户名称，查找文章列表
+ * 根据用户名称，查找文章id列表
  * @param {ObjectId} author_id 用户id
  * @param {Function} callback 回调 
  */
 
 export function getArticlesByAuthorId(author_id, callback) {
-  Article.find({ author_id: author_id }, callback);
+  Article.find({ author_id: author_id }, { article_id: 1, title: 1, _id: 0 }, { sort: { article_id: -1 } }, callback);
 }
 
 /**

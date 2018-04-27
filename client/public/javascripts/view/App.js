@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import store from '../store/main';
+import {store} from '../store/main';
 import './css/App.css'
 
 class App extends Component {

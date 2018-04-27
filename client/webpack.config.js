@@ -7,12 +7,12 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   // 页面入口文件配置
   entry: {
-    main: ['./client/public/javascripts/view/router/index.js'],
-    vender: ['react', 'react-dom', 'react-router-dom', 'react-router']
+    main: ['./client/public/javascripts/view/router/index.js']
   },
   // 入口文件输出配置
   output: {
@@ -28,7 +28,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react']
         }
       },
       {
@@ -53,7 +53,10 @@ module.exports = {
   plugins: [
     // new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin(G)
+    new webpack.DefinePlugin(G),
+    new BundleAnalyzerPlugin({
+      analyzerHost: '0.0.0.0'
+    })
     // new OpenBrowserPlugin({
     // })
   ],

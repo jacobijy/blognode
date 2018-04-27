@@ -3,9 +3,8 @@ import { render } from "react-dom";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../utils/apiClient";
-import { getInfoFromCookies } from "../../../../utils/tools";
+import { getInfoFromCookies } from "../../../../utils/clienttools";
 import './css/articleeditor.css'
-import { decodeURIComponent } from "utility/lib/web";
 
 class EditorToolBar extends Component {
   constructor(props) {
@@ -14,25 +13,25 @@ class EditorToolBar extends Component {
 
   render() {
     return (
-      <div class="btn-toolbar">
-        <div class="btn-group">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-left"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-center"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-right"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+      <div className="btn-toolbar">
+        <div className="btn-group">
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-left"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-center"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-right"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-justify"></span></button>
         </div>
-        <div class="btn-group btn-group-lg">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-indent-left"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-indent-right"></span></button>
+        <div className="btn-group btn-group-lg">
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-indent-left"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-indent-right"></span></button>
         </div>
-        <div class="btn-group btn-group-sm">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-font"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-bold"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-italic"></span></button>
+        <div className="btn-group btn-group-sm">
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-font"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-bold"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-italic"></span></button>
         </div>
-        <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height"></span></button>
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-width"></span></button>
+        <div className="btn-group btn-group-xs">
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-text-height"></span></button>
+          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-text-width"></span></button>
         </div>
       </div>
     )
@@ -42,12 +41,13 @@ class EditorToolBar extends Component {
 class ArticleEditor extends Component {
   constructor() {
     super();
-    console.log(getInfoFromCookies(decodeURIComponent(document.cookie)))
-    this.author_id = getInfoFromCookies(decodeURIComponent(document.cookie))[1];
-    this.authod_name = getInfoFromCookies(decodeURIComponent(document.cookie))[2]
+    let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
+    this.author_id = articleinfo[1];
+    this.authod_name = articleinfo[2]
+    let article_id = articleinfo.length >= 4 ? articleinfo[3] : 0;
     this.state = {
       files: [],
-      article_id: 0,
+      article_id: article_id,
       image_src: '',
       article: '<p><br /></p>'
     };
@@ -55,16 +55,18 @@ class ArticleEditor extends Component {
 
   componentDidMount() {
     this.timer = setInterval(() => this.saveArticle(), 5000);
-    let sheet = document.getElementsByClassName('edit-sheet')[0];
-    request
-      .post('/editor')
-      .field('article_id', 1)
-      .end((err, res) => {
-        if (err) throw err;
-        console.log('did', res.body);
+    let sheet = this.refs.editorsheet;
+    if (this.state.article_id > 0) {
+      request
+        .post('/editor')
+        .field('article_id', this.state.article_id)
+        .end((err, res) => {
+          if (err) throw err;
+          console.log('did', res.body);
 
-        // sheet.innerHTML = 
-      })
+          // sheet.innerHTML = 
+        })
+    }
   }
 
   componentWillUnmount() {
@@ -104,10 +106,6 @@ class ArticleEditor extends Component {
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}>
         </Dropzone>
-        {
-          this.state.image_src !== '' ?
-            <img src={this.state.image_src} /> : null
-        }
         <div className='edit-sheet' contentEditable={true} ref='editorsheet'>
           <p><br /></p>
         </div>
@@ -127,6 +125,8 @@ class ArticleEditor extends Component {
         else {
           console.log(json)
           let json = JSON.parse(result.text);
+          let sheet = this.refs.editorsheet;
+          sheet.innerHTML += `<img src=${json.path} />`
           this.setState({ image_src: json.path, files: Array.from(files, value => value.name) });
         }
       })
@@ -138,7 +138,10 @@ class ArticleEditor extends Component {
       .post('/new_article')
       .send({ maintext: this.refs.editorsheet.innerHTML, author_id: this.author_id })
       .end((err, res) => {
-        console.log(err, res);
+        console.log(err, res.text);
+        this.setState({
+          article_id: JSON.parse(res.text).article_id
+        })
       })
   }
 }

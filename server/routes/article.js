@@ -78,13 +78,23 @@ function newArticle(req, res, next) {
     if (result) {
       console.log('result', result)
       let cookie = req.cookies[config.auth_cookiename];
-      let auth_token = cookie + '$$$$' + result.article_id; // 以后可能会存储更多信息，用 $$$$ 来分隔
+      let array = cookie.split('$$$$')
+      if (array.length >= 3) {
+        array[2] =  result.article_id;
+      }
+      else {
+        array.push(result.article_id);
+      }
+      // 以后可能会存储更多信息，用 $$$$ 来分隔
+      let auth_token = array.reduce((previousvalue, current) => {
+        return previousvalue + current + '$$$$'
+      })
       let opts = {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: false
       };
       res.cookie(config.auth_cookiename, auth_token, opts);
-      res.send('create success')
+      res.send({ article_id: result.article_id });
     }
   })
 }
