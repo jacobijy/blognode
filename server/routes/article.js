@@ -5,9 +5,10 @@ import { createHash } from "crypto";
 import * as article from "../proxy/article";
 
 function getArticleList(req, res, next) {
-  let authod_id = req.authod_id;
-  article.getArticlesByAuthorId(authod_id, (err, result) => {
+  let author_id = req.body.author_id;
+  article.getArticlesByAuthorId(author_id, (err, result) => {
     if (err) throw err;
+    console.log(result);
     res.json(result);
   })
 }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
-import '../css/articleeditor.css'
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
@@ -16,6 +15,7 @@ export default class EditorSheet extends Component {
 
   constructor(props) {
     super(props);
+    this.createNewArticle = this.props.createNewArticle;
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ export default class EditorSheet extends Component {
     clearInterval(this.timer);
   }
 
-  saveArticle() {
+  saveArticle = () => {
     const { article_id, files } = this.props
     if (article_id === 0)
       return;
@@ -71,19 +71,6 @@ export default class EditorSheet extends Component {
           let sheet = this.refs.editorsheet;
           sheet.innerHTML += `<img src=${json.path} />`
         }
-      })
-  }
-
-  createNewArticle = () => {
-    const { author_id } = this.props;
-    request
-      .post('/new_article')
-      .send({ maintext: this.refs.editorsheet.innerHTML, author_id })
-      .end((err, res) => {
-        console.log(err, res.text);
-        this.setState({
-          article_id: JSON.parse(res.text).article_id
-        })
       })
   }
 

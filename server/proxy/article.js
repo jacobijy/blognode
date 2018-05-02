@@ -53,14 +53,19 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
  */
 
 export function getArticlesByAuthorId(author_id, callback) {
-  Article.find({ author_id: author_id }, { article_id: 1, title: 1, _id: 0 }, { sort: { article_id: -1 } }, callback);
+  console.log(author_id)
+  const query = Article.find(); // `query` is an instance of `Query`
+  query.setOptions({ article_id: 1, title: 1, _id: 0 });
+  query.collection(Article.collection);
+  query.sort({ article_id: -1 });
+  query.where('author_id').equals(author_id).limit(6).exec(callback);
 }
 
 /**
  * example as article info
  * id: auto
  * article_id: audo-increment
- * author_id: number
+ * author_id: ObjectId
  * figure: []//image names
  * maintext: ''//innerhtml
  * postdate: Date, default: Date.now

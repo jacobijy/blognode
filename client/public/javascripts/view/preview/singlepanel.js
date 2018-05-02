@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import "./css/article.css";
+import "../css/article.css";
 
-export default class ArticlePanel extends Component {
+export default class SinglePanel extends Component {
   static PropTypes = {
     article: PropTypes.string.isRequired,
     image: PropTypes.string,
@@ -14,13 +14,17 @@ export default class ArticlePanel extends Component {
   }
 
   render() {
+    const { article, image, title } = this.props
     return (
-      <div className="article">
+      <div className="col-4">
         <h1 className="article-title">
+          {title}
         </h1>
-        <img className="article-image">
-        </img>
+        <img className="article-image" src={image} />
         <p className="article-summery">
+          {
+            article.length > 50 ? article.slice(0, 50) : article
+          }
         </p>
       </div>
     )

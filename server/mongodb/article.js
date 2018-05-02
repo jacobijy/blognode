@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
 import BaseModel from './base_model';
-import { Article } from '.';
 
 const ArticleSchema = new Schema({
   id: { type: Number },

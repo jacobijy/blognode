@@ -17,6 +17,7 @@ router.post('/editor', article.onOpenEditor);
 router.post('/upload_image', article.uploadImage);
 router.post('/save_article', article.saveArticle);
 router.post('/new_article', article.newArticle);
+router.post('/get_articles', article.getArticleList);
 
 //User
 router.post('/signin', users.userSignin);
