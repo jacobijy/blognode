@@ -51,10 +51,10 @@ class App extends Component {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <TitlePanel />
-          <div className="col-12">
+          <div className="col-sm-12">
             <Switch>
               <Route exact path="/" component={ArticlePanel} />
               <Route path="/signup" component={SignPanel} />

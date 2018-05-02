@@ -32,7 +32,7 @@ export default class SigninPanel extends Component {
       return <Redirect to={dest} />
     }
     return (
-      <div className="container">
+      <div className="container sign">
         <h3>用户登陆</h3>
         <form>
           <div className="form-group">

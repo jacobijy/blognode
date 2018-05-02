@@ -26,22 +26,27 @@ export default class PreviewPage extends Component {
   }
 
   render() {
-    console.log(this.state.articles)
+    let articles = this.state.articles
+    for (const article of articles) {
+      if (!article.title)
+        Object.assign(article, { title: article.maintext.slice(3, 8) })
+    }
     return (
       <div className="row">
-        <div className="col-auto"></div>
-        <div className="col-9">
-          {
-            this.state.articles.map((article, index) => (
-              <SinglePanel
-                article={article.maintext}
-                image={article.figure[0]}
-                title={article.title}
-              />
-            ))
-          }
+        <div className="col-sm-8 offset-sm-2">
+          <div className="row">
+            {
+              articles.map((article, index) => (
+                <SinglePanel
+                  key={index}
+                  article={article.maintext}
+                  image={article.figure[0]}
+                  title={article.title}
+                />
+              ))
+            }
+          </div>
         </div>
-        <div className="col-auto"></div>
       </div>
     )
   }

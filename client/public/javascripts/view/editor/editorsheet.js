@@ -84,8 +84,8 @@ export default class EditorSheet extends Component {
           onDrop={this.onImageDrop.bind(this)}
         />
         <div className="row">
-          <div className="col-4">Title</div>
-          <div className="col-8" contentEditable ref='editorsheet'>{article}</div>
+          <div className="col-sm-4">Title</div>
+          <div className="col-sm-8" contentEditable ref='editorsheet'>{article}</div>
         </div>
         <button onClick={this.createNewArticle}>New Article</button>
       </div>

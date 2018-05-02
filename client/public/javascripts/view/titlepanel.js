@@ -8,7 +8,7 @@ export default class TitlePanel extends Component {
 
   render() {
     return (
-      <div id="title-header" className="col-12">
+      <div id="title-header" className="col-sm-12">
         <div id="title-name">
         </div>
         <div className='btn-group'>

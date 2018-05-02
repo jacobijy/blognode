@@ -16,7 +16,7 @@ export default class SinglePanel extends Component {
   render() {
     const { article, image, title } = this.props
     return (
-      <div className="col-4">
+      <div className="col-sm-4 offset-sm-2 singlepanel">
         <h1 className="article-title">
           {title}
         </h1>
