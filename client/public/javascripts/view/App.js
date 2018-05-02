@@ -6,6 +6,7 @@ import SignPanel from './signpanel'
 import Editor from './editor'
 import ArticlePage from './articlepage'
 import SigninPanel from './signinpanel'
+import ArticlePanel from "./articlepanel";
 import './css/App.css'
 
 class App extends Component {
@@ -50,11 +51,11 @@ class App extends Component {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
     return (
-      <div className="col">
+      <div className="row">
         <TitlePanel />
         <main>
           <Switch>
-            <Route exact path="/" />
+            <Route exact path="/" component={ArticlePanel}/>
             <Route path="/signup" component={SignPanel} />
             <Route path="/article" component={ArticlePage} />
             <Route path="/editor" component={Editor} />

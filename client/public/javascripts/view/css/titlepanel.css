@@ -11,46 +11,6 @@
 #title-name {
   height: 112px;
 }
-/*
-ul#title-navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-li, .menu-item{
-  float: left;
-  width: 100px;
-  background-color: #333;
-  font-size: 16px;
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
-  display: inline-flex;
-  cursor: pointer;
-}
-
-li a, .dropbtn {
-  margin: auto;
-  display: inline-flex;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: #111;
-}
-
-.dropdown {
-  display: inline-block;
-}
-
-
-
-.dropdown-content a:hover {background-color: #f1f1f1} */
 
 li {
   display: inline;
