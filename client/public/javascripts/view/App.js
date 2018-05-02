@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import {store} from '../store/main';
+import { store } from '../store/main';
+import { Route, Switch } from 'react-router-dom'
+import TitlePanel from './titlepanel'
+import SignPanel from './signpanel'
+import Editor from './editor'
+import ArticlePage from './articlepage'
+import SigninPanel from './signinpanel'
 import './css/App.css'
 
 class App extends Component {
@@ -9,7 +14,7 @@ class App extends Component {
     this.state = {
       messageList: []
     };
-    this.getData();
+    // this.getData();
   }
 
   componentDidMount() {
@@ -20,6 +25,21 @@ class App extends Component {
     console.log('App unmouted');
   }
 
+  getData() {
+    var self = this;
+    store.getAllData(function (data) {
+      var i = 0;
+      var len = data.length;
+      var messageListArr = [];
+      for (; i < len; i++) {
+        messageListArr[i] = data[i].Message;
+      }
+      self.setState({ messageList: messageListArr });
+      console.log(self.state.messageList);
+    })
+  }
+
+
   render() {
     // var self = this;
     // var messages = this.state.messageList;
@@ -29,27 +49,20 @@ class App extends Component {
     //   .forEach(function (em) {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
-    var self = this;
     return (
-      <div>
-        {self.props.children}
+      <div className="col">
+        <TitlePanel />
+        <main>
+          <Switch>
+            <Route exact path="/" />
+            <Route path="/signup" component={SignPanel} />
+            <Route path="/article" component={ArticlePage} />
+            <Route path="/editor" component={Editor} />
+            <Route path="/signin" component={SigninPanel} />
+          </Switch>
+        </main>
       </div>
-    );
-  }
-
-  getData() {
-    var self = this;
-    store
-      .getAllData(function (data) {
-        var i = 0;
-        var len = data.length;
-        var messageListArr = [];
-        for (; i < len; i++) {
-          messageListArr[i] = data[i].Message;
-        }
-        self.setState({ messageList: messageListArr });
-        console.log(self.state.messageList);
-      })
+    )
   }
 }
 

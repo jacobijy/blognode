@@ -1,30 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import TitlePanel from '../titlepanel'
-import MainContainer from '../App'
-import SignPanel from '../signpanel'
-import ArticleEditor from '../articleeditor'
-import ArticlePage from '../articlepage'
-import SigninPanel from '../signinpanel'
+import { BrowserRouter as Router} from 'react-router-dom'
+import App from "../App";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <TitlePanel />
-        <main>
-          <Switch>
-            <Route exact path='/' component={MainContainer} />
-            <Route path='/signup' component={SignPanel} />
-            <Route path='/article' component={ArticlePage} />
-            <Route path='/editor' component={ArticleEditor} />
-            <Route path='/signin' component={SigninPanel} />
-          </Switch>
-        </main>
-      </div>
-    )
-  }
-}
-
-render(<Router><App /></Router>, document.getElementById('main-container'))
+render(<Router><App /></Router>, document.querySelector('#main-container'))
