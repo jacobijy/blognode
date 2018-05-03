@@ -28,7 +28,7 @@ export default class Editor extends Component {
 
   createNewArticle = () => {
     Request
-      .post('/new_article')
+      .post('/article/new')
       .send({ maintext: this.state.article, author_id: this.author_id })
       .end((err, res) => {
         console.log(err, res.text);

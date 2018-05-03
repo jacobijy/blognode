@@ -5,8 +5,6 @@ const G = {
 }
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -43,7 +41,7 @@ module.exports = {
   },
   // 其他解决方案配置
   resolve: {
-    extensions: [' ', '.js', '.jsx', '.css', '.json', '.svg'],
+    extensions: [' ', '.js', '.jsx', '.css', '.json', '.svg']
   },
   optimization: {
 
@@ -65,5 +63,5 @@ module.exports = {
     contentBase: "./client",//本地服务器所加载的页面所在的目录
     historyApiFallback: true,//不跳转
     inline: true//实时刷新
-  },
+  }
 }
