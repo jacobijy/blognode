@@ -1,6 +1,11 @@
-import mongoose from 'mongoose'
-import logger from "../../utils/logger";
+import mongoose from 'mongoose';
 import { config } from '../../config';
+import logger from "../../utils/logger";
+import './article';
+import './attachment';
+// models
+import './counter';
+import './users';
 
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
@@ -12,13 +17,6 @@ mongoose.connect(config.mongodb_conf, {
   }
 }
 );
-
-
-// models
-import './counter'
-import './users';
-import './article';
-import './attachment';
 
 export var User = mongoose.model('User');
 export var Article = mongoose.model('Article');
