@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import request from "superagent";
-import { formatUrl } from "../../../../../utils/apiClient";
+import ApiClient, { formatUrl } from "../../../../../utils/apiClient";
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
@@ -16,6 +16,7 @@ export default class EditorSheet extends Component {
   constructor(props) {
     super(props);
     this.createNewArticle = this.props.createNewArticle;
+    console.log(new ApiClient());
   }
 
   componentDidMount() {

@@ -4,10 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Root from "../../containers/Root";
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducers from '../../reducers';
+// import rootReducers from '../../reducers';
 
 const store = createStore(
-  rootReducers,
+  ((a)=>a),
   applyMiddleware(thunk)
 )
 

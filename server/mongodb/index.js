@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import { config } from '../../config';
 import logger from "../../utils/logger";
-import './article';
-import './attachment';
 // models
 import './counter';
 import './users';
+import './article';
+import './attachment';
 
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
