@@ -4,12 +4,11 @@ import * as Users from "../proxy/users";
 import { config } from "../../config";
 
 function signuperror(msg, res) {
-  res.status(422);
-  res.send(msg);
+  res.status(203);
+  res.send({ msg, result: false });
 }
 
 function userSignUp(req, res, next) {
-
   let username = trim(req.body.username).toLowerCase();
   let password = trim(req.body.password);
   let passwordex = trim(req.body.passwordex);
@@ -48,8 +47,7 @@ function userSignUp(req, res, next) {
       let avatarurl = Users.makerAvatarUrl(email);
       Users.newAndSave(username, username, passhash, email, avatarurl, false).then(
         (result) => {
-          res.redirect('/signin');
-          console.log(result);
+          res.send({ msg: 'success', result: true });
         },
         (error) => {
           console.log(error);
@@ -75,7 +73,7 @@ function userSignin(req, res, next) {
         };
         console.log(auth_token)
         res.cookie(config.auth_cookiename, auth_token, opts);
-        res.send('login success');
+        res.send({ result: true });
         // res.redirect('/');
       }
       else {

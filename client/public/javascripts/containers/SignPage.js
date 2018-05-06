@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { UserSignup } from '../actions'
 import SignupPanel from '../view/sign/signuppanel';
 
 const mapStateToProps = (state) => {
-  const { isSigning, isInvalid, items } = state;
+  const { items } = state.signup;
+  const result = items.result || false
   return {
-    redirectToLogin: ''
+    redirectToLogin: result,
+    SignMessage: items.msg
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  sumibSignup: UserSignup(ownProps.FormData)(dispatch)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignupPanel)
+export default connect(mapStateToProps)(SignupPanel)

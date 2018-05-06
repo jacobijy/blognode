@@ -7,12 +7,12 @@ export const USER_SIGNUP_FAILURE = 'USER_SIGNUP_FAILURE'
 const UserSignupOption = {
   Request: (json) => ({
     type: USER_SIGNUP_REQUEST,
-    json
+    result: json
   }),
 
   Failure: (err) => ({
     type: USER_SIGNUP_FAILURE,
-  err
+    result: err
   }),
 
   Success: () => ({
@@ -20,21 +20,19 @@ const UserSignupOption = {
   })
 }
 
-const UserSignRequest = (action, json) => (method, path = '') => (dispatch) =>{
+const UserSignRequest = (action, json) => (method, path = '') => (dispatch) => {
   dispatch(action.Request(json))
   const request = new ApiClient();
   let promise = request[method](path, { data: json })
   promise.then((result) => {
-    console.log('result', result);
-    return dispatch(action.Success(result))
+    return result.result ? dispatch(action.Success(result)) : dispatch(action.Failure(result))
   }).catch((err) => {
     console.log('err', err);
-    return dispatch(action.Failure(err));
   });
 }
 
-export var UserSignup = json => dispatch => {
-  return UserSignRequest(json, UserSignupOption)('post', '/signup')(dispatch)
+export const UserSignup = json => dispatch => {
+  return UserSignRequest(UserSignupOption, json)('post', '/signup')(dispatch)
 }
 
 export const USER_SIGNIN_REQUEST = 'USER_SIGNIN_REQUEST'
@@ -49,7 +47,7 @@ const UserSigninOption = {
 
   Failure: (err) => ({
     type: USER_SIGNIN_FAILURE,
-  err
+    err
   }),
 
   Success: () => ({
@@ -58,5 +56,5 @@ const UserSigninOption = {
 }
 
 export const UserSignin = json => dispatch => {
-  return UserSignRequest(json, UserSigninOption)('post', '/signin')(dispatch)
+  return UserSignRequest(UserSigninOption, json)('post', '/signin')(dispatch)
 }

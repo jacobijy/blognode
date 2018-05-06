@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 import previews from './previews';
-import sign from './sign';
+import { signin, signup } from './sign';
 
-export default combineReducers({ previews, sign });
+export default combineReducers({ previews, signin, signup });

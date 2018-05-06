@@ -1,11 +1,10 @@
-import { combineReducers } from 'redux';
 import * as ACTIONS from '../actions';
 
 const signup = (
   state = {
     isSigning: false,
     isInvalid: false,
-    items: []
+    items: {}
   }, action) => {
   switch (action.type) {
     case ACTIONS.USER_SIGNUP_REQUEST:
@@ -17,7 +16,8 @@ const signup = (
       return {
         ...state,
         isSigning: false,
-        isInvalid: true
+        isInvalid: true,
+        items: action.result
       }
 
     case ACTIONS.USER_SIGNUP_SUCCESS:
@@ -25,7 +25,7 @@ const signup = (
         ...state,
         isSigning: false,
         isInvalid: false,
-        items: action.body
+        items: action.result
       }
 
     default:
@@ -33,11 +33,11 @@ const signup = (
   }
 }
 
-const signin = (state, action) => (
+const signin = (
   state = {
     isSigning: false,
     isInvalid: false,
-    items: []
+    items: {}
   }, action) => {
   switch (action.type) {
     case ACTIONS.USER_SIGNIN_REQUEST:
@@ -65,4 +65,4 @@ const signin = (state, action) => (
   }
 }
 
-export default combineReducers(signin, signup);
+export { signin, signup };
