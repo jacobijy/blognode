@@ -1,9 +1,7 @@
-import { Router } from "express";
 import { trim, isEmail } from "validator";
 import * as tools from "../../utils/tools";
 import * as Users from "../proxy/users";
 import { config } from "../../config";
-const router = Router();
 
 function signuperror(msg, res) {
   res.status(422);
@@ -49,12 +47,12 @@ function userSignUp(req, res, next) {
 
       let avatarurl = Users.makerAvatarUrl(email);
       Users.newAndSave(username, username, passhash, email, avatarurl, false).then(
-        (result) => { 
+        (result) => {
           res.redirect('/signin');
-          console.log(result) 
-        }, 
-        (error) => { 
-          console.log(error) 
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
         })
     })
   })

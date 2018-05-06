@@ -12,6 +12,6 @@
   },
   "watch": [
     "/client/public/output/js/main.bundle.js",
-    "server/*"
+    "/server/*"
   ]
 }

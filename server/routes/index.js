@@ -20,7 +20,7 @@ router.post('/new_article', article.newArticle);
 router.post('/get_articles', article.getArticleList);
 
 //User
-router.post('/signin', users.userSignin);
-router.post('/signup', users.userSignUp);
+router.post('/api/signin', users.userSignin);
+router.post('/api/signup', users.userSignUp);
 
 export { router as router}

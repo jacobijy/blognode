@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { store } from '../store/main';
 import { Route, Switch } from 'react-router-dom'
 import TitlePanel from './titlepanel'
-import SignPanel from './signpanel'
+import SignPanel from '../containers/SignPage'
 import Editor from './editor'
 import ArticlePage from './articlepage'
 import SigninPanel from './signinpanel'
