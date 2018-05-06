@@ -39,6 +39,7 @@ const signin = (
     isInvalid: false,
     items: {}
   }, action) => {
+  console.log(action)
   switch (action.type) {
     case ACTIONS.USER_SIGNIN_REQUEST:
       return {
@@ -49,7 +50,8 @@ const signin = (
       return {
         ...state,
         isSigning: false,
-        isInvalid: true
+        isInvalid: true,
+        items: action.result
       }
 
     case ACTIONS.USER_SIGNIN_SUCCESS:
@@ -57,7 +59,7 @@ const signin = (
         ...state,
         isSigning: false,
         isInvalid: false,
-        items: action.body
+        items: action.result
       }
 
     default:

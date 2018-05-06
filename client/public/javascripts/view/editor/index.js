@@ -40,7 +40,6 @@ export default class Editor extends Component {
 
   render() {
     /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-    console.log(this.state);
     if (!(this.author_id && this.author_name)) {
       return <Redirect to='/signin' />
     }

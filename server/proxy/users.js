@@ -57,7 +57,6 @@ export function newAndSave(username, loginname, passhash, email, avatar_url, act
   user.avatar = avatar_url;
   user.active = active || false;
   user.accessToken = v4();
-  console.log(username, passhash, email, avatar_url, user);
   return user.save();
 }
 

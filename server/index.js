@@ -22,7 +22,6 @@ app.engine('html', require('ejs-mate'));
 
 // 新增接口路由
 app.get('/data/:module', (req, res, next) => {
-  console.log('fecth success');
   let c_path = req.params.module;
   let Action = require('./action/data/' + c_path);
   Action.execute(req, res);

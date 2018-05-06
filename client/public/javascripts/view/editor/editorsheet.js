@@ -16,7 +16,6 @@ export default class EditorSheet extends Component {
   constructor(props) {
     super(props);
     this.createNewArticle = this.props.createNewArticle;
-    console.log(new ApiClient());
   }
 
   componentDidMount() {
@@ -28,7 +27,6 @@ export default class EditorSheet extends Component {
         .field('article_id', this.props.article_id)
         .end((err, res) => {
           if (err) throw err;
-          console.log('did', res.body);
           sheet.innerHTML = res.body.article;
         })
     }
@@ -46,10 +44,8 @@ export default class EditorSheet extends Component {
     if (sheet.innerHTML === this.state.article)
       return;
     this.setState({ article: sheet.innerHTML });
-    console.log(sheet.innerHTML);
     let formData = new FormData();
     for (const file of files) {
-      console.log(file);
       formData.append('image', file);
     }
     formData.append('article_id', article_id);

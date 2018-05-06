@@ -15,8 +15,9 @@ const UserSignupOption = {
     result: err
   }),
 
-  Success: () => ({
-    type: USER_SIGNUP_SUCCESS
+  Success: (json) => ({
+    type: USER_SIGNUP_SUCCESS,
+    result: json
   })
 }
 
@@ -42,16 +43,17 @@ export const USER_SIGNIN_FAILURE = 'USER_SIGNIN_FAILURE'
 const UserSigninOption = {
   Request: (json) => ({
     type: USER_SIGNIN_REQUEST,
-    json
+    result: json
   }),
 
   Failure: (err) => ({
     type: USER_SIGNIN_FAILURE,
-    err
+    result: err
   }),
 
-  Success: () => ({
-    type: USER_SIGNIN_SUCCESS
+  Success: (json) => ({
+    type: USER_SIGNIN_SUCCESS,
+    result: json
   })
 }
 

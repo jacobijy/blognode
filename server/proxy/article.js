@@ -53,7 +53,6 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
  */
 
 export function getArticlesByAuthorId(author_id, callback) {
-  console.log(author_id)
   const query = Article.find(); // `query` is an instance of `Query`
   query.setOptions({ article_id: 1, title: 1, _id: 0 });
   query.collection(Article.collection);
