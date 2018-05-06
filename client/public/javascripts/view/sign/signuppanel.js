@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../css/signpanel.css"
-import { UserSignupRequset } from '../actions';
+import { UserSignupRequset } from '../../actions';
 import { Redirect } from "react-router-dom";
 import PropTypes from 'prop-types';
 
