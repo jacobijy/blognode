@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import request from "superagent";
-import ApiClient, { formatUrl } from "../../../../../utils/apiClient";
+import { formatUrl } from "../../../../../utils/apiClient";
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {

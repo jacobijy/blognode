@@ -24,7 +24,7 @@ export function getUserByid(id, callback) {
  * @param {Function} callback 回调函数
  */
 export function getUserByName(name, callback) {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     User.findOne({loginname:name}, (err, res) => {
       if (err)
         reject(err);
@@ -32,7 +32,6 @@ export function getUserByName(name, callback) {
         resolve(res);
     });
   })
-  return promise;
 }
 
 /**

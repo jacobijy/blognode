@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import SinglePanel from "./singlepanel";
-import Request from "superagent";
 import { getInfoFromCookies } from "../../../../../utils/clienttools";
+import { ArticlesMainPage } from '../../actions';
+import PropTypes from 'prop-types';
 
 export default class PreviewPage extends Component {
+  static propTypes = {
+    articles: PropTypes.array[PropTypes.object],
+    articleNumber: PropTypes.number.isRequired,
+    hasLoadAll: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    authorid: PropTypes.string.isRequired
+  }
   constructor(props) {
     super(props);
     let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
@@ -14,19 +22,24 @@ export default class PreviewPage extends Component {
   }
 
   componentDidMount() {
-    Request
-      .post('/get_articles')
-      .send({ author_id: this.author_id })
-      .end((err, res) => {
-        if (err) console.log(err);
-        this.setState({
-          articles: JSON.parse(res.text)
-        })
-      })
+    const { articleNumber, dispatch, authorid } = this.props;
+    ArticlesMainPage({ authorid, articleNumber })(dispatch);
+  }
+
+  renderSinglePanel(article, index) {
+    const { maintext, figure, title } = article
+    return (
+      <SinglePanel
+        key={index}
+        article={maintext}
+        image={figure[0]}
+        title={title}
+      />
+    )
   }
 
   render() {
-    let articles = this.state.articles
+    let { articles } = this.props;
     for (const article of articles) {
       if (!article.title)
         Object.assign(article, { title: article.maintext.slice(3, 8) })
