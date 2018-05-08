@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { store } from '../store/main';
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TitlePanel from './titlepanel'
 import SignupPage from '../containers/SignupPage'
 import Editor from './editor'
@@ -47,18 +47,21 @@ class App extends Component {
     //   .forEach(function (em) {
     //     arr.push(<li key={em}> {em} </li>);
     //   });
+    // console.log(this.props);
     return (
       <div className="container">
         <div className="row">
           <TitlePanel />
           <div className="col-sm-12">
-            <Switch>
-              <Route exact path="/" component={ArticlePanel} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/article" component={ArticlePage} />
-              <Route path="/editor" component={Editor} />
-              <Route path="/signin" component={SigninPage} />
-            </Switch>
+            <Router>
+              <Switch>
+                <Route exact path="/" component={ArticlePanel} />
+                <Route path="/signup" component={SignupPage} />
+                <Route path="/article" component={ArticlePage} />
+                <Route path="/editor" component={Editor} />
+                <Route path="/signin" component={SigninPage} />
+              </Switch>
+            </Router>
           </div>
         </div>
       </div>

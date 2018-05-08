@@ -5,7 +5,6 @@ const mainpreview = (
     isRequesting: false,
     items: {}
   }, action) => {
-  console.log(action);
   switch (action.type) {
     case ACTIONS.Articles_Main_Page_Request:
       return {

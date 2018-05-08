@@ -61,7 +61,7 @@ export default class EditorSheet extends Component {
       .field('article_id', 1)
       .end((err, result) => {
         if (err) {
-          console.log('err', err);
+          console.error('err', err);
         }
         else {
           let json = JSON.parse(result.text);

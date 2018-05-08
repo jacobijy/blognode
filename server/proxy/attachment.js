@@ -40,7 +40,6 @@ export function saveFileToDb(fileinfo, callback) {
     filename: fileinfo.filename,
     article_id: parseInt(fileinfo.article_id)
   })
-  console.log(fileinfo);
   createReadStream(fileinfo.filepath + fileinfo.filename).pipe(writestream);
   writestream.on('close', file => callback(file))
 }

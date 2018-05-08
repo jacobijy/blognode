@@ -5,10 +5,13 @@ export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
 export const USER_SIGNUP_FAILURE = 'USER_SIGNUP_FAILURE'
 
 const UserSignupOption = {
-  Request: (json) => ({
-    type: USER_SIGNUP_REQUEST,
-    data: json
-  }),
+  Request: (json) => {
+    console.log(json);
+    return {
+      type: USER_SIGNUP_REQUEST,
+      data: json
+    }
+  },
 
   Failure: (err) => ({
     type: USER_SIGNUP_FAILURE,
@@ -21,14 +24,14 @@ const UserSignupOption = {
   })
 }
 
-const RequestAction = (action, json) => (method, path = '') => (dispatch) => {
+const RequestAction = (action, json) => (method, path = '') => dispatch => {
   dispatch(action.Request(json))
   const request = new ApiClient();
   let promise = request[method](path, { data: json })
   promise.then((result) => {
     return result.err ? dispatch(action.Failure(result)) : dispatch(action.Success(result))
   }).catch((err) => {
-    console.log('err', err);
+    console.error('err', err);
   });
 }
 

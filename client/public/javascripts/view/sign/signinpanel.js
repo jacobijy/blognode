@@ -19,7 +19,7 @@ export default class SigninPanel extends Component {
     let name = this.refs.name.value;
     let password = this.refs.password.value;
     let json = { name, password };
-    UserSignin('post', json)(dispatch);
+    dispatch(UserSignin('post', json))
   }
 
   render() {

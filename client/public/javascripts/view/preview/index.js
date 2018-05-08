@@ -15,13 +15,14 @@ export default class PreviewPage extends Component {
 
   constructor(props) {
     super(props);
+    console.log({ props });
     let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
     this.author_id = articleinfo[1];
   }
 
   componentDidMount() {
     const { articleNumber, dispatch, authorid } = this.props;
-    ArticlesMainPage('post', { authorid, articleNumber })(dispatch);
+    dispatch(ArticlesMainPage('post', { authorid, articleNumber }))
   }
 
   renderSinglePanel(article, index) {
@@ -39,6 +40,7 @@ export default class PreviewPage extends Component {
 
   render() {
     let { articles } = this.props;
+    articles = articles || [];
     for (const article of articles) {
       if (!article.title)
         Object.assign(article, { title: article.maintext.slice(3, 8) })

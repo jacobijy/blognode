@@ -32,7 +32,7 @@ function userSignUp(req, res, next) {
   let query = { "$or": [{ "username": username }, { "email": email }] };
   Users.getUsersByQuery(query, {}, (err, users) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       return;
     }
     if (users.length > 0) {
@@ -50,7 +50,7 @@ function userSignUp(req, res, next) {
           res.send({ msg: 'success', result: true });
         },
         (error) => {
-          console.log(error);
+          console.error(error);
         })
     })
   })
@@ -78,7 +78,7 @@ function userSignin(req, res, next) {
       }
     })
   }, function (error) {
-    console.log(error);
+    console.error(error);
   });
 }
 

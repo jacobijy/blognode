@@ -31,7 +31,6 @@ export default class Editor extends Component {
       .post('/article/new')
       .send({ maintext: this.state.article, author_id: this.author_id })
       .end((err, res) => {
-        console.log(err, res.text);
         this.setState({
           article_id: JSON.parse(res.text).article_id
         })
