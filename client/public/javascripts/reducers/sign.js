@@ -39,7 +39,6 @@ const signin = (
     isInvalid: false,
     items: {}
   }, action) => {
-  console.log(action)
   switch (action.type) {
     case ACTIONS.USER_SIGNIN_REQUEST:
       return {

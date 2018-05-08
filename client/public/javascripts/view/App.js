@@ -6,7 +6,7 @@ import SignupPage from '../containers/SignupPage'
 import Editor from './editor'
 import ArticlePage from './articlepage'
 import SigninPage from '../containers/SigninPage'
-import ArticlePanel from "./preview";
+import ArticlePanel from "../containers/Articles";
 import './css/App.css'
 
 class App extends Component {

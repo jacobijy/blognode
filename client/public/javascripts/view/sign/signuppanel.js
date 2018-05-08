@@ -22,7 +22,7 @@ export default class SignupPanel extends Component {
     let passwordex = this.refs.pwdex.value;
     let email = this.refs.email.value;
     let formData = { username, password, passwordex, email }
-    UserSignup(formData)(dispatch);
+    UserSignup('post', formData)(dispatch);
     // superagent.post('/signup')
     //   .field({ username, password, passwordex, email })
     //   .end((err, result) => {

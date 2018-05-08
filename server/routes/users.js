@@ -5,7 +5,7 @@ import { config } from "../../config";
 
 function signuperror(msg, res) {
   res.status(203);
-  res.send({ msg, result: false });
+  res.send({ msg, err: true });
 }
 
 function userSignUp(req, res, next) {

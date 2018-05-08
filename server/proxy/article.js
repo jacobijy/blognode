@@ -1,5 +1,6 @@
 import { Article } from "../mongodb";
 import { Types } from "mongoose";
+import { config } from '../../config'
 
 /**
  * 根据ID，查找文章
@@ -57,7 +58,12 @@ export function getArticlesByAuthorId(author_id, callback) {
   query.setOptions({ article_id: 1, title: 1, _id: 0 });
   query.collection(Article.collection);
   query.sort({ article_id: -1 });
-  query.where('author_id').equals(author_id).limit(6).exec(callback);
+  query
+    .where('author_id')
+    .equals(author_id)
+    .limit(config.articleNumberLoadOnce)
+    .skip(0)
+    .exec(callback);
 }
 
 /**

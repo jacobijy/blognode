@@ -3,9 +3,9 @@ import * as ACTIONS from '../actions';
 const mainpreview = (
   state = {
     isRequesting: false,
-    isInvalid: false,
     items: {}
   }, action) => {
+  console.log(action);
   switch (action.type) {
     case ACTIONS.Articles_Main_Page_Request:
       return {
@@ -16,16 +16,14 @@ const mainpreview = (
       return {
         ...state,
         isRequesting: false,
-        isInvalid: true,
-        items: action.result
+        items: action.data
       }
 
     case ACTIONS.Articles_Main_Page_SUCCESS:
       return {
         ...state,
         isRequesting: false,
-        isInvalid: false,
-        items: action.articles
+        items: action.data
       }
 
     default:

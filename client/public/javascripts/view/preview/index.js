@@ -12,21 +12,20 @@ export default class PreviewPage extends Component {
     dispatch: PropTypes.func.isRequired,
     authorid: PropTypes.string.isRequired
   }
+
   constructor(props) {
     super(props);
     let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
     this.author_id = articleinfo[1];
-    this.state = {
-      articles: []
-    }
   }
 
   componentDidMount() {
     const { articleNumber, dispatch, authorid } = this.props;
-    ArticlesMainPage({ authorid, articleNumber })(dispatch);
+    ArticlesMainPage('post', { authorid, articleNumber })(dispatch);
   }
 
   renderSinglePanel(article, index) {
+    console.log(article);
     const { maintext, figure, title } = article
     return (
       <SinglePanel
@@ -50,12 +49,7 @@ export default class PreviewPage extends Component {
           <div className="row">
             {
               articles.map((article, index) => (
-                <SinglePanel
-                  key={index}
-                  article={article.maintext}
-                  image={article.figure[0]}
-                  title={article.title}
-                />
+                this.renderSinglePanel(article, index)
               ))
             }
           </div>

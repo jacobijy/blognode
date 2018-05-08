@@ -5,11 +5,13 @@ import { createHash } from "crypto";
 import * as article from "../proxy/article";
 
 function getArticleList(req, res, next) {
-  let author_id = req.body.author_id;
-  article.getArticlesByAuthorId(author_id, (err, result) => {
+  let { authorid, articleNumber } = req.body
+  console.log(req.body);
+  article.getArticlesByAuthorId(authorid, (err, result) => {
     if (err) throw err;
     console.log(result);
-    res.json(result);
+    articleNumber += result.length;
+    res.json({ articles: result, articleNumber });
   })
 }
 
@@ -81,7 +83,7 @@ function newArticle(req, res, next) {
       let cookie = req.cookies[config.auth_cookiename];
       let array = cookie.split('$$$$')
       if (array.length >= 3) {
-        array[2] =  result.article_id;
+        array[2] = result.article_id;
       }
       else {
         array.push(result.article_id);

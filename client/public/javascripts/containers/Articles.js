@@ -1,18 +1,21 @@
-import React, { Component } from "react";
 import PreviewPage from "../view/preview";
 import { connect } from 'react-redux';
-
-class Articles extends Component {
-  render() {
-    <div><PreviewPage /></div>
-  }
-}
+import { getInfoFromCookies } from '../../../../utils/clienttools';
 
 const mapStateToProps = (state) => {
   const { items } = state.mainpreview;
-  const result = items.result || false
+  // console.log({items, state})
+  let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
+  let authorid = articleinfo.length >= 2 ? articleinfo[1] : 0
+  let articles = items !== undefined&&items.articles ? items.articles : []
+  console.log(items);
+  console.log(articles);
   return {
+    articles: articles,
+    articleNumber: 0,
+    hasLoadAll: false,
+    authorid
   }
 }
 
-export default connect(mapStateToProps)(Articles);
+export default connect(mapStateToProps)(PreviewPage);
