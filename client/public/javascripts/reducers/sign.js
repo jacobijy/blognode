@@ -17,7 +17,7 @@ const signup = (
         ...state,
         isSigning: false,
         isInvalid: true,
-        items: action.result
+        items: action.data
       }
 
     case ACTIONS.USER_SIGNUP_SUCCESS:
@@ -25,7 +25,7 @@ const signup = (
         ...state,
         isSigning: false,
         isInvalid: false,
-        items: action.result
+        items: action.data
       }
 
     default:
@@ -50,7 +50,7 @@ const signin = (
         ...state,
         isSigning: false,
         isInvalid: true,
-        items: action.result
+        items: action.data
       }
 
     case ACTIONS.USER_SIGNIN_SUCCESS:
@@ -58,7 +58,7 @@ const signin = (
         ...state,
         isSigning: false,
         isInvalid: false,
-        items: action.result
+        items: action.data
       }
 
     default:

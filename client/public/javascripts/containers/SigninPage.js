@@ -3,7 +3,8 @@ import SigninPanel from '../view/sign/signinpanel';
 
 const mapStateToProps = (state) => {
   const { items } = state.signin;
-  const result = items.data || false
+  let { data } = items;
+  const result = data || false
   return {
     redirectToMain: result,
     SignMessage: items.msg

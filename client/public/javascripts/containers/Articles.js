@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   // console.log({items, state})
   let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
   let authorid = articleinfo.length >= 2 ? articleinfo[1] : 0
-  let articles = items !== undefined&&items.articles ? items.articles : []
+  let { articles } = items;
+  articles = articles || []
   return {
     articles: articles,
     articleNumber: 0,
