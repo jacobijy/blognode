@@ -42,16 +42,14 @@ export default class Editor extends Component {
       return <Redirect to='/signin' />
     }
     return (
-      <div>
-        <EditorSheet
-          author_id={this.author_id}
-          authod_name={this.author_name}
-          files={this.state.files}
-          article_id={this.state.article_id}
-          article={this.state.article}
-          createNewArticle={this.createNewArticle}
-        />
-      </div>
+      <EditorSheet
+        author_id={this.author_id}
+        authod_name={this.author_name}
+        files={this.state.files}
+        article_id={this.state.article_id}
+        article={this.state.article}
+        createNewArticle={this.createNewArticle}
+      />
     )
   }
 }

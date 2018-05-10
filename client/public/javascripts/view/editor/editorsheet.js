@@ -77,7 +77,7 @@ export default class EditorSheet extends Component {
     /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
     const { article } = this.props
     return (
-      <div>
+      <div style={{height:"100%"}}>
         <Dropzone multiple
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}
@@ -85,9 +85,9 @@ export default class EditorSheet extends Component {
         <div className="row">
           <div className="col-sm-4">Title</div>
           <div className="col-sm-8">
-          <div className="rown">
+          <div className="row">
             <EditorToolbar />
-            <div className="col-sm-12" contentEditable ref='editorsheet'>{article}</div>
+            <div className="col-sm-12" contentEditable ref="editorsheet">{article}</div>
           </div>
           </div>
         </div>

@@ -50,19 +50,17 @@ class App extends Component {
     // console.log(this.props);
     return (
       <div className="container-fluid">
-        <div className="row">
-          <TitlePanel />
-          <div className="col-sm-12">
-            <Router>
-              <Switch>
-                <Route exact path="/" component={ArticlePanel} />
-                <Route path="/signup" component={SignupPage} />
-                <Route path="/article" component={ArticlePage} />
-                <Route path="/editor" component={Editor} />
-                <Route path="/signin" component={SigninPage} />
-              </Switch>
-            </Router>
-          </div>
+        <TitlePanel />
+        <div className="col-sm-12">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={ArticlePanel} />
+              <Route path="/signup" component={SignupPage} />
+              <Route path="/article" component={ArticlePage} />
+              <Route path="/editor" component={Editor} />
+              <Route path="/signin" component={SigninPage} />
+            </Switch>
+          </Router>
         </div>
       </div>
     )
