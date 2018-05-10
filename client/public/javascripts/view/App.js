@@ -49,7 +49,7 @@ class App extends Component {
     //   });
     // console.log(this.props);
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <TitlePanel />
           <div className="col-sm-12">

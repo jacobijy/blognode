@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../css/iconfont.css'
 
 export default class EditorToolBar extends Component {
   constructor(props) {
@@ -7,27 +8,17 @@ export default class EditorToolBar extends Component {
 
   render() {
     return (
-      <div className="btn-toolbar">
-        <div className="btn-group">
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-left"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-center"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-right"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-align-justify"></span></button>
-        </div>
-        <div className="btn-group btn-group-lg">
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-indent-left"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-indent-right"></span></button>
-        </div>
-        <div className="btn-group btn-group-sm">
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-font"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-bold"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-italic"></span></button>
-        </div>
-        <div className="btn-group btn-group-xs">
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-text-height"></span></button>
-          <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-text-width"></span></button>
-        </div>
-      </div>
+      <div className="col-sm-12 toolsbg">
+        <ul className="icon_lists clear tools">
+          <li><i className="icon iconfont icon-746bianjiqi_biaoqing" /></li>
+          <li><i className="icon iconfont icon-bold" /></li>
+          <li><i className="icon iconfont icon-image" /></li>
+          <li><i className="icon iconfont icon-insert_tag_field" /></li>
+          <li><i className="icon iconfont icon-italic" /></li>
+          <li><i className="icon iconfont icon-underline" /></li>
+          <li><i className="icon iconfont icon-bianjiqiyinyong" /></li>
+        </ul>
+      </div >
     )
   }
 }

@@ -53,7 +53,7 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
  * @param {Function} callback 回调
  */
 
-export function getArticlesByAuthorId(author_id, callback) {
+export function getArticlesByAuthorId(author_id, number, callback) {
   const query = Article.find(); // `query` is an instance of `Query`
   query.setOptions({ article_id: 1, title: 1, _id: 0 });
   query.collection(Article.collection);
@@ -62,7 +62,7 @@ export function getArticlesByAuthorId(author_id, callback) {
     .where('author_id')
     .equals(author_id)
     .limit(config.articleNumberLoadOnce)
-    .skip(0)
+    .skip(number)
     .exec(callback);
 }
 

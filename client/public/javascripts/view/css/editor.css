@@ -16,6 +16,31 @@ div.edit-sheet.p {
   height: fit-content;
 }
 
+div {
+  border: 1px solid #000
+}
+
+.toolsbg {
+  height: 40px;
+  background-color: #D9D9D9
+}
+
+.tools {
+  height: inherit;
+  margin: auto;
+}
+
+ul.tools li {
+  height: 40px;
+  min-width: 25px;
+  line-height: 40px;
+  float: left;
+}
+
+ul.tools li:hover {
+  background-color: #595959
+}
+
 label {
   display: inline-block;
   margin: auto;
@@ -32,4 +57,10 @@ label {
   border-radius: 5px;
   background-color: lavender;
   border: orangered
+}
+
+.icon.iconfont {
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
 }

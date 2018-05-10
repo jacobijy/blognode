@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import EditorToolBar from './editortoolbar';
 import EditorSheet from './editorsheet';
 import { getInfoFromCookies } from "../../../../../utils/clienttools";
 import '../css/editor.css'
@@ -44,7 +43,6 @@ export default class Editor extends Component {
     }
     return (
       <div>
-        <EditorToolBar />
         <EditorSheet
           author_id={this.author_id}
           authod_name={this.author_name}

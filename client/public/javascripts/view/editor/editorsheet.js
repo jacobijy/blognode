@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
+import EditorToolbar from './editortoolbar';
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
@@ -37,11 +38,12 @@ export default class EditorSheet extends Component {
   }
 
   saveArticle = () => {
-    const { article_id, files } = this.props
+    const { article_id, files, article } = this.props
+    return;
     if (article_id === 0)
       return;
     let sheet = this.refs.editorsheet;
-    if (sheet.innerHTML === this.state.article)
+    if (sheet.innerHTML === article)
       return;
     this.setState({ article: sheet.innerHTML });
     let formData = new FormData();
@@ -82,7 +84,12 @@ export default class EditorSheet extends Component {
         />
         <div className="row">
           <div className="col-sm-4">Title</div>
-          <div className="col-sm-8" contentEditable ref='editorsheet'>{article}</div>
+          <div className="col-sm-8">
+          <div className="rown">
+            <EditorToolbar />
+            <div className="col-sm-12" contentEditable ref='editorsheet'>{article}</div>
+          </div>
+          </div>
         </div>
         <button onClick={this.createNewArticle}>New Article</button>
       </div>

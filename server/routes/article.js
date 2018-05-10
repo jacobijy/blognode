@@ -7,7 +7,7 @@ import * as article from "../proxy/article";
 function getArticleList(req, res, next) {
   let { authorid, articleNumber } = req.body
   console.log(req.body);
-  article.getArticlesByAuthorId(authorid, (err, result) => {
+  article.getArticlesByAuthorId(authorid, articleNumber, (err, result) => {
     if (err) throw err;
     console.log(result);
     articleNumber += result.length;
@@ -79,24 +79,11 @@ function newArticle(req, res, next) {
   article.newAndSave(articleInfo, (err, result) => {
     if (err) return console.log(err);
     if (result) {
-      console.log('result', result)
-      let cookie = req.cookies[config.auth_cookiename];
-      let array = cookie.split('$$$$')
-      if (array.length >= 3) {
-        array[2] = result.article_id;
-      }
-      else {
-        array.push(result.article_id);
-      }
-      // 以后可能会存储更多信息，用 $$$$ 来分隔
-      let auth_token = array.reduce((previousvalue, current) => {
-        return previousvalue + current + '$$$$'
-      })
       let opts = {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: false
       };
-      res.cookie(config.auth_cookiename, auth_token, opts);
+      res.cookie('ARTICLE_EDIT', result.article_id, opts);
       res.send({ article_id: result.article_id });
     }
   })
