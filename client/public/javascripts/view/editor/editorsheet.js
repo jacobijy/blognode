@@ -38,18 +38,21 @@ export default class EditorSheet extends Component {
 
   saveArticle = () => {
     const { article_id, files, article } = this.props
-    if (article_id === 0)
-      return;
+    // if (article_id === 0)
+    //   return;
     let sheet = this.refs.editorsheet;
     if (sheet.innerHTML === article)
       return;
-    const req = request.post('/saveArticle')
+    const req = request.post(formatUrl('/saveArticle'))
     for (const file of files) {
       req.attach('image', file);
     }
     req.attach('article_id', article_id);
-    req.attach('image', sheet.innerHTML);
-    req.end();
+    req.attach('article', sheet.innerHTML);
+    req.end((err, result) => {
+      if (err) console.log({err});
+      console.log({result});
+    });
     /*
     this.setState({ article: sheet.innerHTML });
     let formData = new FormData();
