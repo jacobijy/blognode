@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Dropzone from "react-dropzone";
 import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
@@ -39,12 +38,19 @@ export default class EditorSheet extends Component {
 
   saveArticle = () => {
     const { article_id, files, article } = this.props
-    return;
     if (article_id === 0)
       return;
     let sheet = this.refs.editorsheet;
     if (sheet.innerHTML === article)
       return;
+    const req = request.post('/saveArticle')
+    for (const file of files) {
+      req.attach('image', file);
+    }
+    req.attach('article_id', article_id);
+    req.attach('image', sheet.innerHTML);
+    req.end();
+    /*
     this.setState({ article: sheet.innerHTML });
     let formData = new FormData();
     for (const file of files) {
@@ -55,6 +61,7 @@ export default class EditorSheet extends Component {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/save_article');
     xhr.send(formData);
+    */
   }
 
   onImageDrop = (files) => {
@@ -77,18 +84,18 @@ export default class EditorSheet extends Component {
     /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
     const { article } = this.props
     return (
-      <div style={{height:"100%"}}>
-        <Dropzone multiple
+      <div style={{ height: "100%" }}>
+        {/* <Dropzone multiple
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}
-        />
-        <div className="row">
-          <div className="col-sm-4">Title</div>
+        /> */}
+        <div className="row no-gutters">
+          <div className="col-sm-2 offset-sm-2">Title</div>
           <div className="col-sm-8">
-          <div className="row">
-            <EditorToolbar />
-            <div className="col-sm-12" contentEditable ref="editorsheet">{article}</div>
-          </div>
+            <div className="row no-gutters flex_fill">
+              <EditorToolbar />
+              <div className="col-sm-12 sheet" contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }}></div>
+            </div>
           </div>
         </div>
         <button onClick={this.createNewArticle}>New Article</button>

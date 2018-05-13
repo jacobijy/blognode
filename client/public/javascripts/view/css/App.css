@@ -24,6 +24,15 @@
   border-radius: 8px;
 }
 
+.fill-left {
+  height: calc(100% - 150px);
+}
+
+div {
+  padding: 0px;
+  margin: 0;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -18,7 +18,7 @@ export default class ArticlePanel extends Component {
         if (err) return err;
         if (result && result.length > 0) {
           this.setState({
-            articles : result
+            articles: result
           })
         }
       })

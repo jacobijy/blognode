@@ -49,9 +49,9 @@ class App extends Component {
     //   });
     // console.log(this.props);
     return (
-      <div className="container-fluid">
+      <div className="fill-container">
         <TitlePanel />
-        <div className="col-sm-12">
+        <div className="fill-left">
           <Router>
             <Switch>
               <Route exact path="/" component={ArticlePanel} />
