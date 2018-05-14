@@ -1,0 +1,12 @@
+.m-modal{
+    text-align:center;
+}
+.modal_align,.modal_wrap{
+    display:inline-block;
+    vertical-align:middle;
+}
+.modal_align{
+    height:100%;
+    width:1px;
+    line-height:100%;
+}
