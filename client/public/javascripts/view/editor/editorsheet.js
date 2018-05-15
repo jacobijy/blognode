@@ -37,6 +37,7 @@ export default class EditorSheet extends Component {
   }
 
   saveArticle = () => {
+      return;
     const { article_id, files, article } = this.props
     // if (article_id === 0)
     //   return;

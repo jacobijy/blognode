@@ -1,9 +1,4 @@
 #modal-root {
-    position: relative;
-    z-index: 999;
-}
-  
-#modal {
     background-color: rgba(0,0,0,0.5);
     position: fixed;
     height: 100%;
@@ -14,4 +9,5 @@
     align-items: center;
     justify-content: center;
     visibility: visible;
+    z-index: 999;
 }
