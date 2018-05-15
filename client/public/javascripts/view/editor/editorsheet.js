@@ -10,7 +10,8 @@ export default class EditorSheet extends Component {
         author_name: PropTypes.string.isRequired,
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
-        article: PropTypes.string.isRequired
+        article: PropTypes.string.isRequired,
+        titles: PropTypes.arrayOf(PropTypes.object).isRequired
     }
 
     constructor(props) {
@@ -39,8 +40,8 @@ export default class EditorSheet extends Component {
 
     saveArticle = () => {
         const { article_id, files } = this.props
-        // if (article_id === 0)
-        //   return;
+        if (article_id === 0)
+          return;
         let sheet = this.refs.editorsheet;
         if (sheet.innerHTML === this.article)
             return;
@@ -91,7 +92,8 @@ export default class EditorSheet extends Component {
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        const { article } = this.props
+        let { article, titles } = this.props
+        titles = titles || []
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
@@ -99,15 +101,22 @@ export default class EditorSheet extends Component {
           onDrop={this.onImageDrop.bind(this)}
         /> */}
                 <div className="row no-gutters">
-                    <div className="col-sm-2 offset-sm-2">Title</div>
+                    <div className="col-sm-2 offset-sm-2 title_panel">
+                        <head>Title</head>
+                        <div>
+                            {titles.map((item) => {<div>{item.title}</div>})}
+                            <div><button onClick={this.createNewArticle}>New Article</button></div>
+                        </div>
+                    </div>
                     <div className="col-sm-8">
-                        <div className="row no-gutters flex_fill">
+                        <div className="no-gutters flex_fill">
                             <EditorToolbar />
-                            <div className="col-sm-12 sheet" contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }}></div>
+                            <div className="col-sm-12 sheet">
+                                <div id='editor' contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }} />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button onClick={this.createNewArticle}>New Article</button>
             </div>
         )
     }
