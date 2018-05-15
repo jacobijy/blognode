@@ -1,6 +1,6 @@
 import PreviewPage from "../view/preview";
 import { connect } from 'react-redux';
-import { getInfoFromCookies } from '../../../../utils/clienttools';
+import { getInfoFromCookies } from '../utils/clienttools';
 
 const mapStateToProps = (state) => {
   const { items } = state.mainpreview;

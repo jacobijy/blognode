@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SinglePanel from "./singlepanel";
-import { getInfoFromCookies } from "../../../../../utils/clienttools";
+import { getInfoFromCookies } from "../../utils/clienttools";
 import { ArticlesMainPage } from '../../actions';
 import PropTypes from 'prop-types';
 
