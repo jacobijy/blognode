@@ -39,7 +39,7 @@ export default class Editor extends Component {
         return (
             <EditorSheet
                 author_id={this.author_id}
-                authod_name={this.author_name}
+                author_name={this.author_name}
                 files={files}
                 article_id={article_id}
                 article={article}

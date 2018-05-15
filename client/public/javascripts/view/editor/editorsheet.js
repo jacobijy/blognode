@@ -16,6 +16,7 @@ export default class EditorSheet extends Component {
     constructor(props) {
         super(props);
         this.createNewArticle = this.props.createNewArticle;
+        this.article = this.props.article
     }
 
     componentDidMount() {
@@ -37,35 +38,39 @@ export default class EditorSheet extends Component {
     }
 
     saveArticle = () => {
-        return;
-        const { article_id, files, article } = this.props
+        const { article_id, files } = this.props
         // if (article_id === 0)
         //   return;
         let sheet = this.refs.editorsheet;
-        if (sheet.innerHTML === article)
+        if (sheet.innerHTML === this.article)
             return;
         const req = request.post(formatUrl('/saveArticle'))
         for (const file of files) {
             req.attach('image', file);
         }
-        req.attach('article_id', article_id);
-        req.attach('article', sheet.innerHTML);
+        req.field('article_id', article_id);
+        req.field('article', sheet.innerHTML);
         req.end((err, result) => {
-            if (err) console.log({ err });
-            console.log({ result });
+            if (err) {
+                console.log({ err });
+                return;
+            }
+            else {
+                this.article = sheet.innerHTML;
+                console.log({ result });
+            }
         });
-        /*
-        this.setState({ article: sheet.innerHTML });
-        let formData = new FormData();
-        for (const file of files) {
-          formData.append('image', file);
-        }
-        formData.append('article_id', article_id);
-        formData.append('article', sheet.innerHTML)
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/save_article');
-        xhr.send(formData);
-        */
+        // this.article = sheet.innerHTML
+        // let formData = new FormData();
+        // for (const file of files) {
+        //   formData.append('image', file);
+        // }
+        // formData.append('article_id', article_id);
+        // formData.append('article', sheet.innerHTML)
+        // let xhr = new XMLHttpRequest();
+        // xhr.open('POST', '/api/saveArticle');
+        // xhr.send(formData);
+        // console.log(formData);
     }
 
     onImageDrop = (files) => {
