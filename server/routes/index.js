@@ -14,9 +14,9 @@ router.get('/*', (req, res, next) => {
 
 // Article
 router.post('/editor', article.onOpenEditor);
-router.post('/upload_image', article.uploadImage);
+router.post('/api/uploadImage', article.uploadImage);
 router.post('/api/saveArticle', article.saveArticle);
-router.post('/new_article', article.newArticle);
+router.post('/api/newArticle', article.newArticle);
 router.post('/api/articles', article.getArticleList);
 
 //User

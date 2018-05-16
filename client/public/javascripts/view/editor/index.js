@@ -1,49 +1,45 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import EditorSheet from './editorsheet';
-import { getInfoFromCookies } from "../../utils/clienttools";
 import '../css/editor.css'
-import Request from "superagent";
+import { EditorNew } from '../../actions';
+import PropTypes from 'prop-types';
 
 export default class Editor extends Component {
+    static propTypes = {
+        article_id: PropTypes.number.isRequired,
+        files: PropTypes.arrayOf(PropTypes.string).isRequired,
+        article: PropTypes.string.isRequired,
+        author_id: PropTypes.string.isRequired,
+        author_name: PropTypes.string.isRequired,
+        createNewArticle: PropTypes.func.isRequired,
+        dispatch: PropTypes.func.isRequired
+    }
+
     constructor(props) {
         super(props);
-        let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
-        this.author_id = articleinfo[1];
-        this.author_name = articleinfo[2];
-        let article_id = articleinfo.length >= 4 ? articleinfo[3] : 0;
-        this.state = {
-            files: [],
-            article_id: article_id,
-            article: '<p><br/></p>'
-        };
     }
 
     createNewArticle = () => {
-        Request
-            .post('/article/new')
-            .send({ maintext: this.state.article, author_id: this.author_id })
-            .end((err, res) => {
-                this.setState({
-                    article_id: JSON.parse(res.text).article_id
-                })
-            })
+        const dispatch = this.props.dispatch
+        dispatch(EditorNew('post'));
     }
 
     render() {
+        const { author_id, author_name } = this.props
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        if (!(this.author_id && this.author_name)) {
+        if (!(author_id && author_name)) {
             return <Redirect to='/signin' />
         }
-        const { files, article_id, article } = this.state;
+        const { files, article_id, article, createNewArticle } = this.props;
         return (
             <EditorSheet
-                author_id={this.author_id}
-                author_name={this.author_name}
+                author_id={author_id}
+                author_name={author_name}
                 files={files}
                 article_id={article_id}
                 article={article}
-                createNewArticle={this.createNewArticle}
+                createNewArticle={createNewArticle}
             />
         )
     }

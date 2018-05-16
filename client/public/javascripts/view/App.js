@@ -3,7 +3,7 @@ import { store } from '../store/main';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TitlePanel from './titlepanel'
 import SignupPage from '../containers/SignupPage'
-import Editor from './editor'
+import Editor from '../containers/EditorPage'
 import ArticlePage from './articlepage'
 import SigninPage from '../containers/SigninPage'
 import ArticlePanel from "../containers/Articles";
