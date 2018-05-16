@@ -1,11 +1,21 @@
-export function getInfoFromCookies(cookie) {
-  if (cookie != '') {
-    let array = cookie.split('=');
-    let new_array = array[1].split('$$$$');
-    new_array.unshift(array[0]);
-    return new_array;
-  }
-  else {
-    return '';
-  }
+const getInfoFromCookies = (cookie) => {
+    if (cookie != '') {
+        let array = cookie.split('$$$$');
+        return array;
+    }
+    else {
+        return '';
+    }
 }
+
+const getCookie = (key) => {
+    let name = key + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+    }
+    return ''
+}
+
+export { getInfoFromCookies, getCookie }

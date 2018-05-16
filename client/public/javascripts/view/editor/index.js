@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import EditorSheet from './editorsheet';
+import { getCookie } from '../../utils/clienttools';
 import '../css/editor.css'
-import { EditorNew } from '../../actions';
 import PropTypes from 'prop-types';
 
 export default class Editor extends Component {
@@ -20,18 +20,14 @@ export default class Editor extends Component {
         super(props);
     }
 
-    createNewArticle = () => {
-        const dispatch = this.props.dispatch
-        dispatch(EditorNew('post'));
-    }
-
     render() {
         const { author_id, author_name } = this.props
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
         if (!(author_id && author_name)) {
             return <Redirect to='/signin' />
         }
-        const { files, article_id, article, createNewArticle } = this.props;
+        let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
+        const { files, article, createNewArticle } = this.props;
         return (
             <EditorSheet
                 author_id={author_id}

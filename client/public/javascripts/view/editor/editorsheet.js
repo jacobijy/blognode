@@ -11,12 +11,12 @@ export default class EditorSheet extends Component {
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
         article: PropTypes.string.isRequired,
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired
+        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
+        createNewArticle: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props);
-        this.createNewArticle = this.props.createNewArticle;
         this.article = this.props.article
     }
 
@@ -39,9 +39,9 @@ export default class EditorSheet extends Component {
     }
 
     saveArticle = () => {
-        const { article_id, files } = this.props
+        const { article_id = 0, files } = this.props
         if (article_id === 0)
-          return;
+            return;
         let sheet = this.refs.editorsheet;
         if (sheet.innerHTML === this.article)
             return;
@@ -53,12 +53,10 @@ export default class EditorSheet extends Component {
         req.field('article', sheet.innerHTML);
         req.end((err, result) => {
             if (err) {
-                console.log({ err });
-                return;
+                console.log(err);
             }
             else {
                 this.article = sheet.innerHTML;
-                console.log({ result });
             }
         });
         // this.article = sheet.innerHTML
@@ -92,8 +90,7 @@ export default class EditorSheet extends Component {
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, titles } = this.props
-        titles = titles || []
+        let { article, titles = [], createNewArticle } = this.props
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
@@ -104,8 +101,8 @@ export default class EditorSheet extends Component {
                     <div className="col-sm-2 offset-sm-2 title_panel">
                         <head>Title</head>
                         <div>
-                            {titles.map((item) => {<div>{item.title}</div>})}
-                            <div><button onClick={this.createNewArticle}>New Article</button></div>
+                            {titles.map((item) => { <div>{item.title}</div> })}
+                            <div><button onClick={createNewArticle}>New Article</button></div>
                         </div>
                     </div>
                     <div className="col-sm-8">
