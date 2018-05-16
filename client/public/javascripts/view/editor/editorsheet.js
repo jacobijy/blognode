@@ -20,21 +20,12 @@ export default class EditorSheet extends Component {
     constructor(props) {
         super(props);
         this.article = this.props.article
+        console.log(props);
+        
     }
 
     componentDidMount() {
         this.timer = setInterval(() => this.saveArticle(), 5000);
-        let sheet = this.refs.editorsheet;
-        const { article_id, author_id } = this.props
-        if (this.props.article_id > 0) {
-            request
-                .post(formatUrl('/editor'))
-                .send({ article_id, author_id })
-                .end((err, res) => {
-                    if (err) throw err;
-                    sheet.innerHTML = res.body.article;
-                })
-        }
     }
 
     componentWillUnmount() {

@@ -20,17 +20,19 @@ function onOpenEditor(req, res, next) {
     console.log(article_id, author_id);
     let promise1 = new Promise((resolve, reject) => {
         article.getArtileByArticleid(article_id, (err, result) => {
-            if (result == null)
+            if (err)
                 reject({ status: 0 })
             else {
                 const { maintext = '<p><br></p>', figure = [] } = result
-                resolve({ article: maintext, figure })
+                let status = result == null ? 0 : 1
+                resolve({ article: maintext, figure, status })
             }
         })
     })
     let promise2 = article.getTitlesByAuthorId(author_id)
     Promise.all([promise1, promise2]).then(posts => {
-        console.log('success', posts[0], posts[1]);
+        let data = Object.assign({}, posts[0], { titles: posts[1] })
+        res.json(data);
     }).catch(reason => {
         console.log('fail', reason);
     })

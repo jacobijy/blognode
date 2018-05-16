@@ -14,12 +14,13 @@ export default class Editor extends Component {
         author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
         createNewArticle: PropTypes.func.isRequired,
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
-        dispatch: PropTypes.func.isRequired
+        titles: PropTypes.arrayOf(PropTypes.object).isRequired
     }
 
     constructor(props) {
         super(props);
+        const { author_id, article_id, onOpenEditor } = this.props
+        onOpenEditor({ author_id, article_id })
     }
 
     render() {
