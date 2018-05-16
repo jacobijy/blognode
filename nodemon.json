@@ -6,7 +6,7 @@
   ],
   "execMap": {
     "": "node",
-    "js": "node --harmony"
+    "js": "node --harmony --inspect"
   },
   "events": {
   },

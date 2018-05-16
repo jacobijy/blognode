@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
-import EditorCreator from './editorcreate';
-import Titles from './editortitles';
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
@@ -13,15 +11,12 @@ export default class EditorSheet extends Component {
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
         article: PropTypes.string.isRequired,
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
-        createNewArticle: PropTypes.func.isRequired
+        title: PropTypes.string.isRequired
     }
 
     constructor(props) {
         super(props);
         this.article = this.props.article
-        console.log(props);
-        
     }
 
     componentDidMount() {
@@ -82,32 +77,19 @@ export default class EditorSheet extends Component {
             })
     }
 
+    handleChange = (event) => {
+        console.log(this.title.value);
+    }
+
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, titles = ['aaaaa', 'bbbbb', 'ccccc'], createNewArticle } = this.props
+        let { article, title, onChangeTitle } = this.props
         return (
-            <div style={{ height: "100%" }}>
-                {/* <Dropzone multiple
-          accept='image/*'
-          onDrop={this.onImageDrop.bind(this)}
-        /> */}
-                <div className="row no-gutters">
-                    <div className="col-sm-2" style={{backgroundColor:"#404040"}}></div>
-                    <div className="col-sm-2 title_panel">
-                        <head>Title</head>
-                        <div>
-                            <EditorCreator createNewArticle={createNewArticle}/>
-                            <Titles titles={titles} />
-                        </div>
-                    </div>
-                    <div className="col-sm-8">
-                        <div className="no-gutters flex_fill">
-                            <EditorToolbar />
-                            <div className="col-sm-12 sheet">
-                                <div id='editor' contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }} />
-                            </div>
-                        </div>
-                    </div>
+            <div className="no-gutters flex_fill">
+                <input type="text" className="sheet-title" ref={(ref) => { this.title = ref }} onChange={onChangeTitle} defaultValue={title} />
+                <EditorToolbar />
+                <div className="col-sm-12 sheet">
+                    <div id='editor' contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }} />
                 </div>
             </div>
         )

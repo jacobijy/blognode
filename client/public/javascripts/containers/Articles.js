@@ -1,11 +1,11 @@
 import PreviewPage from "../view/preview";
 import { connect } from 'react-redux';
-import { getInfoFromCookies } from '../utils/clienttools';
+import { getInfoFromCookies, getCookie } from '../utils/clienttools';
 
 const mapStateToProps = (state) => {
     const { items } = state.mainpreview;
     // console.log({items, state})
-    let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
+    let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
     let authorid = articleinfo.length >= 2 ? articleinfo[1] : 0
     let { articles = [] } = items;
     return {

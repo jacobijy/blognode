@@ -5,6 +5,7 @@ export default class EditorCreator extends Component {
     static propTypes = {
         createNewArticle: PropTypes.func.isRequired
     }
+
     constructor(props) {
         super(props)
     }

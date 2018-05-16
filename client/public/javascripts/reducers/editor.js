@@ -14,7 +14,8 @@ const editorOnOpen = (
             case Actions.Editor_On_Open_Failure:
                 return {
                     ...state,
-                    isRequesting: false
+                    isRequesting: false,
+                    items: action.data
                 }
             case Actions.Editor_On_Open_Success:
                 return {
@@ -50,4 +51,20 @@ const editorNew = (
     }
 }
 
-export { editorNew, editorOnOpen }
+const editorChangeTitle = (
+    state = {
+        title: ''
+    },
+    action) => {
+        switch (action.type) {
+            case Actions.Editor_Change_Title:
+                return {
+                    ...state,
+                    title: action.title
+                }
+            default:
+                return state
+        }
+    }
+
+export { editorNew, editorOnOpen, editorChangeTitle }

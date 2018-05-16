@@ -11,7 +11,7 @@ export default class ArticlePanel extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     Request
       .post('/get_articles')
       .end((err, result) => {

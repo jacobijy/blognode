@@ -2,13 +2,14 @@ import { readFile, writeFile, unlink } from "fs";
 import { getFilebyMd5, saveFileToDb } from "../proxy/attachment";
 import { config } from "../../config";
 import { createHash } from "crypto";
+import { formatDate } from '../../utils/tools';
 import * as article from "../proxy/article";
 
 function getArticleList(req, res, next) {
     let { authorid, articleNumber } = req.body
     console.log(req.body);
     article.getArticlesByAuthorId(authorid, articleNumber, (err, result) => {
-        if (err) throw err;
+        if (err) return console.log(err);
         console.log(result);
         articleNumber += result.length;
         res.json({ articles: result, articleNumber });
@@ -21,11 +22,11 @@ function onOpenEditor(req, res, next) {
     let promise1 = new Promise((resolve, reject) => {
         article.getArtileByArticleid(article_id, (err, result) => {
             if (err)
-                reject({ status: 0 })
+                reject({ err: true })
             else {
+                if (!result) return resolve({ err: true })
                 const { maintext = '<p><br></p>', figure = [] } = result
-                let status = result == null ? 0 : 1
-                resolve({ article: maintext, figure, status })
+                resolve({ article: maintext, figure })
             }
         })
     })
@@ -83,12 +84,15 @@ function uploadImage(req, res, next) {
 }
 
 function newArticle(req, res, next) {
+    let date = new Date();
+    date = formatDate(date);
     let articleInfo = {
-        maintext: req.body.maintext,
-        author_id: req.body.author_id
+        maintext: '<p><br></p>',
+        author_id: req.body.author_id,
+        title: date
     }
     article.newAndSave(articleInfo, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.log(err, result);
         if (result) {
             let opts = {
                 maxAge: 1000 * 60 * 60 * 24 * 30,

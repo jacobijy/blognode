@@ -1,7 +1,7 @@
 import ApiClient from '../../../../utils/apiClient';
 import { ArticleMainPageOption } from './articleActions';
 import { UserSigninOption, UserSignupOption } from './signActions';
-import { EditorNewEditorOption, EditorOnOpenOption } from './editorActions';
+import { EditorNewEditorOption, EditorOnOpenOption, EditorChangeTitleAction } from './editorActions';
 
 const RequestAction = (action, json) => (method, path = '') => dispatch => {
     dispatch(action.Request(json))
@@ -34,4 +34,8 @@ const EditorOnOpen = (method, json) => dispatch => {
     return RequestAction(EditorOnOpenOption, json)(method, '/editor')(dispatch);
 }
 
-export { UserSignup, UserSignin, ArticlesMainPage, EditorNew, EditorOnOpen }
+const EditorChangeTitle = title => dispatch => {
+    return dispatch(EditorChangeTitleAction(title))
+}
+
+export { UserSignup, UserSignin, ArticlesMainPage, EditorNew, EditorOnOpen, EditorChangeTitle }

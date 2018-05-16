@@ -95,5 +95,6 @@ export function newAndSave(articleinfo, callback) {
     article.author_id = Types.ObjectId(articleinfo.author_id);
     article.figure = [];
     article.maintext = articleinfo.maintext;
+    article.title = articleinfo.title;
     article.save(callback);
 }

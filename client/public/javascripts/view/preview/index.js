@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SinglePanel from "./singlepanel";
-import { getInfoFromCookies } from "../../utils/clienttools";
+import { getInfoFromCookies, getCookie } from "../../utils/clienttools";
 import { ArticlesMainPage } from '../../actions';
 import PropTypes from 'prop-types';
 
@@ -16,8 +16,8 @@ export default class PreviewPage extends Component {
   constructor(props) {
     super(props);
     console.log({ props });
-    let articleinfo = getInfoFromCookies(decodeURIComponent(document.cookie));
-    this.author_id = articleinfo[1];
+    let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
+    this.author_id = articleinfo[0];
   }
 
   componentDidMount() {

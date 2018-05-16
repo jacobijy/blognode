@@ -54,6 +54,13 @@ label {
   word-break: break-word;
 }
 
+.sheet-title {
+  padding: 0px 80px 10px 40px;
+  width: 100%;
+  outline: none;
+  border: 0;
+}
+
 #editor {
   height: 100%;
   padding: 40px 40px 80px 40px;

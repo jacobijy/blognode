@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
+import EditorCreator from './editorcreate';
 import PropTypes from 'prop-types';
 
 export default class Titles extends Component {
     static propTypes = {
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired
+        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
+        createNewArticle: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props)
     }
 
-    renderLine(title, index) {
+    renderLine(value, index) {
         return (
             <li>
-                <span>{title}</span>
+                <span>{value.title}</span>
                 <span></span>
             </li>
         )
     }
 
     render() {
-        const titles = this.props.titles;
+        const { titles, createNewArticle } = this.props;
         return (
-            <ul className="title-list">
-                {titles.map((value, index) => this.renderLine(value, index))}
-            </ul>
+            <div>
+                <EditorCreator createNewArticle={createNewArticle} />
+                <ul className="title-list">
+                    {titles.map((value, index) => this.renderLine(value, index))}
+                </ul>
+            </div>
         )
     }
 }

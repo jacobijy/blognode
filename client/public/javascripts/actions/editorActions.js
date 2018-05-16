@@ -50,9 +50,17 @@ const EditorOnOpenOption = {
         data: json
     }),
 
-    Failure: () => ({
-        type: Editor_On_Open_Failure
+    Failure: (err) => ({
+        type: Editor_On_Open_Failure,
+        data: err
     })
 }
 
-export { EditorUploadImageOption, EditorNewEditorOption, EditorOnOpenOption }
+export const Editor_Change_Title = 'Editor_Change_Title'
+
+const EditorChangeTitleAction = (title) => ({
+    type: Editor_Change_Title,
+    title
+})
+
+export { EditorUploadImageOption, EditorNewEditorOption, EditorOnOpenOption, EditorChangeTitleAction }
