@@ -66,4 +66,4 @@ typings/
 *.code-workspace
 test/
 *hot-update*
-client/public/output/
+client/public/output/js/
