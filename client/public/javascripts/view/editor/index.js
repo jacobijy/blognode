@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import EditorSheet from './editorsheet';
 import { getCookie } from '../../utils/clienttools';
 import '../css/editor.css'
+import '../../../iconfont/iconfont.css'
 import PropTypes from 'prop-types';
 
 export default class Editor extends Component {
@@ -13,6 +14,7 @@ export default class Editor extends Component {
         author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
         createNewArticle: PropTypes.func.isRequired,
+        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
         dispatch: PropTypes.func.isRequired
     }
 

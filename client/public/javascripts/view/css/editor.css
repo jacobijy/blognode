@@ -90,3 +90,34 @@ label {
   height: 40px;
   font-size: 30px;
 }
+
+.icon.iconfont.icon-addition_fill {
+    font-size: 18px
+}
+
+.editor-creator {
+    padding: 20px 20px 20px 0px;
+    cursor: pointer;
+    text-align: center;
+    height: 60px;
+    border-bottom: 1px solid #D9D9D9
+}
+
+ul.title-list {
+    padding-left: 0;
+}
+
+ul.title-list>li {
+    height: 90px;
+    display: list-item;
+    list-style: none;
+    border-bottom: 1px solid #D9D9D9;
+    line-height:  60px;
+    padding: 15px 60px 14px 30px;
+}
+
+ul.title_panel span {
+    display: block;
+    height: 30px;
+    padding-left: 30px;
+}

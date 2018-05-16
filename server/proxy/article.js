@@ -11,7 +11,7 @@ import { config } from '../../config'
  * @param {Function} callback 回调函数
  */
 export function getArtileByid(id, callback) {
-  Article.findOne({ _id: id }, callback);
+    Article.findOne({ _id: id }, callback);
 }
 
 /**
@@ -23,7 +23,7 @@ export function getArtileByid(id, callback) {
  * @param {Function} callback 回调函数
  */
 export function getArtileByArticleid(article_id, callback) {
-  Article.findOne({ article_id: article_id }, callback);
+    Article.findOne({ article_id: article_id }, callback);
 }
 
 /**
@@ -36,15 +36,15 @@ export function getArtileByArticleid(article_id, callback) {
  * @param {String} maintext 正文
  */
 export function updateArtileByAritcleid(article_id, article, images, callback) {
-  // callback
-  let option = { article: article }
-  if ('function' == typeof images) {
-    callback = images;
-  }
-  else {
-    option = { maintext: article, figure: images }
-  }
-  Article.findOneAndUpdate({ article_id: article_id }, { $set: option }, callback);
+    // callback
+    let option = { article: article }
+    if ('function' == typeof images) {
+        callback = images;
+    }
+    else {
+        option = { maintext: article, figure: images }
+    }
+    Article.findOneAndUpdate({ article_id: article_id }, { $set: option }, callback);
 }
 
 /**
@@ -54,16 +54,25 @@ export function updateArtileByAritcleid(article_id, article, images, callback) {
  */
 
 export function getArticlesByAuthorId(author_id, number, callback) {
-  const query = Article.find(); // `query` is an instance of `Query`
-  query.setOptions({ article_id: 1, title: 1, _id: 0 });
-  query.collection(Article.collection);
-  query.sort({ article_id: -1 });
-  query
-    .where('author_id')
-    .equals(author_id)
-    .limit(config.articleNumberLoadOnce)
-    .skip(number)
-    .exec(callback);
+    const query = Article.find({ author_id }, { article_id: 1, title: 1, article: 1, _id: 0 }); // `query` is an instance of `Query`
+    query.collection(Article.collection)
+    query
+        .sort({ article_id: -1 })
+        .limit(config.articleNumberLoadOnce)
+        .skip(number)
+    return query.exec(callback);
+}
+
+/**
+ * 根据作者id，查找文章id， title列表
+ * @param {ObjectId} author_id 用户id
+ * @param {Function} callback 回调
+ */
+
+export function getTitlesByAuthorId(author_id, callback) {
+    const query = Article.find({ author_id }, { article_id: 1, title: 1, _id: 0 })
+    query.sort({ article_id: -1 })
+    return query.exec(callback)
 }
 
 /**
@@ -82,9 +91,9 @@ export function getArticlesByAuthorId(author_id, number, callback) {
  */
 
 export function newAndSave(articleinfo, callback) {
-  let article = new Article();
-  article.author_id = Types.ObjectId(articleinfo.author_id);
-  article.figure = [];
-  article.maintext = articleinfo.maintext;
-  article.save(callback);
+    let article = new Article();
+    article.author_id = Types.ObjectId(articleinfo.author_id);
+    article.figure = [];
+    article.maintext = articleinfo.maintext;
+    article.save(callback);
 }

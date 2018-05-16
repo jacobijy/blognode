@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from '../../basecomponent/modal';
-import '../../../iconfont/iconfont.css'
 
 export default class EditorToolBar extends Component {
     constructor(props) {

@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
     // author_name
     // dispatch
     let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-    let author_id = articleinfo.length >= 2 ? articleinfo[1] : 0
-    let author_name = articleinfo.length >= 2 ? articleinfo[0] : ''
+    let author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
+    let author_name = articleinfo.length >= 2 ? articleinfo[1] : ''
     let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
     let { article = "<p><br></p>", files = [] } = editorNew.items
     return {

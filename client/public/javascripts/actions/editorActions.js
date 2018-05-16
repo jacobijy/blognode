@@ -36,4 +36,23 @@ const EditorNewEditorOption = {
     })
 }
 
-export { EditorUploadImageOption, EditorNewEditorOption }
+export const Editor_On_Open_Request = 'Editor_On_Open_Request'
+export const Editor_On_Open_Success = 'Editor_On_Open_Success'
+export const Editor_On_Open_Failure = 'Editor_On_Open_Failure'
+
+const EditorOnOpenOption = {
+    Request: () => ({
+        type: Editor_On_Open_Request
+    }),
+
+    Success: (json) => ({
+        type: Editor_On_Open_Success,
+        data: json
+    }),
+
+    Failure: () => ({
+        type: Editor_On_Open_Failure
+    })
+}
+
+export { EditorUploadImageOption, EditorNewEditorOption, EditorOnOpenOption }

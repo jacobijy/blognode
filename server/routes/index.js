@@ -13,7 +13,7 @@ router.get('/*', (req, res, next) => {
 })
 
 // Article
-router.post('/editor', article.onOpenEditor);
+router.post('/api/editor', article.onOpenEditor);
 router.post('/api/uploadImage', article.uploadImage);
 router.post('/api/saveArticle', article.saveArticle);
 router.post('/api/newArticle', article.newArticle);

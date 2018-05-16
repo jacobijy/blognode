@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
+import EditorCreator from './editorcreate';
+import Titles from './editortitles';
 import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
@@ -23,10 +25,11 @@ export default class EditorSheet extends Component {
     componentDidMount() {
         this.timer = setInterval(() => this.saveArticle(), 5000);
         let sheet = this.refs.editorsheet;
+        const { article_id, author_id } = this.props
         if (this.props.article_id > 0) {
             request
-                .post('/editor')
-                .field('article_id', this.props.article_id)
+                .post(formatUrl('/editor'))
+                .send({ article_id, author_id })
                 .end((err, res) => {
                     if (err) throw err;
                     sheet.innerHTML = res.body.article;
@@ -90,7 +93,7 @@ export default class EditorSheet extends Component {
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, titles = [], createNewArticle } = this.props
+        let { article, titles = ['aaaaa', 'bbbbb', 'ccccc'], createNewArticle } = this.props
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
@@ -98,11 +101,12 @@ export default class EditorSheet extends Component {
           onDrop={this.onImageDrop.bind(this)}
         /> */}
                 <div className="row no-gutters">
-                    <div className="col-sm-2 offset-sm-2 title_panel">
+                    <div className="col-sm-2" style={{backgroundColor:"#404040"}}></div>
+                    <div className="col-sm-2 title_panel">
                         <head>Title</head>
                         <div>
-                            {titles.map((item) => { <div>{item.title}</div> })}
-                            <div><button onClick={createNewArticle}>New Article</button></div>
+                            <EditorCreator createNewArticle={createNewArticle}/>
+                            <Titles titles={titles} />
                         </div>
                     </div>
                     <div className="col-sm-8">
