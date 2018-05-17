@@ -1,6 +1,3 @@
-import AsyncRequests from '.';
-import { getCookie, getInfoFromCookies } from '../utils/clienttools';
-
 export const Editor_Upload_Image_Request = 'Editor_Upload_Image_Request'
 export const Editor_Upload_Image_Success = 'Editor_Upload_Image_Success'
 export const Editor_Upload_Image_Failure = 'Editor_Upload_Image_Failure'
