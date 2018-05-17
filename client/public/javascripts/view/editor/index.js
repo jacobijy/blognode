@@ -42,6 +42,7 @@ export default class Editor extends Component {
                         <Titles
                             author_id={author_id}
                             article_id={article_id}
+                            title={title}
                             titles={titles}
                             createNewArticle={createNewArticle}
                             onSelectArticle={onSelectArticle}

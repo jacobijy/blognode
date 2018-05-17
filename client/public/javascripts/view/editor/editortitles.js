@@ -26,13 +26,13 @@ export default class Titles extends Component {
     }
 
     renderLine(value, indexli) {
-        const { article_id = 0 } = this.props
+        const { article_id = 0, title } = this.props
         return (
             <li className={value.article_id == article_id ? "title selected" : "title"}
                 onClick={this.onSelectArticle.bind(this, value.article_id)}
                 ref={li => { this.titles[indexli] = li; }}
             >
-                <span>{`${value.title}"["${value.article_id}"]"`}</span>
+                <span>{value.article_id == article_id ? title : value.title}</span>
                 <span></span>
             </li>
         )
