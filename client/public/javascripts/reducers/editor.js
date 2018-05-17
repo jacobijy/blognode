@@ -68,19 +68,4 @@ const editorChangeTitle = (
     }
 }
 
-const editorSelectArticle = (
-    state = {
-        article_id: 0
-    }, action) => {
-        switch (action.type) {
-            case Actions.Editor_Select_Article:
-                return {
-                    ...state,
-                    article_id: action.article_id
-                }
-            default:
-                return state
-        }
-}
-
-export default combineReducers({ editorNew, editorOnOpen, editorChangeTitle, editorSelectArticle })
+export default combineReducers({ editorNew, editorOnOpen, editorChangeTitle })

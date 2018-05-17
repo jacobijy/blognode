@@ -22,10 +22,6 @@ export default class EditorSheet extends Component {
         this.timer = setInterval(() => this.saveArticle(), 5000);
     }
 
-    shouldComponentUpdate(nextProps) {
-        return (nextProps.article_id != this.props.article_id || nextProps.title != this.props.title)
-    }
-
     componentWillUnmount() {
         clearInterval(this.timer);
     }

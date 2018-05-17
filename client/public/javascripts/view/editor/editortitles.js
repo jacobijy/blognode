@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditorCreator from './editorcreate';
 import { getCookie } from '../../utils/clienttools';
+import { setCookie } from '../../utils/clienttools';
 import PropTypes from 'prop-types';
 
 export default class Titles extends Component {
@@ -8,7 +9,7 @@ export default class Titles extends Component {
         titles: PropTypes.arrayOf(PropTypes.object).isRequired,
         createNewArticle: PropTypes.func.isRequired,
         onSelectArticle: PropTypes.func.isRequired,
-        article_id:PropTypes.number.isRequired
+        article_id: PropTypes.number.isRequired
     }
 
     constructor(props) {
@@ -19,15 +20,18 @@ export default class Titles extends Component {
     }
 
     onSelectArticle = (article) => {
-        const { author_id, onOpenEditor, onSelectArticle } = this.props
-        onSelectArticle(article)
+        const { author_id, onOpenEditor } = this.props
+        setCookie('ARTICLE_EDIT', article)
         onOpenEditor({ author_id, article_id: article })
     }
 
     renderLine(value, indexli) {
         const { article_id = 0 } = this.props
         return (
-            <li className={value.article_id == article_id ? "title selected":"title"} onClick={this.onSelectArticle.bind(this, value.article_id)} ref={li => { this.titles[indexli] = li; }}>
+            <li className={value.article_id == article_id ? "title selected" : "title"}
+                onClick={this.onSelectArticle.bind(this, value.article_id)}
+                ref={li => { this.titles[indexli] = li; }}
+            >
                 <span>{`${value.title}"["${value.article_id}"]"`}</span>
                 <span></span>
             </li>
