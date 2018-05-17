@@ -1,4 +1,5 @@
 import * as ACTIONS from '../actions/signActions';
+import { combineReducers } from 'redux';
 
 const signup = (
   state = {
@@ -66,4 +67,4 @@ const signin = (
   }
 }
 
-export { signin, signup };
+export default combineReducers({ signin, signup });

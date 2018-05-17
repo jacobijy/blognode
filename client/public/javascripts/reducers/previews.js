@@ -1,4 +1,5 @@
 import * as ACTIONS from '../actions';
+import {combineReducers} from 'redux';
 
 const mainpreview = (
   state = {
@@ -30,4 +31,4 @@ const mainpreview = (
   }
 }
 
-export { mainpreview }
+export default combineReducers({mainpreview})

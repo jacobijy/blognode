@@ -1,31 +1,32 @@
 import * as Actions from '../actions/editorActions';
+import { combineReducers } from 'redux';
 
 const editorOnOpen = (
     state = {
         isRequesting: false,
         items: {}
     }, action) => {
-        switch (action.type) {
-            case Actions.Editor_On_Open_Request:
-                return {
-                    ...state,
-                    isRequesting: true
-                }
-            case Actions.Editor_On_Open_Failure:
-                return {
-                    ...state,
-                    isRequesting: false,
-                    items: action.data
-                }
-            case Actions.Editor_On_Open_Success:
-                return {
-                    ...state,
-                    items: action.data
-                }
-            default:
-                return state
-        }
+    switch (action.type) {
+        case Actions.Editor_On_Open_Request:
+            return {
+                ...state,
+                isRequesting: true
+            }
+        case Actions.Editor_On_Open_Failure:
+            return {
+                ...state,
+                isRequesting: false,
+                items: action.data
+            }
+        case Actions.Editor_On_Open_Success:
+            return {
+                ...state,
+                items: action.data
+            }
+        default:
+            return state
     }
+}
 
 const editorNew = (
     state = {
@@ -56,15 +57,30 @@ const editorChangeTitle = (
         title: ''
     },
     action) => {
+    switch (action.type) {
+        case Actions.Editor_Change_Title:
+            return {
+                ...state,
+                title: action.title
+            }
+        default:
+            return state
+    }
+}
+
+const editorSelectArticle = (
+    state = {
+        article_id: 0
+    }, action) => {
         switch (action.type) {
-            case Actions.Editor_Change_Title:
+            case Actions.Editor_Select_Article:
                 return {
                     ...state,
-                    title: action.title
+                    article_id: action.article_id
                 }
             default:
                 return state
         }
-    }
+}
 
-export { editorNew, editorOnOpen, editorChangeTitle }
+export default combineReducers({ editorNew, editorOnOpen, editorChangeTitle, editorSelectArticle })

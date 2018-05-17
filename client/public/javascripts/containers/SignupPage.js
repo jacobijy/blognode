@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import SignupPanel from '../view/sign/signuppanel';
 
 const mapStateToProps = (state) => {
-  const { items } = state.signup;
+  const { items } = state.sign.signup;
   let { data = false } = items;
   return {
     redirectToLogin: data,

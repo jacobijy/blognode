@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 export default class EditorSheet extends Component {
     static PropTypes = {
-        author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
@@ -21,6 +20,10 @@ export default class EditorSheet extends Component {
 
     componentDidMount() {
         this.timer = setInterval(() => this.saveArticle(), 5000);
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return (nextProps.article_id != this.props.article_id || nextProps.title != this.props.title)
     }
 
     componentWillUnmount() {
@@ -81,12 +84,16 @@ export default class EditorSheet extends Component {
         console.log(this.title.value);
     }
 
+    onChangeTitle = () => {
+        return this.props.onChangeTitle(this.title.value)
+    }
+
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, title, onChangeTitle } = this.props
+        let { article, title } = this.props
         return (
             <div className="no-gutters flex_fill">
-                <input type="text" className="sheet-title" ref={(ref) => { this.title = ref }} onChange={onChangeTitle} defaultValue={title} />
+                <input type="text" className="sheet-title" ref={(ref) => { this.title = ref }} onChange={this.onChangeTitle} defaultValue={title} />
                 <EditorToolbar />
                 <div className="col-sm-12 sheet">
                     <div id='editor' contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }} />

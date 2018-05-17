@@ -63,4 +63,11 @@ const EditorChangeTitleAction = (title) => ({
     title
 })
 
-export { EditorUploadImageOption, EditorNewEditorOption, EditorOnOpenOption, EditorChangeTitleAction }
+export const Editor_Select_Article = 'Editor_Select_Article'
+
+const EditorSelectArticleAction = (article_id) => ({
+    type: Editor_Select_Article,
+    article_id
+})
+
+export { EditorUploadImageOption, EditorNewEditorOption, EditorOnOpenOption, EditorChangeTitleAction, EditorSelectArticleAction }

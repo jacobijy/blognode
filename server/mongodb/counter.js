@@ -5,4 +5,4 @@ const CounterSchema = new Schema({
   seq: { type: Number, default: 0 }
 });
 
-var counter = mongoose.model('Counter', CounterSchema);
+mongoose.model('Counter', CounterSchema);

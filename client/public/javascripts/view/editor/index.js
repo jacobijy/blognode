@@ -20,14 +20,6 @@ export default class Editor extends Component {
 
     constructor(props) {
         super(props);
-        const { author_id, article_id, onOpenEditor } = this.props
-        onOpenEditor({ author_id, article_id })
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        const { titles = [] } = nextProps;
-        if (titles.length > 0)
-            return true
     }
 
     render() {
@@ -37,7 +29,7 @@ export default class Editor extends Component {
             return <Redirect to='/signin' />
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-        const { files, article, createNewArticle, onChangeTitle, titles = [], title='' } = this.props;
+        const { files, article, createNewArticle, onChangeTitle, onOpenEditor, onSelectArticle, titles = [], title = '' } = this.props;
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
@@ -47,22 +39,20 @@ export default class Editor extends Component {
                 <div className="row no-gutters">
                     <div className="col-sm-2" style={{ backgroundColor: "#404040" }}></div>
                     <div className="col-sm-2 title_panel">
-                        <head>Title</head>
-                        {
-                            titles.length <= 0 ? null :
-                                <Titles
-                                    selectedTitle={title}
-                                    titles={titles}
-                                    createNewArticle={createNewArticle}
-                                />
-                        }
+                        <Titles
+                            author_id={author_id}
+                            article_id={article_id}
+                            titles={titles}
+                            createNewArticle={createNewArticle}
+                            onSelectArticle={onSelectArticle}
+                            onOpenEditor={onOpenEditor}
+                        />
 
                     </div>
                     <div className="col-sm-8">
                         {
                             titles.length <= 0 ? null :
                                 <EditorSheet
-                                    author_id={author_id}
                                     files={files}
                                     article={article}
                                     article_id={article_id}

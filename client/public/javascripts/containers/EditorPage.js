@@ -1,10 +1,10 @@
 import EditorPage from "../view/editor";
-import { EditorNew, EditorOnOpen, EditorChangeTitle } from '../actions';
+import { EditorNew, EditorOnOpen, EditorChangeTitle, EditorSelectArticle} from '../actions';
 import { connect } from 'react-redux';
-import { getInfoFromCookies, getCookie } from '../utils/clienttools';
+import { getInfoFromCookies, getCookie, setCookie } from '../utils/clienttools';
 
 const mapStateToProps = (state, ownProps) => {
-    const { editorNew, editorOnOpen, editorChangeTitle } = state;
+    const { editorOnOpen, editorChangeTitle, editorSelectArticle } = state.editor;
     // article_id
     // files
     // article
@@ -12,15 +12,15 @@ const mapStateToProps = (state, ownProps) => {
     // author_name
     // dispatch
     // titles
-    let { err } = editorOnOpen.items
-    let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-    let author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
-    let author_name = articleinfo.length >= 2 ? articleinfo[1] : ''
-    let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-    let { article = "<p><br></p>", files = [] } = editorNew.items
-    let { titles = [] } = editorOnOpen.items
-    let title = editorChangeTitle.title || ''
-    article = editorNew.items.article || article
+    let { err } = editorOnOpen.items,
+        articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
+        author_id = articleinfo.length >= 2 ? articleinfo[0] : 0,
+        author_name = articleinfo.length >= 2 ? articleinfo[1] : '',
+        cachedArticleId = parseInt(getCookie('ARTICLE_EDIT')),
+        { article_id = cachedArticleId || 0 } = editorSelectArticle,
+        { article = "<p><br></p>", files =[], titles = [] } = editorOnOpen.items,
+        title = editorChangeTitle.title.length > 0 ? editorChangeTitle.title:titles.length>0? titles[0].title:''
+    if (article_id != cachedArticleId && article_id != 0) setCookie('ARTICLE_EDIT', article_id)
     return Object.assign({}, {
         author_id,
         article_id,
@@ -32,16 +32,21 @@ const mapStateToProps = (state, ownProps) => {
     }, err ? { err } : {})
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    onOpenEditor: (data) => { dispatch(EditorOnOpen('post', data)) },
-    createNewArticle: () => {
-        let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-        let author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
-        dispatch(EditorNew('post', { author_id }))
-    },
-    onChangeTitle: (event) => {
-        dispatch(EditorChangeTitle(event.target.value))
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onOpenEditor: (data) => { dispatch(EditorOnOpen('post', data)) },
+        createNewArticle: () => {
+            let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
+            let author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
+            dispatch(EditorNew('post', { author_id }))
+        },
+        onChangeTitle: (title) => {
+            dispatch(EditorChangeTitle(title))
+        },
+        onSelectArticle: (article) => {
+            dispatch(EditorSelectArticle(article))
+        }
     }
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorPage);
