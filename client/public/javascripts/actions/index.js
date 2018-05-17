@@ -14,32 +14,25 @@ const RequestAction = (action, json) => (method, path = '') => dispatch => {
     });
 }
 
-const UserSignup = (method, json) => dispatch => {
-    return RequestAction(UserSignupOption, json)(method, '/signup')(dispatch)
+const TypeToOption = {
+    'signup': UserSignupOption,
+    'signin': UserSigninOption,
+    'articles': ArticleMainPageOption,
+    'newArticle': editor.EditorNewEditorOption,
+    'editor': editor.EditorOpenArticleOption,
+    'titles': editor.EditorOpenTitlesOption,
+    'saveArticle': editor.EditorOnSaveOption
 }
 
-const UserSignin = (method, json) => dispatch => {
-    return RequestAction(UserSigninOption, json)(method, '/signin')(dispatch)
+const AsyncRequests = (type, method, json) => dispatch => {
+    let option = TypeToOption[type]
+    return RequestAction(option, json)(method, type)(dispatch)
 }
 
-const ArticlesMainPage = (method, json) => dispatch => {
-    return RequestAction(ArticleMainPageOption, json)(method, '/articles')(dispatch);
-}
-
-const EditorNew = (method, json) => dispatch => {
-    return RequestAction(editor.EditorNewEditorOption, json)(method, '/newArticle')(dispatch);
-}
-
-const EditorOnOpen = (method, json) => dispatch => {
-    return RequestAction(editor.EditorOnOpenOption, json)(method, '/editor')(dispatch);
-}
+export default AsyncRequests
 
 const EditorChangeTitle = title => dispatch => {
     return dispatch(editor.EditorChangeTitleAction(title))
 }
 
-const EditorSelectArticle = article => dispatch => {
-    return dispatch(editor.EditorSelectArticleAction(article))
-}
-
-export { UserSignup, UserSignin, ArticlesMainPage, EditorNew, EditorOnOpen, EditorChangeTitle, EditorSelectArticle}
+export { EditorChangeTitle }

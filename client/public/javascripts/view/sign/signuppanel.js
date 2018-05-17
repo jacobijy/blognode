@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import '../css/signpanel.css'
 import { Redirect } from "react-router-dom"
-import { UserSignup } from '../../actions'
+import AsyncRequests from '../../actions'
 import PropTypes from 'prop-types'
 
 export default class SignupPanel extends Component {
@@ -22,7 +22,7 @@ export default class SignupPanel extends Component {
     let passwordex = this.refs.pwdex.value;
     let email = this.refs.email.value;
     let formData = { username, password, passwordex, email }
-    dispatch(UserSignup('post', formData));
+    dispatch(AsyncRequests('signup', 'post', formData))
   }
 
   render() {

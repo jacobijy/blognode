@@ -8,7 +8,6 @@ export default class Titles extends Component {
     static propTypes = {
         titles: PropTypes.arrayOf(PropTypes.object).isRequired,
         createNewArticle: PropTypes.func.isRequired,
-        onSelectArticle: PropTypes.func.isRequired,
         article_id: PropTypes.number.isRequired
     }
 
@@ -20,19 +19,19 @@ export default class Titles extends Component {
     }
 
     onSelectArticle = (article) => {
-        const { author_id, onOpenEditor } = this.props
+        const { author_id, onOpenArticle } = this.props
         setCookie('ARTICLE_EDIT', article)
-        onOpenEditor({ author_id, article_id: article })
+        onOpenArticle({ author_id, article_id: article })
     }
 
     renderLine(value, indexli) {
-        const { article_id = 0, title } = this.props
+        const { article_id = 0 } = this.props
         return (
             <li className={value.article_id == article_id ? "title selected" : "title"}
                 onClick={this.onSelectArticle.bind(this, value.article_id)}
                 ref={li => { this.titles[indexli] = li; }}
             >
-                <span>{value.article_id == article_id ? title : value.title}</span>
+                <span>{value.title}</span>
                 <span></span>
             </li>
         )

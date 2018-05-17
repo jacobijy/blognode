@@ -32,17 +32,19 @@ export function getArtileByArticleid(article_id, callback) {
  * - err, 异常
  * - article, 文章
  * @param {Number} article_id 文章id
+ * @param {String} article 正文
+ * @param {string} title 文章标题
  * @param {Array} images 插入图片
- * @param {String} maintext 正文
+ * @param {Function} callback 回调函数
  */
-export function updateArtileByAritcleid(article_id, article, images, callback) {
+export function updateArtileByAritcleid(article_id, article, title, images, callback) {
     // callback
-    let option = { article: article }
+    let option = { maintext: article, title: title }
     if ('function' == typeof images) {
         callback = images;
     }
     else {
-        option = { maintext: article, figure: images }
+        option = Object.assign({}, option, { figure: images })
     }
     Article.findOneAndUpdate({ article_id: article_id }, { $set: option }, callback);
 }

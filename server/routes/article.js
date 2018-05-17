@@ -19,23 +19,21 @@ function getArticleList(req, res, next) {
 function onOpenEditor(req, res, next) {
     let { article_id, author_id } = req.body
     console.log(article_id, author_id);
-    let promise1 = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         article.getArtileByArticleid(article_id, (err, result) => {
             if (err)
                 reject({ err: true })
             else {
                 if (!result) return resolve({ err: true })
-                const { maintext = '<p><br></p>', figure = [] } = result
-                resolve({ article: maintext, figure })
+                const { maintext = '<p><br></p>', figure = [], title } = result
+                resolve({ article: maintext, files: figure, title })
             }
         })
     })
-    let promise2 = article.getTitlesByAuthorId(author_id)
-    Promise.all([promise1, promise2]).then(posts => {
-        let data = Object.assign({}, posts[0], { titles: posts[1] })
-        res.json(data);
-    }).catch(reason => {
-        console.log('fail', reason);
+    promise.then(result => {
+        res.json(result)
+    }).catch(err => {
+        console.log('fail', err);
     })
 }
 
@@ -104,17 +102,24 @@ function newArticle(req, res, next) {
     })
 }
 
-function saveArticle(req, res, next) {
-    let article_id = req.body.article_id;
-    let maintext = req.body.article;
-    let images = req.body.files;
-    if (images === undefined)
-        images = [];
-    console.log(req.body);
-    article.updateArtileByAritcleid(article_id, maintext, images, (err, doc, result) => {
-        if (err) throw err;
-        res.send('save succeeded');
+function getTitles(req, res, next) {
+    let author_id = req.body.author_id
+    let promise = article.getTitlesByAuthorId(author_id)
+    promise.then(result => {
+        res.json({ titles: result })
+    }).catch(err => {
+        console.log(err);
     })
 }
 
-export { uploadImage, newArticle, saveArticle, onOpenEditor, getArticleList };
+function saveArticle(req, res, next) {
+    let { article_id, title } = req.body;
+    let maintext = req.body.article;
+    let images = req.files || [];
+    article.updateArtileByAritcleid(article_id, maintext, title, images, (err, doc, result) => {
+        if (err) throw err;
+        res.send({ msg: 'save succeeded', article: maintext });
+    })
+}
+
+export { uploadImage, newArticle, saveArticle, onOpenEditor, getArticleList, getTitles };

@@ -92,6 +92,12 @@ label {
   border: orangered
 }
 
+p.editor-saved {
+  font-size: 0.5em;
+  margin: 0;
+  float: right
+}
+
 .icon.iconfont {
   width: 40px;
   height: 40px;

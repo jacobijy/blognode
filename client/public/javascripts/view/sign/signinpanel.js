@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { UserSignin } from '../../actions';
+import AsyncRequests from '../../actions';
 import PropTypes from 'prop-types';
 
 export default class SigninPanel extends Component {
@@ -19,7 +19,7 @@ export default class SigninPanel extends Component {
     let name = this.refs.name.value;
     let password = this.refs.password.value;
     let json = { name, password };
-    dispatch(UserSignin('post', json))
+    dispatch(AsyncRequests('signin', 'post', json))
   }
 
   render() {

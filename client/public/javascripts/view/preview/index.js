@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SinglePanel from "./singlepanel";
 import { getInfoFromCookies, getCookie } from "../../utils/clienttools";
-import { ArticlesMainPage } from '../../actions';
+import AsyncRequests from '../../actions';
 import PropTypes from 'prop-types';
 
 export default class PreviewPage extends Component {
@@ -22,7 +22,7 @@ export default class PreviewPage extends Component {
 
   componentDidMount() {
     const { articleNumber, dispatch, authorid } = this.props;
-    dispatch(ArticlesMainPage('post', { authorid, articleNumber }))
+    dispatch( AsyncRequests('articles', 'post', { authorid, articleNumber }))
   }
 
   renderSinglePanel(article, index) {

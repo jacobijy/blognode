@@ -20,6 +20,8 @@ export default class Editor extends Component {
 
     constructor(props) {
         super(props);
+        let author_id = this.props.author_id
+        this.props.onOpenTitles({ author_id })
     }
 
     render() {
@@ -29,7 +31,8 @@ export default class Editor extends Component {
             return <Redirect to='/signin' />
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-        const { files, article, createNewArticle, onChangeTitle, onOpenEditor, onSelectArticle, titles = [], title = '' } = this.props;
+        const { files, article, titles = [], title = '', saved, saving } = this.props;
+        const { onOpenTitles, onChangeTitle, onOpenArticle, onSaveArticle, createNewArticle } = this.props
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
@@ -42,11 +45,9 @@ export default class Editor extends Component {
                         <Titles
                             author_id={author_id}
                             article_id={article_id}
-                            title={title}
                             titles={titles}
                             createNewArticle={createNewArticle}
-                            onSelectArticle={onSelectArticle}
-                            onOpenEditor={onOpenEditor}
+                            onOpenArticle={onOpenArticle}
                         />
 
                     </div>
@@ -55,10 +56,16 @@ export default class Editor extends Component {
                             titles.length <= 0 ? null :
                                 <EditorSheet
                                     files={files}
+                                    author_id={author_id}
                                     article={article}
                                     article_id={article_id}
                                     title={title}
+                                    saving={saving}
+                                    saved={saved}
                                     onChangeTitle={onChangeTitle}
+                                    onOpenArticle={onOpenArticle}
+                                    onOpenTitles={onOpenTitles}
+                                    onSaveArticle={onSaveArticle}
                                 />
                         }
                     </div>

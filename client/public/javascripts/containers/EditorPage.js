@@ -1,10 +1,10 @@
 import EditorPage from "../view/editor";
-import { EditorNew, EditorOnOpen, EditorChangeTitle, EditorSelectArticle } from '../actions';
+import AsyncRequests, { EditorChangeTitle } from '../actions';
 import { connect } from 'react-redux';
 import { getInfoFromCookies, getCookie } from '../utils/clienttools';
 
 const mapStateToProps = (state, ownProps) => {
-    const { editorOnOpen, editorChangeTitle } = state.editor;
+    const { editorOpenArticle, editorOpenTitles, editorOnSave } = state.editor;
     // article_id
     // files
     // article
@@ -12,19 +12,21 @@ const mapStateToProps = (state, ownProps) => {
     // author_name
     // dispatch
     // titles
-    let { err } = editorOnOpen.items,
+    let { err, article = "<p><br></p>", files = [], title } = editorOpenArticle.items,
         articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
         author_id = articleinfo.length >= 2 ? articleinfo[0] : 0,
         author_name = articleinfo.length >= 2 ? articleinfo[1] : '',
         article_id = parseInt(getCookie('ARTICLE_EDIT')),
-        { article = "<p><br></p>", files = [], titles = [] } = editorOnOpen.items,
-        title = editorChangeTitle.title
+        { titles = [] } = editorOpenTitles.items,
+        { saving, saved } = editorOnSave
     return Object.assign({}, {
         author_id,
         article_id,
         author_name,
         article,
         files,
+        saving,
+        saved,
         titles,
         title
     }, err ? { err } : {})
@@ -32,18 +34,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onOpenEditor: (data) => { dispatch(EditorOnOpen('post', data)) },
+        onOpenArticle: data => { dispatch(AsyncRequests('editor', 'post', data)) },
         createNewArticle: () => {
-            let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-            let author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
-            dispatch(EditorNew('post', { author_id }))
+            let userInfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
+            let author_id = userInfo.length >= 2 ? userInfo[0] : 0
+            dispatch(AsyncRequests('newArticle', 'post', { author_id }))
         },
-        onChangeTitle: (title) => {
-            dispatch(EditorChangeTitle(title))
-        },
-        onSelectArticle: (article) => {
-            dispatch(EditorSelectArticle(article))
-        }
+        onChangeTitle: (title) => { dispatch(EditorChangeTitle(title)) },
+        onOpenTitles: data => { dispatch(AsyncRequests('titles', 'post', data)) },
+        onSaveArticle: data => { dispatch(AsyncRequests('saveArticle', 'post', data)) }
     }
 }
 

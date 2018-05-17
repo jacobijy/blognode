@@ -22,42 +22,31 @@ export default class EditorSheet extends Component {
         this.timer = setInterval(() => this.saveArticle(), 5000);
     }
 
+    componentDidUpdate() {
+        this.article = this.sheet.innerHTML
+    }
+
     componentWillUnmount() {
         clearInterval(this.timer);
     }
 
     saveArticle = () => {
-        const { article_id = 0, files } = this.props
+        const { article_id = 0, files, title } = this.props
         if (article_id === 0)
             return;
-        let sheet = this.refs.editorsheet;
-        if (sheet.innerHTML === this.article)
+        let sheet = this.sheet;
+        if (sheet.innerHTML === this.article && this.title.value === title)
             return;
-        const req = request.post(formatUrl('/saveArticle'))
+        const formData = new FormData();
+        // const req = request.post(formatUrl('/saveArticle'))
         for (const file of files) {
-            req.attach('image', file);
+            // req.attach('image', file);
+            formData.append('image', file)
         }
-        req.field('article_id', article_id);
-        req.field('article', sheet.innerHTML);
-        req.end((err, result) => {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                this.article = sheet.innerHTML;
-            }
-        });
-        // this.article = sheet.innerHTML
-        // let formData = new FormData();
-        // for (const file of files) {
-        //   formData.append('image', file);
-        // }
-        // formData.append('article_id', article_id);
-        // formData.append('article', sheet.innerHTML)
-        // let xhr = new XMLHttpRequest();
-        // xhr.open('POST', '/api/saveArticle');
-        // xhr.send(formData);
-        // console.log(formData);
+        formData.append('article_id', article_id)
+        formData.append('article', sheet.innerHTML)
+        formData.append('title', this.title.value)
+        this.props.onSaveArticle(formData)
     }
 
     onImageDrop = (files) => {
@@ -70,29 +59,35 @@ export default class EditorSheet extends Component {
                 }
                 else {
                     let json = JSON.parse(result.text);
-                    let sheet = this.refs.editorsheet;
+                    let sheet = this.sheet;
                     sheet.innerHTML += `<img src=${json.path} />`
                 }
             })
     }
 
-    handleChange = (event) => {
-        console.log(this.title.value);
-    }
-
-    onChangeTitle = () => {
+    onChangeTitle = (...arg) => {
+        console.log(arg);
         return this.props.onChangeTitle(this.title.value)
     }
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, title } = this.props
+        let { article, title = '', saving, saved } = this.props
         return (
             <div className="no-gutters flex_fill">
-                <input type="text" className="sheet-title" ref={(ref) => { this.title = ref }} onChange={this.onChangeTitle} defaultValue={title} />
+                <p className="editor-saved">{saving?'···SAVING':saved ?'SAVED':'NOT SAVED'}</p>
+                <input
+                    type="text"
+                    className="sheet-title"
+                    ref={(ref) => {
+                        this.title = ref;
+                        if (ref) ref.value = title
+                    }}
+                    onChange={this.onChangeTitle}
+                />
                 <EditorToolbar />
                 <div className="col-sm-12 sheet">
-                    <div id='editor' contentEditable ref="editorsheet" dangerouslySetInnerHTML={{ __html: article }} />
+                    <div id='editor' contentEditable ref={ref => { this.sheet = ref }} dangerouslySetInnerHTML={{ __html: article }} />
                 </div>
             </div>
         )
