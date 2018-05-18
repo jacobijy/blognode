@@ -52,17 +52,16 @@ class App extends Component {
             <Router>
                 <div className="fill-container">
                     <Switch>
-                        <Route exact path="/" component={ArticlePanel} >
+                        <Route path="/editor" component={Editor} />
+                        <Switch>
                             <TitlePanel />
                             <div className="fill-left">
-                                <Switch>
-                                    <Route path="/signup" component={SignupPage} />
-                                    <Route path="/article" component={ArticlePage} />
-                                    <Route path="/signin" component={SigninPage} />
-                                </Switch>
+                                <Route exact path="/" component={ArticlePanel} />
+                                <Route path="/signup" component={SignupPage} />
+                                <Route path="/article" component={ArticlePage} />
+                                <Route path="/signin" component={SigninPage} />
                             </div>
-                        </Route>
-                        <Route path="/editor" component={Editor} />
+                        </Switch>
                     </Switch>
                 </div>
             </Router>
