@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import './css/titlepanel.css';
 
 export default class TitlePanel extends Component {
@@ -16,9 +17,9 @@ export default class TitlePanel extends Component {
           <div className='btn-group' id='dropdown-btn' >
             <button className="btn btn-primary" data-toggle="dropdown" type='button' >账号</button>
             <div className='dropdown-menu'>
-              <a className="dropdown-item" href="/signup">注册</a>
-              <a className="dropdown-item" href="/editor">写文章</a>
-              <a className="dropdown-item" href="/signin">登陆</a>
+              <Link className="dropdown-item" to="/signup">注册</Link>
+              <Link className="dropdown-item" target="_blank" to="/editor">写文章</Link>
+              <Link className="dropdown-item" to="/signin">登陆</Link>
             </div>
           </div>
           <a className="btn btn-primary" href="/">随记</a>

@@ -46,7 +46,7 @@ label {
 
 .sheet {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 92px);
 }
 
 .sheet p {
@@ -90,6 +90,10 @@ label {
   border-radius: 5px;
   background-color: lavender;
   border: orangered
+}
+
+.row.no-gutters>div {
+    height: 100%;
 }
 
 p.editor-saved {

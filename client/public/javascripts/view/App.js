@@ -10,61 +10,64 @@ import ArticlePanel from "../containers/Articles";
 import './css/App.css'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messageList: []
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            messageList: []
+        };
+    }
 
-  componentDidMount() {
-  }
+    componentDidMount() {
+    }
 
-  componentWillUnmount() {
-  }
+    componentWillUnmount() {
+    }
 
-  getData() {
-    var self = this;
-    store.getAllData(function (data) {
-      var i = 0;
-      var len = data.length;
-      var messageListArr = [];
-      for (; i < len; i++) {
-        messageListArr[i] = data[i].Message;
-      }
-      self.setState({ messageList: messageListArr });
-      console.log(self.state.messageList);
-    })
-  }
+    getData() {
+        var self = this;
+        store.getAllData(function (data) {
+            var i = 0;
+            var len = data.length;
+            var messageListArr = [];
+            for (; i < len; i++) {
+                messageListArr[i] = data[i].Message;
+            }
+            self.setState({ messageList: messageListArr });
+            console.log(self.state.messageList);
+        })
+    }
 
 
-  render() {
-    // var self = this;
-    // var messages = this.state.messageList;
-    // var arr = [];
+    render() {
+        // var self = this;
+        // var messages = this.state.messageList;
+        // var arr = [];
 
-    // messages
-    //   .forEach(function (em) {
-    //     arr.push(<li key={em}> {em} </li>);
-    //   });
-    // console.log(this.props);
-    return (
-      <div className="fill-container">
-        <TitlePanel />
-        <div className="fill-left">
-          <Router>
-            <Switch>
-              <Route exact path="/" component={ArticlePanel} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/article" component={ArticlePage} />
-              <Route path="/editor" component={Editor} />
-              <Route path="/signin" component={SigninPage} />
-            </Switch>
-          </Router>
-        </div>
-      </div>
-    )
-  }
+        // messages
+        //   .forEach(function (em) {
+        //     arr.push(<li key={em}> {em} </li>);
+        //   });
+        console.log(this.props);
+        return (
+            <Router>
+                <div className="fill-container">
+                    <Switch>
+                        <Route exact path="/" component={ArticlePanel} >
+                            <TitlePanel />
+                            <div className="fill-left">
+                                <Switch>
+                                    <Route path="/signup" component={SignupPage} />
+                                    <Route path="/article" component={ArticlePage} />
+                                    <Route path="/signin" component={SigninPage} />
+                                </Switch>
+                            </div>
+                        </Route>
+                        <Route path="/editor" component={Editor} />
+                    </Switch>
+                </div>
+            </Router>
+        )
+    }
 }
 
 export default App;

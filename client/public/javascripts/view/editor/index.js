@@ -39,8 +39,8 @@ export default class Editor extends Component {
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}
         /> */}
-                <div className="row no-gutters">
-                    <div className="col-sm-2" style={{ backgroundColor: "#404040" }}></div>
+                <div className="row no-gutters" style={{ height:"100%" }}>
+                    <div className="col-sm-2" style={{ backgroundColor: "#404040", height:"100%" }}></div>
                     <div className="col-sm-2 title_panel">
                         <Titles
                             author_id={author_id}
@@ -52,7 +52,7 @@ export default class Editor extends Component {
                         />
 
                     </div>
-                    <div className="col-sm-8">
+                    <div className="col-sm-8 title_panel">
                         {
                             titles.length <= 0 ? null :
                                 <EditorSheet
