@@ -31,7 +31,7 @@ export default class EditorSheet extends Component {
     }
 
     saveArticle = () => {
-        const { article_id = 0, files, title } = this.props
+        const { article_id = 0, files, title, author_id } = this.props
         if (article_id === 0)
             return;
         let sheet = this.sheet;
@@ -46,7 +46,12 @@ export default class EditorSheet extends Component {
         formData.append('article_id', article_id)
         formData.append('article', sheet.innerHTML)
         formData.append('title', this.title.value)
-        this.props.onSaveArticle(formData)
+        const { onSaveArticle, onOpenArticle, onOpenTitles } = this.props
+        let callback = () => {
+            onOpenArticle({ author_id, article_id })
+            onOpenTitles({ author_id })
+        }
+        onSaveArticle(formData, callback)
     }
 
     onImageDrop = (files) => {
@@ -72,17 +77,17 @@ export default class EditorSheet extends Component {
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, title = '', saving, saved } = this.props
+        let { article, saving, saved } = this.props
         return (
             <div className="no-gutters flex_fill">
-                <p className="editor-saved">{saving?'···SAVING':saved ?'SAVED':'NOT SAVED'}</p>
+                <p className="editor-saved">{saving ? '···SAVING' : saved ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type="text"
                     className="sheet-title"
                     ref={(ref) => {
                         this.title = ref;
-                        if (ref) ref.value = title
                     }}
+                    value={this.props.title}
                     onChange={this.onChangeTitle}
                 />
                 <EditorToolbar />

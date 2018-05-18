@@ -97,7 +97,6 @@ const EditorOnSaveOption = {
         data: json
     }),
 
-
     Failure: err => ({
         type: Editor_On_Save_Failure,
         data: err

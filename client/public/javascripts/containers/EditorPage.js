@@ -33,16 +33,17 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    const onOpenArticle = data => { dispatch(AsyncRequests('editor', 'post', data)) }
+    const createNewArticle = (data, callback) => { dispatch(AsyncRequests('newArticle', 'post', data, callback)) }
+    const onChangeTitle = title => { dispatch(EditorChangeTitle(title)) }
+    const onOpenTitles = data => { dispatch(AsyncRequests('titles', 'post', data)) }
+    const onSaveArticle = (data, callback) => { dispatch(AsyncRequests('saveArticle', 'post', data, callback)) }
     return {
-        onOpenArticle: data => { dispatch(AsyncRequests('editor', 'post', data)) },
-        createNewArticle: () => {
-            let userInfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-            let author_id = userInfo.length >= 2 ? userInfo[0] : 0
-            dispatch(AsyncRequests('newArticle', 'post', { author_id }))
-        },
-        onChangeTitle: (title) => { dispatch(EditorChangeTitle(title)) },
-        onOpenTitles: data => { dispatch(AsyncRequests('titles', 'post', data)) },
-        onSaveArticle: data => { dispatch(AsyncRequests('saveArticle', 'post', data)) }
+        onOpenArticle,
+        createNewArticle,
+        onChangeTitle,
+        onOpenTitles,
+        onSaveArticle
     }
 }
 

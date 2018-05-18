@@ -48,6 +48,7 @@ export default class Editor extends Component {
                             titles={titles}
                             createNewArticle={createNewArticle}
                             onOpenArticle={onOpenArticle}
+                            onOpenTitles={onOpenTitles}
                         />
 
                     </div>

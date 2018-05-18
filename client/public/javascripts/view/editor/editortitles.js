@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EditorCreator from './editorcreate';
-import { getCookie } from '../../utils/clienttools';
+import { getCookie, getInfoFromCookies } from '../../utils/clienttools';
 import { setCookie } from '../../utils/clienttools';
 import PropTypes from 'prop-types';
 
@@ -37,11 +37,28 @@ export default class Titles extends Component {
         )
     }
 
+    createNewArticle = () => {
+        let userInfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
+        let author_id = userInfo.length >= 2 ? userInfo[0] : 0
+        let { createNewArticle,  onOpenArticle, onOpenTitles } = this.props
+        let callback = () => {
+            let article_id = getCookie('ARTICLE_EDIT')
+            onOpenArticle({ author_id, article_id })
+            onOpenTitles({ author_id })
+        }
+        createNewArticle({ author_id }, callback)
+    }
+
     render() {
-        const { titles, createNewArticle } = this.props;
+        const { titles, article_id, author_id, onOpenTitles } = this.props;
         return (
             <div>
-                <EditorCreator createNewArticle={createNewArticle} />
+                <EditorCreator
+                    article_id={article_id}
+                    author_id={author_id}
+                    createNewArticle={this.createNewArticle}
+                    onOpenTitles={onOpenTitles}
+                />
                 <ul className="title-list">
                     {titles.map((value, index) => this.renderLine(value, index))}
                 </ul>
