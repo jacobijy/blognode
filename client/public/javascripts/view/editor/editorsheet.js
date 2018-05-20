@@ -9,13 +9,13 @@ export default class EditorSheet extends Component {
         author_name: PropTypes.string.isRequired,
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
-        article: PropTypes.string.isRequired,
+        maintext: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired
     }
 
     constructor(props) {
         super(props);
-        this.article = this.props.article
+        this.maintext = this.props.maintext
     }
 
     componentDidMount() {
@@ -23,7 +23,6 @@ export default class EditorSheet extends Component {
     }
 
     componentDidUpdate() {
-        this.article = this.sheet.innerHTML
     }
 
     componentWillUnmount() {
@@ -31,27 +30,25 @@ export default class EditorSheet extends Component {
     }
 
     saveArticle = () => {
-        const { article_id = 0, files, title, author_id } = this.props
+        const { article_id = 0, images = [], title } = this.props
         if (article_id === 0)
             return;
         let sheet = this.sheet;
-        if (sheet.innerHTML === this.article && this.title.value === title)
+        if (sheet.innerHTML === this.maintext && this.title.value === title)
             return;
-        const formData = new FormData();
-        // const req = request.post(formatUrl('/saveArticle'))
-        for (const file of files) {
-            // req.attach('image', file);
-            formData.append('image', file)
+        const figure = []
+        for (const file of images) {
+            figure.push(file)
         }
-        formData.append('article_id', article_id)
-        formData.append('article', sheet.innerHTML)
-        formData.append('title', this.title.value)
-        const { onSaveArticle, onOpenArticle, onOpenTitles } = this.props
-        let callback = () => {
-            onOpenArticle({ author_id, article_id })
-            onOpenTitles({ author_id })
-        }
-        onSaveArticle(formData, callback)
+        const data = { article_id, maintext: sheet.innerHTML, title: this.title.value, figure }
+        const { requestAction } = this.props
+        // let callback = () => {
+        //     this.article = sheet.innerHTML
+        //     onEditorOperation('titles', { author_id })
+        // }
+        // onEditorOperation('saveArticle', formData, 'post', callback)
+        requestAction('update', 'article', { data })
+        this.maintext = sheet.innerHTML
     }
 
     onImageDrop = (files) => {
@@ -77,17 +74,17 @@ export default class EditorSheet extends Component {
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, saving, saved } = this.props
+        let { article, saving, saved, title } = this.props
         return (
             <div className="no-gutters flex_fill">
                 <p className="editor-saved">{saving ? '···SAVING' : saved ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type="text"
                     className="sheet-title"
+                    defaultValue={title}
                     ref={(ref) => {
                         this.title = ref;
                     }}
-                    value={this.props.title}
                     onChange={this.onChangeTitle}
                 />
                 <EditorToolbar />

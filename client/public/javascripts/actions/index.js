@@ -25,7 +25,7 @@ const TypeToOption = {
     'saveArticle': editor.EditorOnSaveOption
 }
 
-const AsyncRequests = (type, method, json, callback?:Function) => dispatch => {
+const AsyncRequests = (type, method, json, callback?: Function) => dispatch => {
     let option = TypeToOption[type]
     return RequestAction(option, json, callback)(method, type)(dispatch)
 }

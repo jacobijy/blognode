@@ -25,4 +25,8 @@ const setCookie = (cname, cvalue, exdays = 30) => {
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
-export { getInfoFromCookies, getCookie, setCookie }
+const shotenString = (string: string, maxlength: number) => {
+    return string.length <= maxlength ? string : string.slice(0, maxlength).concat('...')
+}
+
+export { getInfoFromCookies, getCookie, setCookie, shotenString }

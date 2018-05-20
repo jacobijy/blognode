@@ -1,3 +1,9 @@
+/*
+ * @Author: Jacobi
+ * @Date: 2018-05-20 11:08:01
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-05-20 12:24:52
+ */
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
@@ -7,6 +13,7 @@ import logger from '../utils/logger';
 import http from 'http';
 import { config } from '../config';
 import { router } from './routes';
+import restfulApi from './restful';
 import multer from "multer";
 import bodyParser from "body-parser";
 
@@ -124,6 +131,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api', restfulApi)
 app.use('/', router);
 
 // catch 404 and forward to error handler

@@ -47,7 +47,6 @@ class App extends Component {
         //   .forEach(function (em) {
         //     arr.push(<li key={em}> {em} </li>);
         //   });
-        console.log(this.props);
         return (
             <Router>
                 <div className="fill-container">

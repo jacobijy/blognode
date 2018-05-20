@@ -138,6 +138,18 @@ ul.title-list>li.title.selected {
     border-left-color: #ec7259
 }
 
+span.title-shorten {
+  display: block;
+  height: 30px;
+  line-height: 30px
+}
+
+span.article-shorten {
+  display: block;
+  height: 30px;
+  line-height: 30px
+}
+
 li.title:hover, li.title.selected {
     background-color: #e6e6e6
 }

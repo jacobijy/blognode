@@ -2,22 +2,25 @@ module.exports = {
     "env": {
       "browser": true,
       "commonjs": true,
-      "es6": true
+      "es6": true,
+      "node": true
     },
     "extends": "eslint:recommended",
     "globals": {
       "$": true,
       "process": true,
-      "__dirname": true
+      "__dirname": true,
+      "__SERVER__": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaFeatures": {
         "experimentalObjectRestSpread": true,
-        "jsx": true
+        "jsx": true,
+        "destructuring": true, 
       },
       "sourceType": "module",
-      "ecmaVersion": 7
+      "ecmaVersion": 8
     },
     "plugins": [
       "react"

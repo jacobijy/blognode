@@ -11,7 +11,7 @@ export default class Editor extends Component {
     static propTypes = {
         article_id: PropTypes.number.isRequired,
         files: PropTypes.arrayOf(PropTypes.string).isRequired,
-        article: PropTypes.string.isRequired,
+        maintext: PropTypes.string.isRequired,
         author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
         createNewArticle: PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export default class Editor extends Component {
     constructor(props) {
         super(props);
         let author_id = this.props.author_id
-        this.props.onOpenTitles({ author_id })
+        this.props.requestAction('load', 'titles', { params: { author_id } })
     }
 
     render() {
@@ -31,24 +31,23 @@ export default class Editor extends Component {
             return <Redirect to='/signin' />
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-        const { files, article, titles = [], title = '', saved, saving } = this.props;
-        const { onOpenTitles, onChangeTitle, onOpenArticle, onSaveArticle, createNewArticle } = this.props
+        const { files, maintext, titles = [], title = '', saved, saving } = this.props;
+        const { requestAction } = this.props
         return (
             <div style={{ height: "100%" }}>
                 {/* <Dropzone multiple
           accept='image/*'
           onDrop={this.onImageDrop.bind(this)}
         /> */}
-                <div className="row no-gutters" style={{ height:"100%" }}>
-                    <div className="col-sm-2" style={{ backgroundColor: "#404040", height:"100%" }}></div>
+                <div className="row no-gutters" style={{ height: "100%" }}>
+                    <div className="col-sm-2" style={{ backgroundColor: "#404040", height: "100%" }}></div>
                     <div className="col-sm-2 title_panel">
                         <Titles
                             author_id={author_id}
+                            maintext={maintext}
                             article_id={article_id}
                             titles={titles}
-                            createNewArticle={createNewArticle}
-                            onOpenArticle={onOpenArticle}
-                            onOpenTitles={onOpenTitles}
+                            requestAction={requestAction}
                         />
 
                     </div>
@@ -58,15 +57,12 @@ export default class Editor extends Component {
                                 <EditorSheet
                                     files={files}
                                     author_id={author_id}
-                                    article={article}
+                                    maintext={maintext}
                                     article_id={article_id}
                                     title={title}
                                     saving={saving}
                                     saved={saved}
-                                    onChangeTitle={onChangeTitle}
-                                    onOpenArticle={onOpenArticle}
-                                    onOpenTitles={onOpenTitles}
-                                    onSaveArticle={onSaveArticle}
+                                    requestAction={requestAction}
                                 />
                         }
                     </div>
