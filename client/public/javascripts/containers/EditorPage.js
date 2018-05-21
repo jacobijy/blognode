@@ -17,13 +17,8 @@ const mapStateToProps = (state, ownProps) => {
         author_name = author_info[1],
         article_id = getCookie('ARTICLE_EDIT'),
         titlesResult = titles.loadData || [],
-        articleData = {}
-    if (article.editData) {
-        articleData = article.editData.article_id == article_id ? article.editData : article.loadData;
-    }else if (article.loadData) {
-        articleData = article.loadData
-    }
-    let { maintext, title } = articleData
+        { maintext, title } = article.loadData || {},
+        { edited, editing } = article.editData || {}
     return {
         author_id,
         author_name,
@@ -31,14 +26,14 @@ const mapStateToProps = (state, ownProps) => {
         maintext,
         article_id,
         images,
+        edited,
+        editing,
         titles: titlesResult
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    requestAction: (method, prefix, data) => {
-        return dispatch(modules[prefix][method](data))
-    }
+    requestAction: (method, prefix, data) => (dispatch(modules[prefix][method](data)))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorPage);

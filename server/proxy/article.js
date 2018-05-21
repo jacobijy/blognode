@@ -93,11 +93,11 @@ export function getTitlesByAuthorId(author_id, callback) {
  * @param {function} callback
  */
 
-export function newAndSave(articleinfo, callback) {
+export function newAndSave(articleinfo) {
     let article = new Article();
     article.author_id = Types.ObjectId(articleinfo.author_id);
     article.figure = [];
     article.maintext = articleinfo.maintext;
     article.title = articleinfo.title;
-    article.save(callback);
+    return article.save();
 }

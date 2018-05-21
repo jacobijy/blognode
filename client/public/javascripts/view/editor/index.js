@@ -6,6 +6,7 @@ import { getCookie } from '../../utils/clienttools';
 import '../css/editor.css'
 import '../../../iconfont/iconfont.css'
 import PropTypes from 'prop-types';
+import Collection from './editorcollection';
 
 export default class Editor extends Component {
     static propTypes = {
@@ -32,7 +33,7 @@ export default class Editor extends Component {
             return <Redirect to='/signin' />
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-        const { files, maintext, titles = [], title = '', saved, saving } = this.props;
+        const { files, maintext, titles = [], title = '', edited, editing } = this.props;
         const { requestAction } = this.props
         return (
             <div style={{ height: "100%" }}>
@@ -41,7 +42,9 @@ export default class Editor extends Component {
           onDrop={this.onImageDrop.bind(this)}
         /> */}
                 <div className="row no-gutters" style={{ height: "100%" }}>
-                    <div className="col-sm-2" style={{ backgroundColor: "#404040", height: "100%" }}></div>
+                    <div className="col-sm-2" style={{ backgroundColor: "#404040", height: "100%" }}>
+                        <Collection />
+                    </div>
                     <div className="col-sm-2 title_panel">
                         <Titles
                             author_id={author_id}
@@ -61,8 +64,8 @@ export default class Editor extends Component {
                                     maintext={maintext}
                                     article_id={article_id}
                                     title={title}
-                                    saving={saving}
-                                    saved={saved}
+                                    editing={editing}
+                                    edited={edited}
                                     requestAction={requestAction}
                                 />
                         }

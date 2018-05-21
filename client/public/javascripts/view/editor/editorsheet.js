@@ -15,9 +15,9 @@ export default class EditorSheet extends Component {
 
     constructor(props) {
         super(props);
-        this.maintext = this.props.maintext
-        this.onSheetMouseDown = false
-        this.selectedRange = null
+        this.maintext = this.props.maintext;
+        this.onSheetMouseDown = false;
+        this.selectedRange = null;
     }
 
     componentDidMount() {
@@ -25,7 +25,8 @@ export default class EditorSheet extends Component {
     }
 
     componentDidUpdate() {
-        this.title.value = this.props.title
+        this.title.value = this.props.title;
+        this.maintext = this.props.maintext;
     }
 
     componentWillUnmount() {
@@ -71,7 +72,7 @@ export default class EditorSheet extends Component {
     }
 
     onChangeTitle = () => {
-        return this.props.onChangeTitle(this.title.value)
+
     }
 
     onChangeFontStyle = (index, event) => {

@@ -30,7 +30,7 @@ export default class Titles extends Component {
                 onClick={this.onSelectArticle.bind(this, value.article_id)}
                 ref={li => { this.titles[indexli] = li; }}
             >
-                <span className="title-shorten">{shotenString(value.title, 15)}</span>
+                <span className="title-shorten">{shotenString(value.title, 20)}</span>
                 <span className="article-shorten">{value.article_id == article_id ? article : ''}</span>
             </li>
         )

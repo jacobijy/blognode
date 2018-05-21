@@ -7,9 +7,14 @@ api.get('/', (req, res, next) => {
 
 })
 
+// load
 api.get('/article',  article.loadArticle)
 api.get('/titles', article.loadTitles)
 
-api.put('/article', article.saveArticle)
+// update
+api.put('/article', article.updateArticle)
+
+// create
+api.post('/article', article.createArticle)
 
 export default api;

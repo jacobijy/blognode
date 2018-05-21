@@ -159,3 +159,17 @@ ul.title_panel span {
     height: 30px;
     padding-left: 30px;
 }
+
+.collection {
+  text-align: center;
+  padding: 20px 18px 5px 18px;
+}
+
+.collection .to-main {
+  text-decoration: none;
+  display: block;
+  color: #ec7259;
+  border: 1px solid rgba(236,114,89,.8);
+  border-radius: 20px;
+  padding: 9px 0;
+}
