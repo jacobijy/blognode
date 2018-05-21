@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import * as article from './article';
+import article from './article';
 
 const api = Router();
 
 api.get('/', (req, res, next) => {
-    
+
 })
 
-api.get('/article',  article.article)
-api.get('/titles', article.queryTitles)
+api.get('/article',  article.loadArticle)
+api.get('/titles', article.loadTitles)
 
 api.put('/article', article.saveArticle)
 

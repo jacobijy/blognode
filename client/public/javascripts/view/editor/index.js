@@ -14,14 +14,15 @@ export default class Editor extends Component {
         maintext: PropTypes.string.isRequired,
         author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
-        createNewArticle: PropTypes.func.isRequired,
+        requestAction: PropTypes.func.isRequired,
         titles: PropTypes.arrayOf(PropTypes.object).isRequired
     }
 
     constructor(props) {
         super(props);
-        let author_id = this.props.author_id
+        let { author_id, article_id } = this.props
         this.props.requestAction('load', 'titles', { params: { author_id } })
+        this.props.requestAction('load', 'article', { params: { article_id } })
     }
 
     render() {

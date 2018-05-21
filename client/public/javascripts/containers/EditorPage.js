@@ -1,11 +1,10 @@
 import EditorPage from '../view/editor';
 import { connect } from 'react-redux';
-import * as articleActions from '../modules/article';
-import * as titlesActions from '../modules/titles';
+import * as modules from '../modules';
 import { getCookie, getInfoFromCookies } from '../utils/clienttools';
 
 const mapStateToProps = (state, ownProps) => {
-    const { article, images, titles } = state;
+    const { article, images, titles, auth } = state;
     // article_id
     // files
     // article
@@ -17,8 +16,14 @@ const mapStateToProps = (state, ownProps) => {
         author_id = author_info[0],
         author_name = author_info[1],
         article_id = getCookie('ARTICLE_EDIT'),
-        { title, maintext } = article.editData || {},
-        titlesResult = titles.loadData || []
+        titlesResult = titles.loadData || [],
+        articleData = {}
+    if (article.editData) {
+        articleData = article.editData.article_id == article_id ? article.editData : article.loadData;
+    }else if (article.loadData) {
+        articleData = article.loadData
+    }
+    let { maintext, title } = articleData
     return {
         author_id,
         author_name,
@@ -32,18 +37,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     requestAction: (method, prefix, data) => {
-        let action;
-        switch (prefix) {
-            case 'article':
-                action = articleActions
-                break;
-            case 'titles':
-                action = titlesActions
-                break;
-            default:
-                break;
-        }
-        return dispatch(action[method](data))
+        return dispatch(modules[prefix][method](data))
     }
 })
 

@@ -17,9 +17,10 @@ export default class Titles extends Component {
     }
 
     onSelectArticle = (article) => {
-        const { author_id, onEditorOperation } = this.props
+        const { requestAction, article_id } = this.props
+        if (article == article_id) return;
         setCookie('ARTICLE_EDIT', article)
-        onEditorOperation('editor', { author_id, article_id: article })
+        requestAction('load', 'article', { params: { article_id: article } })
     }
 
     renderLine(value, indexli) {
@@ -38,13 +39,8 @@ export default class Titles extends Component {
     createNewArticle = () => {
         let userInfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
         let author_id = userInfo.length >= 2 ? userInfo[0] : 0
-        let { createNewArticle, onOpenArticle, onOpenTitles } = this.props
-        let callback = () => {
-            let article_id = getCookie('ARTICLE_EDIT')
-            onOpenArticle({ author_id, article_id })
-            onOpenTitles({ author_id })
-        }
-        createNewArticle({ author_id }, callback)
+        let { requestAction } = this.props
+        requestAction('create', 'article', { data: { author_id } })
     }
 
     render() {

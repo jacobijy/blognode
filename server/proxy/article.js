@@ -23,7 +23,7 @@ export function getArtileByid(id, callback) {
  * @param {Function} callback 回调函数
  */
 export function getArtileByArticleid(article_id, callback) {
-    Article.findOne({ article_id: article_id }, callback);
+    return Article.findOne({ article_id: article_id }).exec(callback);
 }
 
 /**

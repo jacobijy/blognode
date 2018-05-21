@@ -9,6 +9,8 @@ export default class EditorToolBar extends Component {
         }
     }
 
+    Iconlist = ['icon-bold', 'icon-italic', 'icon-strike', 'icon-blockquote', 'icon-image', 'icon-hr', 'icon-link', 'icon-redo']
+
     openModal = () => {
         this.setState({
             visible: true
@@ -23,18 +25,20 @@ export default class EditorToolBar extends Component {
 
     render() {
         const { visible } = this.state
+        const onChangeFontStyle = this.props.onChangeFontStyle
         return (
             <div>
                 <Modal visible={visible} onClose={this.closeModal} />
-                <ul className="icon_lists clear tools">
-                    <li><i className="icon iconfont icon-bold" /></li>
+                <ul className="icon_lists clear tools" >
+                {this.Iconlist.map((value, index, list) => (<li key={index} onClick={onChangeFontStyle.bind(this, index)}><i className={`icon iconfont ${value}`} /></li>))}
+                    {/* <li><i className="icon iconfont icon-bold" /></li>
                     <li><i className="icon iconfont icon-italic" /></li>
                     <li><i className="icon iconfont icon-strike" /></li>
                     <li><i className="icon iconfont icon-blockquote" /></li>
-                    <li><i className="icon iconfont icon-image" onClick={this.openModal} /></li>
+                    <li onClick={this.openModal}><i className="icon iconfont icon-image" /></li>
                     <li><i className="icon iconfont icon-hr" /></li>
                     <li><i className="icon iconfont icon-link" /></li>
-                    <li><i className="icon iconfont icon-redo" /></li>
+                    <li><i className="icon iconfont icon-redo" /></li> */}
                 </ul>
             </div>
         )

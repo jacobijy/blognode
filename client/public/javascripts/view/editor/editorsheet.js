@@ -16,6 +16,8 @@ export default class EditorSheet extends Component {
     constructor(props) {
         super(props);
         this.maintext = this.props.maintext
+        this.onSheetMouseDown = false
+        this.selectedRange = null
     }
 
     componentDidMount() {
@@ -23,6 +25,7 @@ export default class EditorSheet extends Component {
     }
 
     componentDidUpdate() {
+        this.title.value = this.props.title
     }
 
     componentWillUnmount() {
@@ -36,6 +39,7 @@ export default class EditorSheet extends Component {
         let sheet = this.sheet;
         if (sheet.innerHTML === this.maintext && this.title.value === title)
             return;
+        this.maintext = sheet.innerHTML
         const figure = []
         for (const file of images) {
             figure.push(file)
@@ -48,7 +52,6 @@ export default class EditorSheet extends Component {
         // }
         // onEditorOperation('saveArticle', formData, 'post', callback)
         requestAction('update', 'article', { data })
-        this.maintext = sheet.innerHTML
     }
 
     onImageDrop = (files) => {
@@ -67,29 +70,65 @@ export default class EditorSheet extends Component {
             })
     }
 
-    onChangeTitle = (...arg) => {
-        console.log(arg);
+    onChangeTitle = () => {
         return this.props.onChangeTitle(this.title.value)
+    }
+
+    onChangeFontStyle = (index, event) => {
+        if (!this.selectedRange) return;
+        let range = this.selectedRange
+        console.log(range);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+        }
+    }
+
+    getCurrentRange = () => {
+        let sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            return sel.getRangeAt(0)
+        }
+    }
+
+    handleMouseUp = (event) => {
+        this.selectedRange = this.getCurrentRange();
     }
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { article, saving, saved, title } = this.props
+        let { maintext, saving, saved } = this.props
         return (
             <div className="no-gutters flex_fill">
                 <p className="editor-saved">{saving ? '···SAVING' : saved ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type="text"
                     className="sheet-title"
-                    defaultValue={title}
                     ref={(ref) => {
                         this.title = ref;
                     }}
                     onChange={this.onChangeTitle}
                 />
-                <EditorToolbar />
+                <EditorToolbar onChangeFontStyle={this.onChangeFontStyle} />
                 <div className="col-sm-12 sheet">
-                    <div id='editor' contentEditable ref={ref => { this.sheet = ref }} dangerouslySetInnerHTML={{ __html: article }} />
+                    <div id='editor'
+                        contentEditable
+                        ref={ref => { this.sheet = ref }}
+                        dangerouslySetInnerHTML={{ __html: maintext }}
+                        onMouseUp={this.handleMouseUp}
+                    />
                 </div>
             </div>
         )
