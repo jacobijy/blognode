@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
-import "../css/article.css";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class SinglePanel extends Component {
   static PropTypes = {
@@ -14,19 +14,22 @@ export default class SinglePanel extends Component {
   }
 
   render() {
-    const { article, image, title } = this.props
+    const { article, image, title, article_id } = this.props
+    let li_class = image ? 'have-img' : ''
     return (
-      <div className="col-sm-4 offset-sm-2 singlepanel">
-        <h1 className="article-title">
-          {title}
-        </h1>
-        <img className="article-image" src={image} />
-        <p className="article-summery">
-          {
-            article.length > 50 ? article.slice(0, 50) : article
-          }
-        </p>
-      </div>
+      <li className={`singlepanel ${li_class}`}>
+        <div className="content">
+          <Link className="article-title" target="_blank" to={`/p/${article_id}`}>
+            {title}
+          </Link>
+          <img className="article-image" src={image} />
+          <p className="article-summery">
+            {
+              article.length > 50 ? article.slice(0, 50) : article
+            }
+          </p>
+        </div>
+      </li>
     )
   }
 }

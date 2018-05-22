@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SinglePanel from "./singlepanel";
 import { getInfoFromCookies, getCookie, getSimpleText } from "../../utils/clienttools";
 import PropTypes from 'prop-types';
+import '../css/article.css';
 
 export default class PreviewPage extends Component {
     static propTypes = {
@@ -26,10 +27,11 @@ export default class PreviewPage extends Component {
 
     renderSinglePanel(article, index) {
         console.log(article);
-        const { maintext, figure, title } = article
+        const { maintext, figure, title, article_id } = article
         return (
             <SinglePanel
                 key={index}
+                article_id={article_id}
                 article={getSimpleText(maintext)}
                 image={figure[0]}
                 title={title}
@@ -46,14 +48,15 @@ export default class PreviewPage extends Component {
         }
         return (
             <div className="row">
+                <div className="split-line"></div>
                 <div className="col-sm-8 offset-sm-2">
-                    <div className="row">
+                    <ul className="main articles">
                         {
                             articles.map((article, index) => (
                                 this.renderSinglePanel(article, index)
                             ))
                         }
-                    </div>
+                    </ul>
                 </div>
             </div>
         )

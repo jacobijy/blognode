@@ -2,3 +2,51 @@
   margin-left: 8.33%;
   margin-right: 8.33%
 }
+
+.row {
+  margin: 0
+}
+
+.content {
+  padding-right: 160px
+}
+
+.split-line {
+  margin: -5px 0 15px;
+  border-top: 1px solid #f0f0f0;
+  width: 100%
+}
+
+.main.articles>li {
+  text-align: center;
+  display: list-item;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 2px 17px 0;
+  line-height: 20px;
+  margin: 0 0 17px 0;
+  list-style: none;
+}
+
+.main.articles>li.have-img {
+  min-height: 140px;
+}
+
+p.article-summery {
+  line-height: 24px;
+  font-size: 13px;
+  margin: 0 0 8px;
+  color: #333333;
+}
+
+.article-title {
+  color: #333333;
+  margin: -7px 0 4px;
+  display: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.article-title:visited {
+  color: #969696
+}
