@@ -10,6 +10,13 @@ export default class Collection extends Component {
         return (
             <div>
                 <div className="collection"><Link className="to-main" to="/">回到首页</Link></div>
+                <div></div>
+                <div>
+                    <ul className="collectionlist">
+                        <li className="selected"><span>日记</span></li>
+                        <li><span>随笔</span></li>
+                    </ul>
+                </div>
             </div>
         )
     }

@@ -3,6 +3,7 @@ import request from "superagent";
 import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
 import PropTypes from "prop-types";
+import Modal from '../../basecomponent/modal';
 
 export default class EditorSheet extends Component {
     static PropTypes = {
@@ -18,6 +19,7 @@ export default class EditorSheet extends Component {
         this.maintext = this.props.maintext;
         this.onSheetMouseDown = false;
         this.selectedRange = null;
+        this.state = { modalVisible: false }
     }
 
     componentDidMount() {
@@ -27,6 +29,7 @@ export default class EditorSheet extends Component {
     componentDidUpdate() {
         this.title.value = this.props.title;
         this.maintext = this.props.maintext;
+        this.restoreSelection()
     }
 
     componentWillUnmount() {
@@ -46,7 +49,7 @@ export default class EditorSheet extends Component {
             figure.push(file)
         }
         const data = { article_id, maintext: sheet.innerHTML, title: this.title.value, figure }
-        const { requestAction } = this.props
+        const { requestAction } = this.props;
         // let callback = () => {
         //     this.article = sheet.innerHTML
         //     onEditorOperation('titles', { author_id })
@@ -76,25 +79,12 @@ export default class EditorSheet extends Component {
     }
 
     onChangeFontStyle = (index, event) => {
+        const commands = ['bold', 'italic', 'strikeThrough']
+        this.restoreSelection();
         if (!this.selectedRange) return;
         let range = this.selectedRange
         console.log(range);
-        switch (index) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-        }
+        document.execCommand(commands[index], true, null);
     }
 
     getCurrentRange = () => {
@@ -104,16 +94,43 @@ export default class EditorSheet extends Component {
         }
     }
 
+    restoreSelection = () => {
+        var selection = window.getSelection();
+        if (this.selectedRange) {
+            try {
+                selection.removeAllRanges();
+            } catch (ex) {
+                document.body.createTextRange().select();
+                document.selection.empty();
+            }
+
+            selection.addRange(this.selectedRange);
+        }
+    }
+
     handleMouseUp = (event) => {
         this.selectedRange = this.getCurrentRange();
     }
 
+    openModal = () => {
+        this.setState({
+            modalVisible: true
+        })
+    }
+
+    closeModal = () => {
+        this.setState({
+            modalVisible: false
+        })
+    }
+
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { maintext, saving, saved } = this.props
+        let { maintext, editing, edited } = this.props
         return (
             <div className="no-gutters flex_fill">
-                <p className="editor-saved">{saving ? '···SAVING' : saved ? 'SAVED' : 'NOT SAVED'}</p>
+                <Modal visible={this.state.modalVisible} onClose={this.closeModal} />
+                <p className="editor-saved">{editing ? '···SAVING' : edited ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type="text"
                     className="sheet-title"

@@ -173,3 +173,30 @@ ul.title_panel span {
   border-radius: 20px;
   padding: 9px 0;
 }
+
+ul.collectionlist {
+    padding: 0;
+}
+
+ul.collectionlist>li {
+    display: list-item;
+    list-style: none;
+    border-left: 5px solid transparent;
+    height: 40px;
+}
+
+ul.collectionlist>li>span {
+    margin-left: 40px;
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 40px;
+}
+
+ul.collectionlist>li.selected {
+    border-left-color: #ec7259
+}
+
+ul.collectionlist>li:hover, ul.collectionlist>li.selected {
+    background-color: #666666
+}
