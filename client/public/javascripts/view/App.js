@@ -37,6 +37,21 @@ class App extends Component {
         })
     }
 
+    renderNext() {
+        return (
+            <div>
+                <TitlePanel />
+                <div className="fill-left">
+                    <Switch>
+                        <Route exact path="/" component={ArticlePanel} />
+                        <Route path="/signup" component={SignupPage} />
+                        <Route path="/article" component={ArticlePage} />
+                        <Route path="/signin" component={SigninPage} />
+                    </Switch>
+                </div>
+            </div>
+        )
+    }
 
     render() {
         // var self = this;
@@ -52,15 +67,7 @@ class App extends Component {
                 <div className="fill-container">
                     <Switch>
                         <Route path="/editor" component={Editor} />
-                        <Switch>
-                            <TitlePanel />
-                            <div className="fill-left">
-                                <Route exact path="/" component={ArticlePanel} />
-                                <Route path="/signup" component={SignupPage} />
-                                <Route path="/article" component={ArticlePage} />
-                                <Route path="/signin" component={SigninPage} />
-                            </div>
-                        </Switch>
+                        <Route path="/" component={this.renderNext} />
                     </Switch>
                 </div>
             </Router>

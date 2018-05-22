@@ -15,8 +15,17 @@ const ArticleApi = {
     loadTitles: (req: Request, res: Response, next: NextFunction) => {
         let author_id = req.query.author_id
         Article.getTitlesByAuthorId(author_id).then(result => {
-            console.log(result);
             res.json(result);
+        }).catch(err => {
+            res.json(err)
+        })
+    },
+
+    loadArticles: (req: Request, res: Response, next: NextFunction) => {
+        let { author_id, articleNumber } = req.query;
+        Article.getArticlesByAuthorId(author_id, articleNumber).then(result => {
+            let number = parseInt(articleNumber) + result.length
+            res.json(Object.assign({}, { articles: result }, { number }));
         }).catch(err => {
             res.json(err)
         })
@@ -31,7 +40,7 @@ const ArticleApi = {
         //     res.json(err)
         // })
         Article.updateArtileByAritcleid(article_id, maintext, title, figure, (err, doc, result) => {
-            if (err) res.json({err});
+            if (err) res.json(err);
             if (doc) res.json(doc);
         })
     },
@@ -52,7 +61,7 @@ const ArticleApi = {
             res.cookie('ARTICLE_EDIT', result.article_id, opts);
             res.json({ article_id: result.article_id });
         }).catch(err => {
-            res.json({ err })
+            res.json(err)
         })
     }
 }

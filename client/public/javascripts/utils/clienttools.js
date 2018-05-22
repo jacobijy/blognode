@@ -29,4 +29,10 @@ const shotenString = (string: string, maxlength: number) => {
     return string.length <= maxlength ? string : string.slice(0, maxlength).concat('...')
 }
 
-export { getInfoFromCookies, getCookie, setCookie, shotenString }
+const getSimpleText = (html) => {
+    var re1 = new RegExp("<.+?>", "g");//??html?????????"g"????????????
+    var msg = html.replace(re1, '');//????????
+    return msg;
+}
+
+export { getInfoFromCookies, getCookie, setCookie, shotenString, getSimpleText }

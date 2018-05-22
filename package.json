@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./main.js",
     "debug": "nodemon ./main.js",
-    "pack": "webpack --config ./client/webpack.config.js --watch --progress --colors",
+    "pack": "webpack --config ./client/webpack.config.js --watch --progress --colors --display-modules",
     "dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '192.168.137.78' --mode 'development'",
     "babel": "babel ./client/public/javascripts/view/main/index.js"
   },

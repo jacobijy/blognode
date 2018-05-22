@@ -4,7 +4,7 @@ import * as modules from '../modules';
 import { getCookie, getInfoFromCookies } from '../utils/clienttools';
 
 const mapStateToProps = (state, ownProps) => {
-    const { article, images, titles, auth } = state;
+    const { article, images, titles } = state;
     // article_id
     // files
     // article

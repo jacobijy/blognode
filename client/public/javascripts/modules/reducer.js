@@ -2,6 +2,7 @@ import article from './article';
 import auth from './auth';
 import images from './images';
 import titles from './titles';
+import articles from './articles';
 
 import { combineReducers } from 'redux';
-export default combineReducers({ article, auth, images, titles })
+export default combineReducers({ article, auth, images, titles, articles })

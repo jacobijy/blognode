@@ -1,19 +1,23 @@
 import PreviewPage from "../view/preview";
 import { connect } from 'react-redux';
+import * as modules from '../modules';
 import { getInfoFromCookies, getCookie } from '../utils/clienttools';
 
 const mapStateToProps = (state) => {
-    const { items } = state.previews.mainpreview;
+    const { loadData = {} } = state.articles;
     // console.log({items, state})
-    let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-    let authorid = articleinfo.length >= 2 ? articleinfo[0] : 0
-    let { articles = [] } = items;
+    let { articles = [], articleNumber = 0 } = loadData,
+        articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
+        author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
     return {
         articles: articles,
-        articleNumber: 0,
-        hasLoadAll: false,
-        authorid
+        articleNumber,
+        author_id
     }
 }
 
-export default connect(mapStateToProps)(PreviewPage);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    requestAction: (method, prefix, data) => (dispatch(modules[prefix][method](data)))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PreviewPage);
