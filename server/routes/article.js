@@ -13,8 +13,8 @@ function uploadImage(req, res, next) {
         console.log('readfile', data)
         let md5sum = createHash('md5').update(data);
         let md5 = md5sum.digest('hex').toLowerCase();
-        getFilebyMd5(md5, (err, attachment) => {
-            if (attachment != null) {
+        getFilebyMd5(md5).then(result => {
+            if (result != null) {
                 unlink(tmpfile, err => {
                     if (err) console.log(err);
                 })
@@ -43,6 +43,8 @@ function uploadImage(req, res, next) {
                     res.json({ path: srcpath });
                 })
             })
+        }).catch(err => {
+
         })
     });
 }
