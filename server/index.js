@@ -1,8 +1,8 @@
 /*
  * @Author: Jacobi
  * @Date: 2018-05-20 11:08:01
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-05-20 12:24:52
+ * @Last Modified by: Jacobi
+ * @Last Modified time: 2018-05-23 16:16:04
  */
 import createError from 'http-errors';
 import express from 'express';
@@ -12,7 +12,7 @@ import morgan from 'morgan';
 import logger from '../utils/logger';
 import http from 'http';
 import { config } from '../config';
-import { router } from './routes';
+import router from './routes';
 import restfulApi from './restful';
 import multer from "multer";
 import bodyParser from "body-parser";

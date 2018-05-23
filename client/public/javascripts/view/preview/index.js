@@ -26,7 +26,6 @@ export default class PreviewPage extends Component {
     }
 
     renderSinglePanel(article, index) {
-        console.log(article);
         const { maintext, figure, title, article_id } = article
         return (
             <SinglePanel

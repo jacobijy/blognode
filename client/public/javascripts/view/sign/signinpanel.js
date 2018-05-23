@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import AsyncRequests from '../../actions';
 import PropTypes from 'prop-types';
 
 export default class SigninPanel extends Component {
@@ -15,11 +14,10 @@ export default class SigninPanel extends Component {
   }
 
   submitSignin = () => {
-    const { dispatch } = this.props;
     let name = this.refs.name.value;
     let password = this.refs.password.value;
     let json = { name, password };
-    dispatch(AsyncRequests('signin', 'post', json))
+    this.props.requestAction('load', 'auth', { params: json })
   }
 
   render() {

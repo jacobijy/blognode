@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { getCookie } from '../utils/clienttools';
+import SideTools from '../basecomponent/sideTools';
 
 export default class ArticlePanel extends Component {
   constructor(props) {
     super(props);
-    let article_id = getCookie('ARTICLE_EDIT')
+    let article_id = parseInt(this.props.location.pathname.replace(/\/p\//, ''))
     this.props.requestAction('load', 'article', { params: { article_id } })
   }
 
@@ -12,11 +12,12 @@ export default class ArticlePanel extends Component {
     let { maintext, title, figure = [] } = this.props
     return (
       <div>
-        <h1>{title}</h1>
-        <div>
+        <h1 style={{ textAlign: "center" }}>{title}</h1>
+        <div className="col-sm-8 offset-sm-2">
           {/* <image src={figure[0]}></image> */}
-          <div dangerouslySetInnerHTML={{__html: maintext}}></div>
+          <div dangerouslySetInnerHTML={{ __html: maintext }}></div>
         </div>
+        <SideTools />
       </div>
     )
   }

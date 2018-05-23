@@ -1,8 +1,7 @@
-import React, { Component } from "react"
-import '../css/signpanel.css'
-import { Redirect } from "react-router-dom"
-import AsyncRequests from '../../actions'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import '../css/signpanel.css';
+import { Redirect } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 export default class SignupPanel extends Component {
   static propTypes = {
@@ -16,13 +15,12 @@ export default class SignupPanel extends Component {
   }
 
   submitSignup = () => {
-    const { dispatch } = this.props;
     let username = this.refs.username.value;
     let password = this.refs.pwd.value;
     let passwordex = this.refs.pwdex.value;
     let email = this.refs.email.value;
     let formData = { username, password, passwordex, email }
-    dispatch(AsyncRequests('signup', 'post', formData))
+    this.props.requestAction('create', 'auth', { data: formData })
   }
 
   render() {
