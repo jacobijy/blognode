@@ -13,6 +13,8 @@ export const config = {
   auth_cookiename: 'blog_node',
   articleNumberLoadOnce: 6,
 
+  default_api_version: 'v1',
+
   // redis 配置，默认是本地
   redis_host: '127.0.0.1',
   redis_port: 6379,
