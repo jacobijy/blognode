@@ -17,7 +17,7 @@ export default class SigninPanel extends Component {
     let name = this.refs.name.value;
     let password = this.refs.password.value;
     let json = { name, password };
-    this.props.requestAction('signin', 'post', json);
+    this.props.requestAction('load', 'auth', { params: json })
   }
 
   render() {

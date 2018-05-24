@@ -55,7 +55,7 @@ export default class Editor extends Component {
                         />
 
                     </div>
-                    <div className="col-sm-8 title_panel">
+                    <div className="col-sm-8">
                         {
                             titles.length <= 0 ? null :
                                 <EditorSheet

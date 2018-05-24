@@ -1,9 +1,8 @@
 import article from './article';
-import signin from './signin';
-import signup from './signup';
 import images from './images';
 import titles from './titles';
 import articles from './articles';
-
+import auth from './auth';
 import { combineReducers } from 'redux';
-export default combineReducers({ article, signin, signup, images, titles, articles })
+
+export default combineReducers({ article, auth, images, titles, articles })

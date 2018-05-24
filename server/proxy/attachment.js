@@ -1,12 +1,12 @@
 import { Attachment } from "../mongodb";
 import mongoose from "mongoose";
-import GridFs from "gridfs-stream";
+import GridFs, { Grid } from "gridfs-stream";
 import { createReadStream } from "fs";
 
 var connection = mongoose.connection;
 GridFs.mongo = mongoose.mongo;
 
-var gfs;
+var gfs: Grid;
 connection.once('open', () => {
   gfs = GridFs(connection.db)
 })
@@ -19,8 +19,8 @@ connection.once('open', () => {
  * @param {String} filename 图片名称
  * @param {Function} callback 回调函数
  */
-export function getFilebyName(filename, callback) {
-  Attachment.findOne({ filename: filename }, callback);
+export function getFilebyName(filename) {
+  return Attachment.findOne({ filename }).exec();
 }
 
 /**
@@ -31,8 +31,8 @@ export function getFilebyName(filename, callback) {
  * @param {String} md5 md5
  * @param {Function} callback 回调函数
  */
-export function getFilebyMd5(md5, callback) {
-  Attachment.findOne({ md5: md5 }, callback);
+export function getFilebyMd5(md5) {
+  return Attachment.findOne({ md5 }).exec();
 }
 
 export function saveFileToDb(fileinfo, callback) {

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TitlePanel from './titlepanel'
 import SignupPage from '../containers/SignupPage'
 import Editor from '../containers/EditorPage'
-import ArticlePage from './articlepage'
+import ArticlePage from '../containers/ArticlePage'
 import SigninPage from '../containers/SigninPage'
 import ArticlePanel from "../containers/Articles";
 import './css/App.css'
@@ -45,7 +45,6 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={ArticlePanel} />
                         <Route path="/signup" component={SignupPage} />
-                        <Route path="/article" component={ArticlePage} />
                         <Route path="/signin" component={SigninPage} />
                     </Switch>
                 </div>
@@ -67,6 +66,7 @@ class App extends Component {
                 <div className="fill-container">
                     <Switch>
                         <Route path="/editor" component={Editor} />
+                        <Route path="/p/:article_id" component={ArticlePage}/>
                         <Route path="/" component={this.renderNext} />
                     </Switch>
                 </div>

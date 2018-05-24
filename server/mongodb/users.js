@@ -17,7 +17,7 @@ const UserSchema = new Schema({
 
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
-  accessToken: { type: String },
+  accessToken: { type: String }
 });
 
 UserSchema.plugin(BaseModel);

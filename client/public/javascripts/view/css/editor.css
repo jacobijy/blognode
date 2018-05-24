@@ -70,6 +70,17 @@ label {
   outline: 0;
 }
 
+#editor.image-package {
+  text-align: center;
+    font-size: 0;
+}
+
+#editor.image-package.image-view {
+  width: 100%;
+    text-align: center;
+    font-size: 0;
+}
+
 .title_panel {
   overflow-y: scroll
 }

@@ -128,7 +128,7 @@ export default class EditorSheet extends Component {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
         let { maintext, editing, edited } = this.props
         return (
-            <div className="no-gutters flex_fill">
+            <div className="no-gutters flex_fill" style={{ overflowY: "hidden" }}>
                 <Modal visible={this.state.modalVisible} onClose={this.closeModal} />
                 <p className="editor-saved">{editing ? '···SAVING' : edited ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
@@ -140,7 +140,7 @@ export default class EditorSheet extends Component {
                     onChange={this.onChangeTitle}
                 />
                 <EditorToolbar onChangeFontStyle={this.onChangeFontStyle} />
-                <div className="col-sm-12 sheet">
+                <div className="col-sm-12 sheet title_panel">
                     <div id='editor'
                         contentEditable
                         ref={ref => { this.sheet = ref }}

@@ -12,7 +12,7 @@ import { Promise } from "mongoose";
  * @param {Function} callback 回调函数
  */
 export function getUserByid(id, callback) {
-  User.findOne({ _id: id }, callback);
+	User.findOne({ _id: id }, callback);
 }
 
 /**
@@ -24,14 +24,14 @@ export function getUserByid(id, callback) {
  * @param {Function} callback 回调函数
  */
 export function getUserByName(name, callback) {
-  return new Promise((resolve, reject) => {
-    User.findOne({loginname:name}, (err, res) => {
-      if (err)
-        reject(err);
-      if (res)
-        resolve(res);
-    });
-  })
+	return new Promise((resolve, reject) => {
+		User.findOne({ loginname: name }, (err, res) => {
+			if (err)
+				reject(err);
+			if (res)
+				resolve(res);
+		});
+	})
 }
 
 /**
@@ -44,21 +44,21 @@ export function getUserByName(name, callback) {
  * @param {Function} callback 回调函数
  */
 export function getUsersByQuery(query, opt, callback) {
-  User.find(query, '', opt, callback);
+	return User.find(query, '', opt).exec();
 }
 
 export function newAndSave(username, loginname, passhash, email, avatar_url, active) {
-  let user = new User();
-  user.name = username;
-  user.loginname = loginname;
-  user.password = passhash;
-  user.email = email;
-  user.avatar = avatar_url;
-  user.active = active || false;
-  user.accessToken = v4();
-  return user.save();
+	let user = new User();
+	user.username = username;
+	user.loginname = loginname;
+	user.password = passhash;
+	user.email = email;
+	user.avatar = avatar_url;
+	user.active = active || false;
+	user.accessToken = v4();
+	return user.save();
 }
 
 export function makerAvatarUrl(email) {
-  return 'http://www.gravatar.com/avatar/' + utility.md5(email.toLowerCase()) + '?size=48';
+	return 'http://www.gravatar.com/avatar/' + utility.md5(email.toLowerCase()) + '?size=48';
 }
