@@ -1,8 +1,8 @@
-import * as Users from '../proxy/users';
+import * as Users from '../../proxy/users';
 import { Request, Response, NextFunction } from 'express';
 import { trim, isEmail } from 'validator';
-import * as tools from '../../utils/tools';
-import { config } from '../../config';
+import * as tools from '../../../utils/tools';
+import { config } from '../../../config';
 
 const signuperror = (msg, res: Response) => {
     res.status(203);

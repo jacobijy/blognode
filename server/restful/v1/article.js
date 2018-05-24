@@ -1,5 +1,5 @@
-import * as Article from '../proxy/article';
-import { formatDate } from '../../utils/tools';
+import * as Article from '../../proxy/article';
+import { formatDate } from '../../../utils/tools';
 import { Request, Response, NextFunction } from 'express';
 
 const ArticleApi = {
