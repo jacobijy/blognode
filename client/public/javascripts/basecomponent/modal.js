@@ -14,7 +14,7 @@ export default class Modal extends Component {
         super(props)
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
+    UNSAFE_componentWillUpdate(nextProps, nextState, nextContext) {
         const { visible } = nextProps;
         if (visible) {
             this.ele = document.createElement("div");

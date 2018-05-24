@@ -9,7 +9,7 @@ export const config = {
   apiPort: 3000,
   apiHost: '172.26.164.243',
   tmpFileDir: join(__dirname, 'client/public/images/tmp/'),
-  session_secret: 'blog_node_secret',
+  session_secret: 'blog_node_jacobi_secret',
   auth_cookiename: 'blog_node',
   articleNumberLoadOnce: 6,
 
