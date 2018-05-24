@@ -7,9 +7,8 @@ export default class PreviewPage extends Component {
     static propTypes = {
         articles: PropTypes.array[PropTypes.object],
         articleNumber: PropTypes.number.isRequired,
-        hasLoadAll: PropTypes.bool.isRequired,
-        dispatch: PropTypes.func.isRequired,
-        authorid: PropTypes.string.isRequired
+        author_id: PropTypes.string.isRequired,
+        requestAction: PropTypes.func.isRequired
     }
 
     constructor(props) {

@@ -1,6 +1,6 @@
 import createCRUD from '../../../../utils/createCRUD';
 
-const { methods: { create, load, update, del }, createReducer } = new createCRUD('auth', 'CRUD', 'signin');
+const { methods: { create, load, update, del }, createReducer } = new createCRUD('auth/signup', 'CRUD', 'auth');
 
 export default function reducer(state = {}, action = {}) {
     return createReducer(state, action) || state

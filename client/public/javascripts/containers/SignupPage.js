@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import SignupPanel from '../view/sign/signuppanel';
+import * as modules from '../modules';
 
 const mapStateToProps = (state) => {
   const { items } = state.sign.signup;
@@ -10,4 +11,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(SignupPanel)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    requestAction: (method, prefix, data) => (dispatch(modules[prefix][method](data)))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPanel)
