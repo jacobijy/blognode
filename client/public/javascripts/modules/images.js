@@ -1,6 +1,6 @@
 import createCRUD from '../../../../utils/createCRUD';
 
-const { methods: { create, load, update, del }, createReducer } = new createCRUD('image', 'CRUD', 'editor')
+const { methods: { create, load, update, del }, createReducer } = new createCRUD('images', 'CRUD', 'editor')
 
 export default function reducer(state = {}, action = {}) {
     return createReducer(state, action) || state

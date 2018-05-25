@@ -6,10 +6,10 @@ export default class ModalPortal extends Component {
     }
 
     render() {
-        const { onClose } = this.props
+        const { onClose, Component, onOption } = this.props
         return (
             <div id="modal-root">
-                <button className="btn btn-primary" onClick={onClose}>Click</button>
+                <Component onClose={onClose} onOption={onOption} />
             </div>
         )
     }

@@ -7,7 +7,8 @@ import '../../javascripts/view/css/Modal.css'
 export default class Modal extends Component {
     static propTypes = {
         visible: PropTypes.bool.isRequired,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        Component: PropTypes.element
     }
 
     constructor(props) {
@@ -15,23 +16,21 @@ export default class Modal extends Component {
     }
 
     UNSAFE_componentWillUpdate(nextProps, nextState, nextContext) {
-        const { visible } = nextProps;
+        const visible = nextProps.visible;
         if (visible) {
             this.ele = document.createElement("div");
             document.body.appendChild(this.ele)
         }
-        else {
-            if (this.ele !== undefined) {
-                document.body.removeChild(this.ele);
-                this.ele = null;
-            }
+        else if (!(this.ele === undefined || this.ele === null)) {
+            document.body.removeChild(this.ele);
+            this.ele = null;
         }
     }
 
     render() {
-        const { onClose } = this.props
+        const { onClose, Component, onOption } = this.props
         if (this.ele !== undefined && this.ele !== null)
-            return createPortal(<ModalPortal onClose={onClose} />, this.ele)
+            return createPortal(<ModalPortal Component={Component} onClose={onClose} onOption={onOption} />, this.ele)
         else
             return null;
     }

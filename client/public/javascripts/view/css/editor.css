@@ -211,3 +211,38 @@ ul.collectionlist>li.selected {
 ul.collectionlist>li:hover, ul.collectionlist>li.selected {
     background-color: #666666
 }
+.modal-bg {
+    width: 412px;
+    height: 301px;
+    border-radius: 6px;
+    position: relative;
+    background: white
+}
+
+.close-bg {
+    width: 48px;
+    height: 48px;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+.modal-main-body {
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-main-body>label {
+    width: 320px;
+    height: 42px;
+    line-height: 42px;
+    background-color: #555555;
+    color: white
+}
+
+.modal-main-body>input {
+    position: absolute;
+    top: -12000px;
+    right: 0;
+    left: 0;
+}

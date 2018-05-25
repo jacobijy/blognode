@@ -4,6 +4,7 @@ import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
 import PropTypes from "prop-types";
 import Modal from '../../basecomponent/modal';
+import ModalAddImage from "./editormodal";
 
 export default class EditorSheet extends Component {
     static PropTypes = {
@@ -78,7 +79,23 @@ export default class EditorSheet extends Component {
 
     }
 
+    uploadImages = (modal) => {
+        if (!modal.input) return;
+        const files:[File] = modal.input.files;
+        if (files.length <= 0) return;
+        const formData = new FormData();
+        for (const file of files) {
+            formData.append('image', file, file.name)
+        }
+        this.props.requestAction('create', 'images', { data: formData });
+        this.closeModal();
+    }
+
     onChangeFontStyle = (index, event) => {
+        if (index == 4) {
+            this.openModal();
+            return;
+        }
         const commands = ['bold', 'italic', 'strikeThrough']
         this.restoreSelection();
         if (!this.selectedRange) return;
@@ -129,7 +146,12 @@ export default class EditorSheet extends Component {
         let { maintext, editing, edited } = this.props
         return (
             <div className="no-gutters flex_fill" style={{ overflowY: "hidden" }}>
-                <Modal visible={this.state.modalVisible} onClose={this.closeModal} />
+                <Modal
+                    Component={ModalAddImage}
+                    onClose={this.closeModal}
+                    onOption={this.uploadImages}
+                    visible={this.state.modalVisible}
+                />
                 <p className="editor-saved">{editing ? '···SAVING' : edited ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type="text"

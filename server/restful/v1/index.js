@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import article from './article';
 import auth from './auth';
+import images from './images';
 
 const api = Router();
 
@@ -20,5 +21,6 @@ api.put('/article', article.updateArticle)
 // create
 api.post('/article', article.createArticle)
 api.post('/auth', auth.userSignUp)
+api.post('/images', images.createImages)
 
 export default api;
