@@ -1,106 +1,106 @@
 #editor-upload-image {
-  margin: auto;
-  width: auto;
-  background-color: dimgrey;
-  display: inline-block;
+	margin: auto;
+	width: auto;
+	background-color: dimgrey;
+	display: inline-block;
 }
 
 div.edit-sheet {
-  width: 400px;
-  margin: auto;
-  padding: 30px;
-  background-color: beige;
+	width: 400px;
+	margin: auto;
+	padding: 30px;
+	background-color: beige;
 }
 
 div.edit-sheet.p {
-  height: fit-content;
+	height: fit-content;
 }
 
 .tools {
-  width: 100%;
-  margin: 0px;
-  height: 40px;
-  padding-left: 0px;
-  background-color: #D9D9D9
+	width: 100%;
+	margin: 0px;
+	height: 40px;
+	padding-left: 0px;
+	background-color: #D9D9D9
 }
 
 ul.tools li {
-  height: 40px;
-  min-width: 35px;
-  line-height: 40px;
-  float: left;
+	height: 40px;
+	min-width: 35px;
+	line-height: 40px;
+	float: left;
 }
 
 ul.tools li:hover {
-  background-color: #595959
+	background-color: #595959
 }
 
 label {
-  display: inline-block;
-  margin: auto;
+	display: inline-block;
+	margin: auto;
 }
 
 .fill-container {
-  height: 100%;
+	height: 100%;
 }
 
 .sheet {
-  width: 100%;
-  height: calc(100% - 92px);
+	width: 100%;
+	height: calc(100% - 92px);
 }
 
 .sheet p {
-  margin: 0 0 25px;
-  word-break: break-word;
+	margin: 0 0 25px;
+	word-break: break-word;
 }
 
 .sheet-title {
-  padding: 0px 80px 10px 40px;
-  width: 100%;
-  outline: none;
-  border: 0;
+	padding: 0px 80px 10px 40px;
+	width: 100%;
+	outline: none;
+	border: 0;
 }
 
 #editor {
-  height: 100%;
-  padding: 40px 40px 80px 40px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.7;
-  outline: 0;
+	height: 100%;
+	padding: 40px 40px 80px 40px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.7;
+	outline: 0;
 }
 
 #editor.image-package {
-  text-align: center;
+	text-align: center;
     font-size: 0;
 }
 
-#editor.image-package.image-view {
-  width: 100%;
+#editor.image-package>img {
+	max-width: 100%;
     text-align: center;
     font-size: 0;
 }
 
 .title_panel {
-  overflow-y: scroll
+	overflow-y: scroll
 }
 
 .flex_fill {
-  height: 100%;
-  flex-flow: column;
+	height: 100%;
+	flex-flow: column;
 }
 
 .row {
-  min-height: 100%;
+	min-height: 100%;
 }
 .row .col-4 {
-  background-color: orange
+	background-color: orange
 }
 
 .row .col-8 {
-  border-radius: 5px;
-  background-color: lavender;
-  border: orangered
+	border-radius: 5px;
+	background-color: lavender;
+	border: orangered
 }
 
 .row.no-gutters>div {
@@ -108,15 +108,15 @@ label {
 }
 
 p.editor-saved {
-  font-size: 0.5em;
-  margin: 0;
-  float: right
+	font-size: 0.5em;
+	margin: 0;
+	float: right
 }
 
 .icon.iconfont {
-  width: 40px;
-  height: 40px;
-  font-size: 30px;
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
 }
 
 .icon.iconfont.icon-addition_fill {
@@ -150,15 +150,15 @@ ul.title-list>li.title.selected {
 }
 
 span.title-shorten {
-  display: block;
-  height: 30px;
-  line-height: 30px
+	display: block;
+	height: 30px;
+	line-height: 30px
 }
 
 span.article-shorten {
-  display: block;
-  height: 30px;
-  line-height: 30px
+	display: block;
+	height: 30px;
+	line-height: 30px
 }
 
 li.title:hover, li.title.selected {
@@ -172,17 +172,17 @@ ul.title_panel span {
 }
 
 .collection {
-  text-align: center;
-  padding: 20px 18px 5px 18px;
+	text-align: center;
+	padding: 20px 18px 5px 18px;
 }
 
 .collection .to-main {
-  text-decoration: none;
-  display: block;
-  color: #ec7259;
-  border: 1px solid rgba(236,114,89,.8);
-  border-radius: 20px;
-  padding: 9px 0;
+	text-decoration: none;
+	display: block;
+	color: #ec7259;
+	border: 1px solid rgba(236,114,89,.8);
+	border-radius: 20px;
+	padding: 9px 0;
 }
 
 ul.collectionlist {

@@ -35,11 +35,14 @@ export function getFilebyMd5(md5) {
   return Attachment.findOne({ md5 }).exec();
 }
 
-export function saveFileToDb(fileinfo, callback) {
+export function saveFileToDb(fileinfo) {
   const writestream = gfs.createWriteStream({
     filename: fileinfo.filename,
     article_id: parseInt(fileinfo.article_id)
   })
-  createReadStream(fileinfo.filepath + fileinfo.filename).pipe(writestream);
-  writestream.on('close', file => callback(file))
+  createReadStream(fileinfo.tmpfile).pipe(writestream);
+  return new Promise((resolve, reject) => {
+    writestream.on('close', file => resolve(file));
+    writestream.on('error', error => reject(error));
+  });
 }

@@ -81,7 +81,7 @@ export default class EditorSheet extends Component {
 
     uploadImages = (modal) => {
         if (!modal.input) return;
-        const files:[File] = modal.input.files;
+        const files: [File] = modal.input.files;
         if (files.length <= 0) return;
         const formData = new FormData();
         for (const file of files) {
@@ -139,6 +139,15 @@ export default class EditorSheet extends Component {
         this.setState({
             modalVisible: false
         })
+    }
+
+    insertImgElement = (file) => {
+        const style = { minWidth: '200px', minHeight: '200px' }
+        const img_div =
+            <div className="image-package">
+                <img className="image-package" style={style} src={file} />
+            </div>
+        this.sheet.appendChild(img_div);
     }
 
     render() {
