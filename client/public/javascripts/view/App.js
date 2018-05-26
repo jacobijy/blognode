@@ -53,14 +53,6 @@ class App extends Component {
     }
 
     render() {
-        // var self = this;
-        // var messages = this.state.messageList;
-        // var arr = [];
-
-        // messages
-        //   .forEach(function (em) {
-        //     arr.push(<li key={em}> {em} </li>);
-        //   });
         return (
             <Router>
                 <div className="fill-container">
