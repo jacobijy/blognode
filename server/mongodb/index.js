@@ -6,6 +6,7 @@ import './counter';
 import './users';
 import './article';
 import './attachment';
+import './comment';
 
 mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
@@ -18,7 +19,8 @@ mongoose.connect(config.mongodb_conf, {
 }
 );
 
-export var User = mongoose.model('User');
-export var Article = mongoose.model('Article');
-export var Attachment = mongoose.model('Attachment');
-export var Counter = mongoose.model('Counter');
+export const User = mongoose.model('User');
+export const Article = mongoose.model('Article');
+export const Attachment = mongoose.model('Attachment');
+export const Counter = mongoose.model('Counter');
+export const Comment = mongoose.model('Comment');

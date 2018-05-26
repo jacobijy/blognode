@@ -1,8 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import GridFs from "gridfs-stream";
-import { config } from "../../config";
 
-var connection = mongoose.createConnection(config.mongodb_conf);
 GridFs.mongo = mongoose.mongo;
 
 var attachmentSchema = new Schema({

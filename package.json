@@ -27,6 +27,7 @@
     "express-session": "^1.15.6",
     "gridfs-stream": "^1.1.1",
     "http-errors": "~1.6.2",
+    "ioredis": "^3.2.2",
     "jquery": "^3.3.1",
     "log4js": "^2.7.0",
     "moment": "^2.22.1",

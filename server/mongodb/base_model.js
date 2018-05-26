@@ -4,7 +4,7 @@
  */
 import { formatDate } from "../../utils/tools";
 
-module.exports = (schema) => {
+const BaseModel = (schema) => {
   schema.methods.create_at_ago = function() {
     return formatDate(this.create_at, true);
   };
@@ -13,3 +13,5 @@ module.exports = (schema) => {
     return formatDate(this.update_at, true);
   };
 };
+
+export default BaseModel;
