@@ -3,5 +3,6 @@ import * as auth from './auth';
 import * as images from './images';
 import * as titles from './titles';
 import * as articles from './articles';
+import * as urlimage from './urlimage';
 
-export { article, auth, images, titles, articles }
+export { article, auth, images, titles, articles, urlimage }

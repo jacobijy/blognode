@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
 import { config } from '../../../config';
 import { createHash } from 'crypto';
+import request from 'superagent';
+import { getImageNameFromUrl } from '../../../utils/tools';
 
 const access = path => {
     return new Promise((resolve, reject) => {
@@ -26,6 +28,33 @@ const loadFile = async file => {
             return 'err'
         });
     }
+}
+
+const writeImageToLocal = (filename, buff) => {
+    return new Promise((resolve, reject) => {
+        const des_file = config.tmpFileDir + filename
+        fs.writeFile(des_file, buff, err => {
+            if (err) reject(err);
+            resolve(filename)
+        })
+    });
+}
+
+const loadFileFromUrl = async url => {
+    const promise = new Promise((resolve, reject) => {
+        request
+            .get(url)
+            .end(
+                (err, result) => {
+                    console.log(result, err);
+                    if (err) reject(err);
+                    if (result) resolve(result)
+                }
+            )
+    });
+
+    const result = await promise;
+    return result
 }
 
 const uploadFile = async (file, article_id, callback) => {
@@ -70,14 +99,13 @@ const uploadFile = async (file, article_id, callback) => {
             })
         }
     }
-    return des_file
+    return file.originalname
 }
 
 const images = {
     createImages: (req: Request, res: Response, next: NextFunction) => {
         let files = req.files;
         let article_id = req.body.article_id;
-        const images = [];
         const promises = [];
         // console.log(req.files);  // 上传的文件信息
         for (const file of files) {
@@ -86,21 +114,51 @@ const images = {
                     res.send('save error');
                     return;
                 }
-                let srcpath = '/public/images/tmp/' + file.originalname;
-                images.push(srcpath);
             })
             promises.push(upload)
         }
 
         Promise.all(promises).then(([...result]) => {
-            res.json({ images: result })
+            res.json({ addedImages: result })
         }).catch(([...err]) => {
             res.json({ err })
         })
     },
 
+    createUrlImage: (req: Request, res: Response, next: NextFunction) => {
+        let url: string = req.body.url;
+        if (!(url.startsWith('http://' || url.startsWith('https://')))) {
+            url = 'http://'.concat(url);
+        }
+        request
+            .get(url)
+            .end((err, result) => {
+                if (err) res.json({ err });
+                if (result) {
+                    const file = result.body;
+                    const filename = getImageNameFromUrl(url);
+                    const promise = writeImageToLocal(filename, file);
+                    promise.then(result => {
+                        console.log(result);
+                        let response = {
+                            tmpfile: config.tmpFileDir + result,
+                            filename: result,
+                            filepath: config.tmpFileDir
+                        }
+                        Attachment.saveFileToDb(response).then(file => {
+                            res.json({ addedImages: result })
+                        }).catch(err => {
+                            res.json({ err })
+                        });
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }
+            })
+    },
+
     loadImages: (req: Request, res: Response, next: NextFunction) => {
-        const images:[] = req.body.images;
+        const images: [] = req.body.images;
         images.map(file => {
             loadFile(file);
         })

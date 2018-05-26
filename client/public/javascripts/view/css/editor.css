@@ -70,12 +70,12 @@ label {
 	outline: 0;
 }
 
-#editor.image-package {
+.image-package {
 	text-align: center;
     font-size: 0;
 }
 
-#editor.image-package>img {
+.image-package>img {
 	max-width: 100%;
     text-align: center;
     font-size: 0;
@@ -232,7 +232,7 @@ ul.collectionlist>li:hover, ul.collectionlist>li.selected {
     text-align: center;
 }
 
-.modal-main-body>label {
+.modal-main-body label {
     width: 320px;
     height: 42px;
     line-height: 42px;
@@ -240,7 +240,33 @@ ul.collectionlist>li:hover, ul.collectionlist>li.selected {
     color: white
 }
 
-.modal-main-body>input {
+.modal-type-url>span {
+	display: inline-block;
+    font-size: inherit;
+    line-height: 21px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 38px;
+}
+
+.modal-type-url>span>i {
+	font-size: inherit
+}
+
+.modal-type-url>input {
+	display: inline-block;
+    text-align: center;
+    width: 280px;
+    padding: 10px;
+    border-left: 0;
+    line-height: 21px;
+	font-size: 15px;
+	border-radius: 0;
+	outline: 0;
+}
+
+input#editor-upload-image {
     position: absolute;
     top: -12000px;
     right: 0;

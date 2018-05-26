@@ -18,14 +18,15 @@ const mapStateToProps = (state, ownProps) => {
         article_id = getCookie('ARTICLE_EDIT'),
         titlesResult = titles.loadData || [],
         { maintext, title } = article.loadData || {},
-        { edited, editing } = article.editData || {}
+        { edited, editing } = article.editData || {},
+        { addedImages } = images.editData || {}
     return {
         author_id,
         author_name,
         title,
         maintext,
         article_id,
-        images,
+        addedImages,
         edited,
         editing,
         titles: titlesResult

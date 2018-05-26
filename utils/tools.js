@@ -32,3 +32,10 @@ export function getFileSuffix(str) {
   var index2 = str.length;
   return str.substring(index1 + 1, index2);
 }
+
+export function getImageNameFromUrl(url:string) {
+  const regex1 = /\/([^/?]+)\?/;
+  if (regex1.test(url)) return url.split(regex1)[1];
+  const array = url.split('/');
+  return array[array.length - 1]
+}

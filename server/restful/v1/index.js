@@ -22,5 +22,6 @@ api.put('/article', article.updateArticle)
 api.post('/article', article.createArticle)
 api.post('/auth', auth.userSignUp)
 api.post('/images', images.createImages)
+api.post('/urlimage', images.createUrlImage);
 
 export default api;

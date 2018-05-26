@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import EditorSheet from './editorsheet';
 import Titles from './editortitles';
 import { getCookie } from '../../utils/clienttools';
-import '../css/editor.css'
 import '../../../iconfont/iconfont.css'
+import '../css/editor.css'
 import PropTypes from 'prop-types';
 import Collection from './editorcollection';
 
@@ -33,7 +33,7 @@ export default class Editor extends Component {
             return <Redirect to='/signin' />
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0
-        const { files, maintext, titles = [], title = '', edited, editing } = this.props;
+        const { files, maintext, titles = [], title = '', edited, editing, addedImages } = this.props;
         const { requestAction } = this.props
         return (
             <div style={{ height: "100%" }}>
@@ -59,8 +59,9 @@ export default class Editor extends Component {
                         {
                             titles.length <= 0 ? null :
                                 <EditorSheet
-                                    files={files}
+                                    addedImages={addedImages}
                                     author_id={author_id}
+                                    files={files}
                                     maintext={maintext}
                                     article_id={article_id}
                                     title={title}

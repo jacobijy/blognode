@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import request from "superagent";
-import { formatUrl } from "../../../../../utils/apiClient";
 import EditorToolbar from './editortoolbar';
 import PropTypes from "prop-types";
 import Modal from '../../basecomponent/modal';
 import ModalAddImage from "./editormodal";
+import $ from 'jquery/dist/jquery.slim';
 
 export default class EditorSheet extends Component {
     static PropTypes = {
@@ -20,6 +19,7 @@ export default class EditorSheet extends Component {
         this.maintext = this.props.maintext;
         this.onSheetMouseDown = false;
         this.selectedRange = null;
+        this.images = [];
         this.state = { modalVisible: false }
     }
 
@@ -30,7 +30,9 @@ export default class EditorSheet extends Component {
     componentDidUpdate() {
         this.title.value = this.props.title;
         this.maintext = this.props.maintext;
-        this.restoreSelection()
+        this.restoreSelection();
+        const files: [] = this.props.addedImages || [];
+        files.map(value => this.insertImgElement(value));
     }
 
     componentWillUnmount() {
@@ -51,44 +53,25 @@ export default class EditorSheet extends Component {
         }
         const data = { article_id, maintext: sheet.innerHTML, title: this.title.value, figure }
         const { requestAction } = this.props;
-        // let callback = () => {
-        //     this.article = sheet.innerHTML
-        //     onEditorOperation('titles', { author_id })
-        // }
-        // onEditorOperation('saveArticle', formData, 'post', callback)
         requestAction('update', 'article', { data })
     }
 
-    onImageDrop = (files) => {
-        request.post(formatUrl('/upload_image'))
-            .attach('image', files[0], files[0].name)
-            .field('article_id', 1)
-            .end((err, result) => {
-                if (err) {
-                    console.error('err', err);
-                }
-                else {
-                    let json = JSON.parse(result.text);
-                    let sheet = this.sheet;
-                    sheet.innerHTML += `<img src=${json.path} />`
-                }
-            })
-    }
-
-    onChangeTitle = () => {
-
-    }
-
-    uploadImages = (modal) => {
+    uploadImages = (modal, style) => {
         if (!modal.input) return;
-        const files: [File] = modal.input.files;
-        if (files.length <= 0) return;
-        const formData = new FormData();
-        for (const file of files) {
-            formData.append('image', file, file.name)
+        if (style) {
+            const files: [File] = modal.input.files;
+            if (files.length <= 0) return;
+            const formData = new FormData();
+            for (const file of files) {
+                formData.append('image', file, file.name)
+            }
+            this.props.requestAction('create', 'images', { data: formData });
+            this.closeModal();
         }
-        this.props.requestAction('create', 'images', { data: formData });
-        this.closeModal();
+        else {
+            const url = modal.input.value;
+            this.props.requestAction('create', 'urlimage', { data: { url } })
+        }
     }
 
     onChangeFontStyle = (index, event) => {
@@ -142,17 +125,19 @@ export default class EditorSheet extends Component {
     }
 
     insertImgElement = (file) => {
-        const style = { minWidth: '200px', minHeight: '200px' }
+        if (this.images.includes(file)) return;
+        const style = 'min-width: 200px; min-height: 200px';
+        const src = `/public/images/tmp/${file}`;
         const img_div =
-            <div className="image-package">
-                <img className="image-package" style={style} src={file} />
-            </div>
-        this.sheet.appendChild(img_div);
+            `<div class="image-package"><img class="uploaded-img" style="${style}" src="${src}" /></div>`;
+        $('#editor').append(img_div);
+        this.images.push(file)
     }
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
         let { maintext, editing, edited } = this.props
+
         return (
             <div className="no-gutters flex_fill" style={{ overflowY: "hidden" }}>
                 <Modal
