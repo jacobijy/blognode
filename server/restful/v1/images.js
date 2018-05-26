@@ -125,36 +125,26 @@ const images = {
         })
     },
 
-    createUrlImage: (req: Request, res: Response, next: NextFunction) => {
+    createUrlImage: async (req: Request, res: Response, next: NextFunction) => {
         let url: string = req.body.url;
         if (!(url.startsWith('http://' || url.startsWith('https://')))) {
             url = 'http://'.concat(url);
         }
-        request
-            .get(url)
-            .end((err, result) => {
-                if (err) res.json({ err });
-                if (result) {
-                    const file = result.body;
-                    const filename = getImageNameFromUrl(url);
-                    const promise = writeImageToLocal(filename, file);
-                    promise.then(result => {
-                        console.log(result);
-                        let response = {
-                            tmpfile: config.tmpFileDir + result,
-                            filename: result,
-                            filepath: config.tmpFileDir
-                        }
-                        Attachment.saveFileToDb(response).then(file => {
-                            res.json({ addedImages: result })
-                        }).catch(err => {
-                            res.json({ err })
-                        });
-                    }).catch(err => {
-                        console.log(err);
-                    })
-                }
-            })
+
+        const filename = getImageNameFromUrl(url);
+        try {
+            let imageRequet = await request.get(url),
+                file_name = await writeImageToLocal(filename, imageRequet.body),
+                fileinfo = {
+                    tmpfile: config.tmpFileDir + file_name,
+                    filename: file_name,
+                    filepath: config.tmpFileDir
+                },
+                images = await Attachment.saveFileToDb(fileinfo);
+            res.json({ addedImages: images })
+        } catch (err) {
+            res.json({ err })
+        }
     },
 
     loadImages: (req: Request, res: Response, next: NextFunction) => {
