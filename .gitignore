@@ -67,3 +67,4 @@ typings/
 test/
 *hot-update*
 client/public/output/js/
+docker-compose*
