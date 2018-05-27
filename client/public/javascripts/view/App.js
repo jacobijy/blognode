@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { store } from '../store/main';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TitlePanel from './titlepanel'
 import SignupPage from '../containers/SignupPage'
@@ -21,20 +20,6 @@ class App extends Component {
     }
 
     componentWillUnmount() {
-    }
-
-    getData() {
-        var self = this;
-        store.getAllData(function (data) {
-            var i = 0;
-            var len = data.length;
-            var messageListArr = [];
-            for (; i < len; i++) {
-                messageListArr[i] = data[i].Message;
-            }
-            self.setState({ messageList: messageListArr });
-            console.log(self.state.messageList);
-        })
     }
 
     renderNext() {

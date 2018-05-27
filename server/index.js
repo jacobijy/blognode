@@ -2,7 +2,7 @@
  * @Author: Jacobi
  * @Date: 2018-05-20 11:08:01
  * @Last Modified by: Jacobi
- * @Last Modified time: 2018-05-23 16:16:04
+ * @Last Modified time: 2018-05-28 01:18:06
  */
 import createError from 'http-errors';
 import express from 'express';
@@ -29,13 +29,6 @@ console.log(path.join(__dirname, '../views'))
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
-
-// 新增接口路由
-app.get('/data/:module', (req, res, next) => {
-    let c_path = req.params.module;
-    let Action = require('./action/data/' + c_path);
-    Action.execute(req, res);
-});
 
 /**
  * Normalize a port into a number, string, or false.
