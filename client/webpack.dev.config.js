@@ -36,7 +36,7 @@ module.exports = {
 	},
 	// 其他解决方案配置
 	resolve: {
-		extensions: [' ', '.js', '.jsx', '.css', '.json', '.svg'],
+		extensions: [' ', '.js', '.jsx', '.css', '.json', '.svg']
 	},
 	optimization: {
 

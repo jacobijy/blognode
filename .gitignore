@@ -60,6 +60,8 @@ typings/
 
 # next.js build output
 .next
+
+# vscode config file
 .vscode/
 .vs/
 .idea/
@@ -68,3 +70,5 @@ test/
 *hot-update*
 client/public/output/js/
 docker-compose*
+*bundle.js
+package-lock.json
