@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 import GridFs, { Grid } from "gridfs-stream";
 import { createReadStream } from "fs";
 
-var connection = mongoose.connection;
+const connection = mongoose.connection;
 GridFs.mongo = mongoose.mongo;
 
-var gfs: Grid;
+let gfs: Grid;
 connection.once('open', () => {
   gfs = GridFs(connection.db)
 })
