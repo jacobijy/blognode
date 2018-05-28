@@ -14,9 +14,10 @@ const createComment = async (req: Request, res: Response, next: NextFunction) =>
 
 const loadComments = async (req: Request, res: Response, next: NextFunction) => {
     const article_id = req.query.article_id;
+    console.log(article_id);
     try {
-        const commets = await Comments.getCommentsByArticleId(article_id)
-        res.json(commets)
+        const comments = await Comments.getCommentsByArticleId(article_id)
+        res.json(comments)
     } catch (err) {
         res.json({ err })
     }

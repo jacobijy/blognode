@@ -6,6 +6,9 @@ export default class Article extends Component {
     constructor(props) {
         super(props);
         let article_id = parseInt(this.props.location.pathname.replace(/\/p\//, ''))
+        this.state = {
+            article_id
+        }
         this.props.requestAction('load', 'article', { params: { article_id } })
         this.props.requestAction('load', 'comment', { params: { article_id } })
     }
@@ -19,7 +22,7 @@ export default class Article extends Component {
                     {/* <image src={figure[0]}></image> */}
                     <div dangerouslySetInnerHTML={{ __html: maintext }}></div>
                 </div>
-                <Comments comments={comments} requestAction={requestAction} />
+                <Comments comments={comments} requestAction={requestAction} article_id={this.state.article_id} />
                 <SideTools />
             </div>
         )

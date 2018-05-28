@@ -10,7 +10,11 @@ export default class CommenntAdd extends Component {
         let anonymous = this.anonymous.checked;
         let name = anonymous ? 'anonymous' : getInfoFromCookies(getCookie('blog_node'))[1]
         let comment = this.comment.value;
-        let article_id = parseInt(this.props.location.pathname.replace(/\/p\//, ''))
+        if (comment === '') {
+            window.alert('内容不能为空');
+            return;
+        }
+        let article_id = this.props.article_id
         this.props.requestAction('create', 'comment', { data: { name, comment, article_id } })
     }
 

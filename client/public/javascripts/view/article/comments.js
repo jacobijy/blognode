@@ -7,7 +7,7 @@ export default class Comments extends Component {
     }
 
     render() {
-        const { comments = [], requestAction } = this.props;
+        const { comments = [], requestAction, article_id } = this.props;
         return (
             <div>
                 <ul>
@@ -15,7 +15,7 @@ export default class Comments extends Component {
                         comments.map(value => (<li key={value.index}>{value.comment}</li>))
                     }
                 </ul>
-                <CommentAdd requestAction={requestAction} />
+                <CommentAdd requestAction={requestAction} article_id={article_id} />
             </div>
         )
     }

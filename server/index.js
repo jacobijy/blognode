@@ -2,7 +2,7 @@
  * @Author: Jacobi
  * @Date: 2018-05-20 11:08:01
  * @Last Modified by: Jacobi
- * @Last Modified time: 2018-05-28 01:18:06
+ * @Last Modified time: 2018-05-28 22:41:16
  */
 import createError from 'http-errors';
 import express from 'express';
@@ -116,7 +116,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.session_secret));
-app.use(express.static(path.join(__dirname, '../client')));
+app.use('/public', express.static(path.join(__dirname, '../client/public')));
 app.use(multer({ dest: config.tmpFileDir }).array('image'));
 app.use(session({
     secret: config.session_secret,
