@@ -68,13 +68,12 @@ export function getArticlesByAuthorId(author_id, number) {
 /**
  * 根据作者id查找文章id title列表
  * @param {ObjectId} author_id 用户id
- * @param {Function} callback 回调
  */
 
-export function getTitlesByAuthorId(author_id, callback) {
+export function getTitlesByAuthorId(author_id) {
     const query = Article.find({ author_id }, { article_id: 1, title: 1, _id: 0 })
     query.sort({ article_id: -1 })
-    return query.exec(callback)
+    return query.exec()
 }
 
 /**

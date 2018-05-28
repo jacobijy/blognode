@@ -11,5 +11,5 @@ export function newAndSave(article_id, name = 'anonymous', comment) {
     comment_info.article_id = article_id;
     comment_info.name = name;
     comment_info.comment = comment;
-    return comment_info.save
+    return comment_info.save()
 }
