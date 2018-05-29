@@ -44,6 +44,7 @@ export default class EditorSheet extends Component {
         if (article_id === 0)
             return;
         let sheet = this.sheet;
+        if (sheet.innerHTML==='') sheet.innerHTML='<p><br></p>'
         if (sheet.innerHTML === this.maintext && this.title.value === title)
             return;
         this.maintext = sheet.innerHTML
@@ -112,6 +113,14 @@ export default class EditorSheet extends Component {
         this.selectedRange = this.getCurrentRange();
     }
 
+    handlePaste =(event) => {
+        console.log(event);
+    }
+
+    handlePasteCapture =(event) => {
+        console.log(event);
+    }
+
     openModal = () => {
         this.setState({
             modalVisible: true
@@ -156,9 +165,9 @@ export default class EditorSheet extends Component {
                     onChange={this.onChangeTitle}
                 />
                 <EditorToolbar onChangeFontStyle={this.onChangeFontStyle} />
-                <div className="col-sm-12 sheet title_panel">
+                <div className="col-sm-12 sheet title_panel" onPaste={this.handlePaste} onPasteCapture={this.handlePasteCapture} >
                     <div id='editor'
-                        contentEditable
+                        contentEditable="plaintext-only"
                         ref={ref => { this.sheet = ref }}
                         dangerouslySetInnerHTML={{ __html: maintext }}
                         onMouseUp={this.handleMouseUp}
