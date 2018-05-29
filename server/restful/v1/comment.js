@@ -23,6 +23,4 @@ const loadComments = async (req: Request, res: Response, next: NextFunction) => 
     }
 }
 
-const comment = { createComment, loadComments }
-
-export default comment
+export default { createComment, loadComments }

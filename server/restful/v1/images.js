@@ -40,23 +40,6 @@ const writeImageToLocal = (filename, buff) => {
     });
 }
 
-const loadFileFromUrl = async url => {
-    const promise = new Promise((resolve, reject) => {
-        request
-            .get(url)
-            .end(
-                (err, result) => {
-                    console.log(result, err);
-                    if (err) reject(err);
-                    if (result) resolve(result)
-                }
-            )
-    });
-
-    const result = await promise;
-    return result
-}
-
 const uploadFile = async (file, article_id, callback) => {
     if (typeof article_id === 'function') {
         callback = article_id;
