@@ -17,6 +17,7 @@ import restfulApi from './restful';
 import multer from 'multer';
 import connectredis from 'connect-redis';
 import session from 'express-session';
+import io from 'socket.io';
 
 const debug = require('debug')('blognode:server');
 global.__SERVER__ = true;
@@ -62,6 +63,10 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+const socketServer = io(server)
+socketServer.on('connection', socket => {
+    console.log('connection established');
+})
 
 /**
  * Event listener for HTTP server "error" event.
