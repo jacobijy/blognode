@@ -2,7 +2,7 @@
  * @Author: Jacobi
  * @Date: 2018-05-20 11:08:01
  * @Last Modified by: Jacobi
- * @Last Modified time: 2018-05-28 22:41:16
+ * @Last Modified time: 2018-05-31 01:12:48
  */
 import createError from 'http-errors';
 import express from 'express';
@@ -17,7 +17,7 @@ import restfulApi from './restful';
 import multer from 'multer';
 import connectredis from 'connect-redis';
 import session from 'express-session';
-import io from 'socket.io';
+import SocketServer from './wsserver';
 
 const debug = require('debug')('blognode:server');
 global.__SERVER__ = true;
@@ -63,10 +63,8 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-const socketServer = io(server)
-socketServer.on('connection', socket => {
-    console.log('connection established');
-})
+const socketServer = new SocketServer(server)
+socketServer.start();
 
 /**
  * Event listener for HTTP server "error" event.
@@ -116,6 +114,10 @@ function onListening() {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Socket.io server side
+ */
 
 app.use(morgan('dev'));
 app.use(express.json());

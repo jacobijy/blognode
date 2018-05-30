@@ -22,7 +22,7 @@ export default class TitlePanel extends Component {
 			  <Link className="dropdown-item" to="/signin">登陆</Link>
 			</div>
 		  </div>
-		  <a className="btn btn-primary" href="/">随记</a>
+		  <a className="btn btn-primary" href="/chat">随记</a>
 		  <a className="btn btn-primary" href="/archieve">归档</a>
 		  <a className="btn btn-primary" href="/friendlink">友情链接</a>
 		  <a className="btn btn-primary" href="/about">关于我</a>

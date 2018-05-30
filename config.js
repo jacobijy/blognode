@@ -2,7 +2,7 @@ import { join } from 'path';
 
 export const config = {
 	port: 3000,
-	host: '192.168.137.100',
+	host: '192.168.137.94',
 	mongodb_conf: 'mongodb://localhost:27017/blog',
 	debug: true,
 	log_dir: join(__dirname, 'logs'),

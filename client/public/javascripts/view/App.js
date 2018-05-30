@@ -6,6 +6,7 @@ import Editor from '../containers/EditorPage'
 import ArticlePage from '../containers/ArticlePage'
 import SigninPage from '../containers/SigninPage'
 import ArticlePanel from "../containers/Articles";
+import Chat from './chat';
 import './css/App.css'
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/editor" component={Editor} />
                         <Route path="/p/:article_id" component={ArticlePage}/>
+                        <Route path="/chat" component={Chat} />
                         <Route path="/" component={this.renderNext} />
                     </Switch>
                 </div>
