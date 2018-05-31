@@ -28,6 +28,10 @@ export default class SioSocket extends EventEmitter {
             self.emit('message', msg);
         });
 
+        socket.on('single', data => {
+            console.log(data);
+        })
+
         socket.on('test', result => {
             console.log(result);
         })

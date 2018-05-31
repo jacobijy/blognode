@@ -30,7 +30,8 @@ export default class SocketServer extends EventEmitter {
             };
         }
 
-        let sio = socket_io(this.server, opts);
+        let sio = socket_io(this.server);
+        console.log(this.server, opts);
         sio.on('connection', socket => {
             console.log('connenction established');
             let siosocket = new SioSocket(curId++, socket);
