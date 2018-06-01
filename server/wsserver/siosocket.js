@@ -17,28 +17,26 @@ export default class SioSocket extends EventEmitter {
         this.remoteAddress = {
             ip: socket.handshake.address
         };
+        this.registerListeners();
+        // TODO: any other events?
+    }
 
-        let self = this;
+    registerListeners() {
+        const self = this;
+        let socket = this.socket;
 
+        //disconnect
         socket.on('disconnect', this.emit.bind(this, 'disconnect'));
 
+        //error
         socket.on('error', this.emit.bind(this, 'error'));
 
-        socket.on('message', function (msg) {
+        //message
+        socket.on('message', msg => {
             self.emit('message', msg);
         });
 
-        socket.on('single', data => {
-            console.log(data);
-        })
-
-        socket.on('test', result => {
-            console.log(result);
-        })
-
         this.state = ST_INITED;
-
-        // TODO: any other events?
     }
 
     send(msg: any) {

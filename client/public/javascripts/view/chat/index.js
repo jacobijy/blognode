@@ -19,7 +19,7 @@ export default class Chat extends Component {
 
     sendMsg = () => {
         // this.Socket.emit('test', this.input.value)
-        this.Socket.sendData('chat', 'single', this.input.value)
+        this.Socket.sendData('chat', 'single', this.input.value);
     }
 
     render() {

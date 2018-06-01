@@ -12,8 +12,8 @@ mongoose.connect(config.mongodb_conf, {
   server: { poolSize: 20 }
 }, (err) => {
   if (err) {
-    logger.log(config.mongodb_conf);
-    logger.error('connect to %s error: ', config.mongodb_conf, err.message);
+    logger('default').log(config.mongodb_conf);
+    logger('default').error('connect to %s error: ', config.mongodb_conf, err.message);
     process.exit(1);
   }
 }

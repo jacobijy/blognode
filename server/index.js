@@ -2,14 +2,13 @@
  * @Author: Jacobi
  * @Date: 2018-05-20 11:08:01
  * @Last Modified by: Jacobi
- * @Last Modified time: 2018-05-31 01:12:48
+ * @Last Modified time: 2018-06-02 04:04:41
  */
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
-import logger from '../utils/logger';
+import logger, { use as LoggerUse } from '../utils/logger';
 import http from 'http';
 import { config } from '../config';
 import router from './routes';
@@ -106,7 +105,6 @@ function onListening() {
     debug('Listening on ' + bind);
 }
 
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -115,11 +113,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Socket.io server side
- */
-
-app.use(morgan('dev'));
+LoggerUse(app, "info");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.session_secret));
@@ -164,5 +158,5 @@ app.use((err, req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    logger.error(err);
+    logger('http').error(err);
 });

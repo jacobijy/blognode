@@ -6,12 +6,13 @@
   ],
   "execMap": {
     "": "node",
-    "js": "node --harmony --inspect=0.0.0.0:9229"
+    "js": "node --harmony --inspect=:::9229"
   },
   "events": {
   },
   "watch": [
     "/client/public/output/js/main.bundle.js",
-    "/server/*"
+    "/server/**/*",
+    "/utils/**/*"
   ]
 }
