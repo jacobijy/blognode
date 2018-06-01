@@ -1,0 +1,14 @@
+.chat-board {
+    width: 400px;
+    height: 300px;
+    border: 1px solid black
+}
+
+.chat-board>p {
+    font-size: 15px;
+    float: left;
+}
+
+p.chat-msg-self {
+    float: right;
+}

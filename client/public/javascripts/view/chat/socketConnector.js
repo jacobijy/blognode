@@ -18,6 +18,11 @@ export default class SocketClient extends EventEmitter {
             console.log('test');
         })
 
+        Socket.on('message', (...args)=> {
+            console.log(args);
+            console.log('message');
+        })
+
         // Socket.on('group', (msg, name, id) => {
         //     console.log(msg, name, id);
         // })
@@ -31,7 +36,6 @@ export default class SocketClient extends EventEmitter {
         const json = `${module}_${action}_down`;
         return protocols[json]
     }
-
 
     getProtocolUp(module, action) {
         const json = `${module}_${action}_up`;
