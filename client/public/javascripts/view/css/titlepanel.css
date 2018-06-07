@@ -1,15 +1,11 @@
 #title-header {
-  background-color: bisque;
-  height: 150px;
+  background-color: #101010;
+  height: 38px;
   padding: 0px;
   margin: 0px;
   color: white;
   text-align: center;
-  position: relative;
-}
-
-#title-name {
-  height: 112px;
+  position: fixed;
 }
 
 li {

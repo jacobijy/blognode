@@ -36,6 +36,11 @@ export default class SioSocket extends EventEmitter {
             self.emit('message', msg);
         });
 
+        //gameapi
+        socket.on('gameapi', (...args) => {
+            console.log(args);
+        });
+
         this.state = ST_INITED;
     }
 

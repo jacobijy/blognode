@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import TitlePanel from './titlepanel'
+import NavBar from './navbar'
 import SignupPage from '../containers/SignupPage'
 import Editor from '../containers/EditorPage'
 import ArticlePage from '../containers/ArticlePage'
@@ -23,7 +23,8 @@ class App extends Component {
     renderNext() {
         return (
             <div>
-                <TitlePanel />
+                <NavBar />
+                <div style={{ height: "38px" }}></div>
                 <div className="fill-left">
                     <Switch>
                         <Route exact path="/" component={ArticlePanel} />
@@ -41,7 +42,7 @@ class App extends Component {
                 <div className="fill-container">
                     <Switch>
                         <Route path="/editor" component={Editor} />
-                        <Route path="/p/:article_id" component={ArticlePage}/>
+                        <Route path="/p/:article_id" component={ArticlePage} />
                         <Route path="/chat" component={Chat} />
                         <Route path="/" component={this.renderNext} />
                     </Switch>
