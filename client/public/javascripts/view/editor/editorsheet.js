@@ -31,7 +31,7 @@ export default class EditorSheet extends Component {
         this.title.value = this.props.title;
         this.maintext = this.props.maintext;
         this.restoreSelection();
-        const files: [] = this.props.addedImages || [];
+        const files: Array<String> = this.props.addedImages || [];
         files.map(value => this.insertImgElement(value));
     }
 
@@ -44,7 +44,7 @@ export default class EditorSheet extends Component {
         if (article_id === 0)
             return;
         let sheet = this.sheet;
-        if (sheet.innerHTML==='') sheet.innerHTML='<p><br></p>'
+        if (sheet.innerHTML === '') sheet.innerHTML = '<p><br></p>'
         if (sheet.innerHTML === this.maintext && this.title.value === title)
             return;
         this.maintext = sheet.innerHTML
@@ -60,7 +60,7 @@ export default class EditorSheet extends Component {
     uploadImages = (modal, style) => {
         if (!modal.input) return;
         if (style) {
-            const files: [File] = modal.input.files;
+            const files: Array<File> = modal.input.files;
             if (files.length <= 0) return;
             const formData = new FormData();
             for (const file of files) {
@@ -113,11 +113,11 @@ export default class EditorSheet extends Component {
         this.selectedRange = this.getCurrentRange();
     }
 
-    handlePaste =(event) => {
+    handlePaste = (event) => {
         console.log(event);
     }
 
-    handlePasteCapture =(event) => {
+    handlePasteCapture = (event) => {
         console.log(event);
     }
 

@@ -10,7 +10,8 @@ module.exports = {
       "$": true,
       "process": true,
       "__dirname": true,
-      "__SERVER__": true
+      "__SERVER__": true,
+      "__DEVELOPMENT__": true
     },
     "parser": "babel-eslint",
     "parserOptions": {

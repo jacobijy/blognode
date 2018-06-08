@@ -13,9 +13,12 @@ const logger = createLogger();
 const client = new ApiClient()
 const api = ApiMiddleware(client)
 const newapi = asyncMiddleware()
-const store = createStore(
+const store = __DEVELOPMENT__ ? createStore(
 	rootReducers,
 	applyMiddleware(api, newapi, thunk, logger)
+): createStore(
+	rootReducers,
+	applyMiddleware(api, newapi, thunk)
 )
 
 render(<Root store={store} />, document.querySelector('#main-container'))

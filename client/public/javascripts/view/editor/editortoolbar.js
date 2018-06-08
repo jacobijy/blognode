@@ -5,7 +5,7 @@ export default class EditorToolBar extends Component {
         super(props);
     }
 
-    Iconlist = ['icon-bold', 'icon-italic', 'icon-strike', 'icon-blockquote', 'icon-image', 'icon-hr', 'icon-link', 'icon-redo']
+    Iconlist = ['icon-bold', 'icon-italic', 'icon-strikethrough', 'icon-blockquote', 'icon-image', 'icon-line', 'icon-link', 'icon-redo']
 
     render() {
         const onChangeFontStyle = this.props.onChangeFontStyle

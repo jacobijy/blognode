@@ -1,11 +1,10 @@
 const G = {
     __SERVER__: false,
-    __DEVELOPMENT__: true,
+    __DEVELOPMENT__: false,
     __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
 }
 const webpack = require('webpack');
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     // 页面入口文件配置
@@ -51,10 +50,7 @@ module.exports = {
     plugins: [
         // new HtmlWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin(G),
-        new BundleAnalyzerPlugin({
-            analyzerHost: '0.0.0.0'
-        })
+        new webpack.DefinePlugin(G)
         // new OpenBrowserPlugin({
         // })
     ],

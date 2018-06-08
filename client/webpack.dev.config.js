@@ -1,5 +1,11 @@
+const G = {
+    __SERVER__: false,
+    __DEVELOPMENT__: true,
+    __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
+}
 const webpack = require('webpack');
 const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	// 页面入口文件配置
@@ -21,7 +27,7 @@ module.exports = {
 				loader: 'babel-loader',
 				exclude: /node_modules/,
 				query: {
-					presets: ['react', 'es2015']
+					presets: ['react']
 				}
 			},
 			{
@@ -49,6 +55,10 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new BundleAnalyzerPlugin({
+			analyzerHost: '0.0.0.0'
+		}),
+		new webpack.DefinePlugin(G)
 	]
 }

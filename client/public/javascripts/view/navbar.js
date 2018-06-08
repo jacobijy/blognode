@@ -13,7 +13,7 @@ export default class TitlePanel extends Component {
 				<div id="title-name">
 				</div>
 				<div style={{ float: 'right' }}>
-					<a className="btn btn-dark" href="/">主页</a>
+					<a className="navbar navbar-dark" href="/"><span>主页</span></a>
 					<div className='btn-group' id='dropdown-btn' >
 						<button className="btn btn-dark" data-toggle="dropdown" type='button' >账号</button>
 						<div className='dropdown-menu'>

@@ -14,21 +14,24 @@ export default class SinglePanel extends Component {
 	}
 
 	render() {
-		const { article, image, title, article_id } = this.props
+		const { article, image, title, article_id, tag } = this.props
 		let li_class = image ? 'have-img' : ''
 		return (
 			<li className={`singlepanel ${li_class}`}>
-				<div className="content">
-					<Link className="article-title" target="_blank" to={`/p/${article_id}`}>
-						{title}
-					</Link>
-					<img className="article-image" src={image} />
-					<p className="article-summery">
-						{
-							article.length > 50 ? article.slice(0, 50) : article
-						}
-					</p>
-				</div>
+				<Link target="_blank" to={`/p/${article_id}`}>
+					<div className="content-list" style={{ height: "154.5px" }}>
+						<span className="bg-primary">运维</span>
+						<div className="blog-title">
+							<h2>{title}</h2>
+							<p className="article-summery">
+								{
+									article.length > 50 ? article.slice(0, 50) : article
+								}
+							</p>
+						</div>
+						<img className="article-image" src={image} />
+					</div>
+				</Link>
 			</li>
 		)
 	}
