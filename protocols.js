@@ -3,46 +3,45 @@ const fsp = fs.promises;
 
 let exportString = ''
 
-const loadUpJson = () => {
-    fs.readdir('./protocol/up', (err, files) => {
-        files.map(value => {
-            let filepre = value.split('.json')[0]
-            exportString = `${exportString}, ${filepre}`
-            fs.appendFile('./protocol/index.js', `import ${filepre} from './up/${value}'\n`, err => {
-                console.log(err);
-                fs.appendFile('./protocol/index.js', `\nexport default { ${exportString.slice(2)} }`, err => {
-                    console.log(err);
-                })
-            })
-        })
-    })
+const loadUpJson = async () => {
+    const files = await fsp.readdir('./protocol/up');
+    for (const file of files) {
+        let filepre = file.split('.json')[0]
+        exportString = `${exportString},\n\t${filepre}`
+        await fsp.appendFile('./protocol/index.js', `import ${filepre} from './up/${file}'\n`)
+    }
+    // fs.readdir('./protocol/up', (err, files) => {
+    //     files.map(value => {
+    //         let filepre = value.split('.json')[0]
+    //         exportString = `${exportString}, ${filepre}`
+    //         fs.appendFile('./protocol/index.js', `import ${filepre} from './up/${value}'\n`, err => {
+    //             console.log(err);
+    //             fs.appendFile('./protocol/index.js', `\nexport default { ${exportString.slice(2)} }`, err => {
+    //                 console.log(err);
+    //             })
+    //         })
+    //     })
+    // })
 }
 
-const loadDownJson = () => {
-    fs.readdir('./protocol/down', (err, files) => {
-        files.map(value => {
-            let filepre = value.split('.json')[0]
-            exportString = `${exportString}, ${filepre}`
-            fs.appendFile('./protocol/index.js', `import ${filepre} from './down/${value}'\n`, err => {
-                console.log(err);
-            })
-        })
-    })
+const loadDownJson = async () => {
+    const files = await fsp.readdir('./protocol/down');
+    for (const file of files) {
+        let filepre = file.split('.json')[0]
+        exportString = `${exportString},\n\t${filepre}`
+        await fsp.appendFile('./protocol/index.js', `import ${filepre} from './down/${file}'\n`)
+    }
 }
 
-const createIndex = () => {
-    const access = fsp.access('./protocol/index.js');
-    const unlink = fsp.unlink('./protocol/index.js');
-    const write = fsp.writeFile('./protocol/index.js', '');
-    access.then(result => {
-        return unlink
-    }).then(result => {
-        return write
-    }).then(result => {
-        loadUpJson();
-        loadDownJson();
-    }).then(result => {
-    })
+const createIndex = async () => {
+    await fsp.access('./protocol/index.js');
+    await fsp.unlink('./protocol/index.js');
+    await fsp.writeFile('./protocol/index.js', '');
+    await loadDownJson();
+    await loadUpJson();
+    await fsp.appendFile('./protocol/index.js', `\nexport default {\n${exportString.slice(2)}\n}`)
 }
 
-createIndex();
+createIndex().then(async result => {
+    console.log((await fsp.readFile('./protocol/index.js')).toString());
+});
