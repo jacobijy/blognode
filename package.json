@@ -8,7 +8,8 @@
 		"pack": "webpack --config ./client/webpack.config.js --watch --progress --colors --display-modules",
 		"dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '192.168.137.78' --mode 'development'",
 		"babel": "babel ./client/public/javascripts/view/main/index.js",
-		"build": "webpack --config ./client/webpack.prod.config.js --mode production"
+        "build": "webpack --config ./client/webpack.prod.config.js --mode production",
+        "protocol": "node ./protocols.js"
 	},
 	"dependencies": {
 		"@types/react": "^16.3.16",
