@@ -17,3 +17,12 @@ a {
 a:hover {
   color: #dddddd;
 }
+
+ol li {
+  display: list-item;
+}
+
+ul li {
+  display: inline;
+}
+

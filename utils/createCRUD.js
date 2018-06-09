@@ -56,7 +56,26 @@ export default class createCRUD {
             createMethodAndConstants(prefix, actions, action, constants, methods, actionsMap[action], pagename)
         })
 
-        const createReducer = (state, action) => {
+        interface State {
+            loading: boolean,
+            loaded: boolean,
+            editting?: boolean,
+            editted?: boolean,
+            deleteing?: boolean,
+            deleted?: boolean,
+            loadData: Object,
+            loadError: Object,
+            editData?: Object,
+            editError?: Object,
+            deleteData?: Object,
+            deleteError?: Object
+        }
+        const createReducer = (state: State = {
+            loading: false,
+            loaded: false,
+            loadData: {},
+            loadError: null
+        }, action) => {
             switch (action.type) {
                 case constants.LOAD:
                     return {

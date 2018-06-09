@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
         articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
         author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
     return {
-        articles: articles,
+        articles,
         articleNumber,
         author_id
     }

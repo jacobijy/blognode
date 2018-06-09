@@ -54,6 +54,8 @@ module.exports = {
 		inline: true//实时刷新
 	},
 
+    devtool: 'source-map',
+
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new BundleAnalyzerPlugin({

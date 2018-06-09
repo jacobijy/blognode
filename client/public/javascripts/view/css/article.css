@@ -95,3 +95,14 @@ p.article-summery {
 .nav i {
 	font-size: inherit!important;
 }
+
+#right-column>div {
+	padding: 0.3em 1em 0.5em 0.5em;
+	margin-bottom: 1em;
+}
+
+#right-column>div>hr {
+    margin-bottom: 0.5rem;
+	margin-top: 0;
+    border-top: 2px solid #555,;
+}

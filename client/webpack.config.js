@@ -45,7 +45,6 @@ module.exports = {
     optimization: {
 
     },
-    devtool: 'source-map',
     // 插件项
     plugins: [
         // new HtmlWebpackPlugin(),

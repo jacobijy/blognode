@@ -8,10 +8,6 @@
   position: relative;
 }
 
-li {
-  display: inline;
-}
-
 #title-header .btn.btn-dark {
   border-radius: 0;
 }

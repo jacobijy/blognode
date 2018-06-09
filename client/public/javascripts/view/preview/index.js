@@ -3,11 +3,12 @@ import { getInfoFromCookies, getCookie } from "../../utils/clienttools";
 import PropTypes from 'prop-types';
 import LatestPanel from './latest';
 import MainArticles from './mainarticles';
+import Tags from './tags';
 import '../css/article.css';
 
 export default class PreviewPage extends Component {
     static propTypes = {
-        articles: PropTypes.array[PropTypes.object],
+        articles: PropTypes.arrayOf(PropTypes.object),
         articleNumber: PropTypes.number.isRequired,
         author_id: PropTypes.string.isRequired,
         requestAction: PropTypes.func.isRequired
@@ -29,7 +30,12 @@ export default class PreviewPage extends Component {
         return (
             <div className="row">
                 <MainArticles articles={articles} />
-                <LatestPanel />
+                <div className="col-lg-3 col-md-3 col-sm-4 remove_padding">
+                    <div id="right-column">
+                        <LatestPanel articles={articles} />
+                        <Tags />
+                    </div>
+                </div>
             </div>
         )
     }
