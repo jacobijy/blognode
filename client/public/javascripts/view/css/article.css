@@ -62,7 +62,6 @@
 .main.articles>li {
 	text-align: center;
 	display: list-item;
-	border-bottom: 1px solid #f0f0f0;
 	padding: 0 2px 17px 0;
 	line-height: 20px;
 	margin: 0 0 17px 0;
@@ -91,4 +90,8 @@ p.article-summery {
 
 .article-title:visited {
 	color: #969696
+}
+
+.nav i {
+	font-size: inherit!important;
 }

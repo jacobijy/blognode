@@ -3,7 +3,7 @@ const createMethod = (method, types, prefix) => ({ params, data } = {}) => ({
     promise: client => client[method](prefix, { params, data })
 })
 
-const createMethodAndConstants = (prefix, actions: [], action, constants, methods, name, pagename) => {
+const createMethodAndConstants = (prefix, actions: string, action, constants, methods, name, pagename) => {
     pagename = pagename ? '-' + pagename : ''
     if (actions.includes(action)) {
         let types = [

@@ -1,20 +1,19 @@
 #title-header {
-  background-color: #101010;
-  height: 38px;
+  background-color: #343a40;
+  height: 40px;
   padding: 0px;
   margin: 0px;
   color: white;
   text-align: center;
-  position: fixed;
+  position: relative;
 }
 
 li {
   display: inline;
 }
 
-.btn.btn-primary>button {
-  margin: 0px;
-  padding: 0px;
+#title-header .btn.btn-dark {
+  border-radius: 0;
 }
 
 .dropdown-menu {

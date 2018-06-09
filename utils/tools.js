@@ -15,25 +15,25 @@ export function formatDate(date, friendly) {
 
 }
 
-export function validateId(str) {
+export function validateId(str: string) {
   return (/^[a-zA-Z0-9\-_]+$/i).test(str);
 }
 
-export function bhash(str, callback) {
+export function bhash(str: string, callback) {
   hash(str, 10, callback);
 }
 
-export function bcompare(str, hash, callback) {
+export function bcompare(str: string, hash: string, callback) {
   compare(str, hash, callback);
 }
 
-export function getFileSuffix(str) {
+export function getFileSuffix(str: string) {
   var index1 = str.lastIndexOf(".");
   var index2 = str.length;
   return str.substring(index1 + 1, index2);
 }
 
-export function getImageNameFromUrl(url:string) {
+export function getImageNameFromUrl(url: string) {
   const regex1 = /\/([^/?]+)\?/;
   if (regex1.test(url)) return url.split(regex1)[1];
   const array = url.split('/');

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import SinglePanel from "./singlepanel";
-import { getInfoFromCookies, getCookie, getSimpleText } from "../../utils/clienttools";
+import { getInfoFromCookies, getCookie } from "../../utils/clienttools";
 import PropTypes from 'prop-types';
+import LatestPanel from './latest';
+import MainArticles from './mainarticles';
 import '../css/article.css';
 
 export default class PreviewPage extends Component {
@@ -23,37 +24,12 @@ export default class PreviewPage extends Component {
         this.props.requestAction('load', 'articles', { params: { author_id, articleNumber } })
     }
 
-    renderSinglePanel(article, index) {
-        const { maintext, figure, title, article_id } = article
-        return (
-            <SinglePanel
-                key={index}
-                article_id={article_id}
-                article={getSimpleText(maintext)}
-                image={figure[0]}
-                title={title}
-            />
-        )
-    }
-
     render() {
-        let { articles } = this.props;
-        articles = articles || [];
-        for (const article of articles) {
-            if (!article.title)
-                Object.assign(article, { title: article.maintext.slice(3, 8) })
-        }
+        let { articles = [] } = this.props;
         return (
             <div className="row">
-                <div className="col-sm-8 offset-sm-2">
-                    <ul className="main articles">
-                        {
-                            articles.map((article, index) => (
-                                this.renderSinglePanel(article, index)
-                            ))
-                        }
-                    </ul>
-                </div>
+                <MainArticles articles={articles} />
+                <LatestPanel />
             </div>
         )
     }

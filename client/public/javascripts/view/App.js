@@ -24,7 +24,6 @@ class App extends Component {
         return (
             <div>
                 <NavBar />
-                <div style={{ height: "38px" }}></div>
                 <div className="fill-left">
                     <Switch>
                         <Route exact path="/" component={ArticlePanel} />

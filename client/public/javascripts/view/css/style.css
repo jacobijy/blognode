@@ -10,5 +10,10 @@ html,body, #main-container {
 }
 
 a {
-  color: #00B7FF;
+  color: #bbb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddddd;
 }
