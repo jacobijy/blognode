@@ -37,4 +37,10 @@ div {
 p i,h1 i,h2 i,h3 i,h4 i,h5 i{
 	font-size: inherit!important;
 }
-  
+
+@media (max-width: 480px) {
+	.remove_padding {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

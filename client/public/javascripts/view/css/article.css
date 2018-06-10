@@ -22,7 +22,8 @@
 .content-list {
 	padding: 24px 24px 24px 16px;
 	border-left: 4px solid transparent;
-	background-color: rgba(34, 34, 34, 0.9)
+	background-color: rgba(34, 34, 34, 0.9);
+	margin-bottom: 16px;
 }
 
 .content-list:hover {
@@ -47,6 +48,15 @@
 	text-align: left;
 }
 
+@media (max-width: 480px) {
+	.blog_title h2 {
+		width: 100%;
+		font-size: 1rem;
+		font-size: 16px;
+		top: 20%;
+	}
+}
+
 .content-list>span {
 	position: absolute;
 	top: 0;
@@ -59,7 +69,7 @@
 	width: 100%
 }
 
-.main.articles>li {
+.main-articles>li {
 	text-align: center;
 	display: list-item;
 	padding: 0 2px 17px 0;
@@ -68,7 +78,7 @@
 	list-style: none;
 }
 
-.main.articles>li.have-img {
+.main-articles>li.have-img {
 	min-height: 140px;
 }
 
@@ -79,20 +89,7 @@ p.article-summery {
 	color: #333333;
 }
 
-.article-title {
-	color: #333333;
-	margin: -7px 0 4px;
-	display: inherit;
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 1.5;
-}
-
-.article-title:visited {
-	color: #969696
-}
-
-.nav i {
+.navbar-nav i {
 	font-size: inherit!important;
 }
 

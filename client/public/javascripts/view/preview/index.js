@@ -28,15 +28,18 @@ export default class PreviewPage extends Component {
     render() {
         let { articles = [] } = this.props;
         return (
-            <div className="row">
-                <MainArticles articles={articles} />
-                <div className="col-lg-3 col-md-3 col-sm-4 remove_padding">
-                    <div id="right-column">
-                        <LatestPanel articles={articles} />
-                        <Tags />
+            <div className="container">
+                <div className="row">
+                    <MainArticles articles={articles} />
+                    <div className="col-lg-3 col-md-3 col-sm-4 remove_padding">
+                        <div id="right-column">
+                            <LatestPanel articles={articles} />
+                            <Tags />
+                        </div>
                     </div>
                 </div>
             </div>
+
         )
     }
 }
