@@ -6,4 +6,12 @@ import * as articles from './articles';
 import * as urlimage from './urlimage';
 import * as comment from './comment';
 
-export { article, auth, images, titles, articles, urlimage, comment }
+export {
+    article,
+    auth,
+    images,
+    titles,
+    articles,
+    urlimage,
+    comment
+}
