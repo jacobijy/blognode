@@ -34,8 +34,12 @@ const loadDownJson = async () => {
 }
 
 const createIndex = async () => {
-    await fsp.access('./protocol/index.js');
-    await fsp.unlink('./protocol/index.js');
+    try {
+        await fsp.access('./protocol/index.js');
+        await fsp.unlink('./protocol/index.js');
+    } catch (err) {
+        console.log('file dose not exist, create new');
+    }
     await fsp.writeFile('./protocol/index.js', '');
     await loadDownJson();
     await loadUpJson();

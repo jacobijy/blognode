@@ -11,7 +11,6 @@ import Collection from './editorcollection';
 export default class Editor extends Component {
     static propTypes = {
         article_id: PropTypes.number.isRequired,
-        files: PropTypes.arrayOf(PropTypes.string).isRequired,
         maintext: PropTypes.string.isRequired,
         author_id: PropTypes.string.isRequired,
         author_name: PropTypes.string.isRequired,
@@ -61,6 +60,7 @@ export default class Editor extends Component {
                                 <EditorSheet
                                     addedImages={addedImages}
                                     author_id={author_id}
+                                    author_name={author_name}
                                     files={files}
                                     maintext={maintext}
                                     article_id={article_id}

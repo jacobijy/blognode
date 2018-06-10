@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 export default class Titles extends Component {
     static propTypes = {
         titles: PropTypes.arrayOf(PropTypes.object).isRequired,
-        createNewArticle: PropTypes.func.isRequired,
         article_id: PropTypes.number.isRequired
     }
 
@@ -28,6 +27,7 @@ export default class Titles extends Component {
         return (
             <li className={value.article_id == article_id ? "title selected" : "title"}
                 onClick={this.onSelectArticle.bind(this, value.article_id)}
+                key={indexli}
                 ref={li => { this.titles[indexli] = li; }}
             >
                 <span className="title-shorten">{shotenString(value.title, 20)}</span>

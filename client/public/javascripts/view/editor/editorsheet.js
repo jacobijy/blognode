@@ -6,9 +6,8 @@ import ModalAddImage from "./editormodal";
 import $ from 'jquery/dist/jquery.slim';
 
 export default class EditorSheet extends Component {
-    static PropTypes = {
+    static propTypes = {
         author_name: PropTypes.string.isRequired,
-        files: PropTypes.arrayOf(PropTypes.string).isRequired,
         article_id: PropTypes.number.isRequired,
         maintext: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired

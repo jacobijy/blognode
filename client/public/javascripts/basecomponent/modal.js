@@ -8,7 +8,7 @@ export default class Modal extends Component {
     static propTypes = {
         visible: PropTypes.bool.isRequired,
         onClose: PropTypes.func.isRequired,
-        Component: PropTypes.element
+        Component: PropTypes.func
     }
 
     constructor(props) {

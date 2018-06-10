@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ModalPortal extends Component {
-    constructor() {
-        super()
+export default class ModalPortal extends React.Component {
+    constructor(props) {
+        super(props)
     }
 
     render() {

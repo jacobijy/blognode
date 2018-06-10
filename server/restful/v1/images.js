@@ -1,24 +1,20 @@
 import * as Attachment from '../../proxy/attachment';
 import { Request, Response, NextFunction } from 'express';
-import fs from 'fs';
+import fs, { promises as fsp } from 'fs';
 import { config } from '../../../config';
 import { createHash } from 'crypto';
 import request from 'superagent';
 import { getImageNameFromUrl } from '../../../utils/tools';
 
-const access = path => {
-    return new Promise((resolve, reject) => {
-        fs.access(path, fs.constants.F_OK, err => {
-            if (err) resolve(false);
-            resolve(true);
-        });
-    });
-}
-
 const loadFile = async file => {
     const des_file = config.tmpFileDir + file;
-
-    const check_exist = await access(des_file);
+    let check_exist = false;
+    try {
+        await fsp.access(des_file);
+        check_exist = true;
+    } catch (err) {
+        check_exist = false;
+    }
     if (!check_exist) {
         let file_data = await Attachment.getFilebyName(file)
         if (!file_data) {
@@ -45,28 +41,32 @@ const uploadFile = async (file, article_id, callback) => {
         callback = article_id;
         article_id = 0;
     }
-    let promise = new Promise((resolve, reject) => {
-        fs.readFile(file.path, (err, data) => {
-            if (err) reject(err);
-            resolve(data)
-        })
-    });
-    const file_data = await promise
+    const file_data = await fsp.readFile(file.path);
     let des_file = config.tmpFileDir + file.originalname;
     let tmpfile = config.tmpFileDir + file.filename;
     let md5sum = createHash('md5').update(file_data);
     let md5 = md5sum.digest('hex').toLowerCase();
-    const check_exist = await access(des_file);
+    let check_exist = false;
+    try {
+        await fsp.access(des_file);
+        check_exist = true;
+    } catch (err) {
+        check_exist = false;
+    }
     const check_db = await Attachment.getFilebyMd5(md5);
     if (!check_exist) {
-        fs.writeFile(des_file, file_data, err => {
-            if (err) return err;
-        });
+        try {
+            await fsp.writeFile(des_file, file_data)
+        } catch (err) {
+            console.log('write file failed', err);
+        }
     }
     if (check_db != null) {
-        fs.unlink(tmpfile, err => {
-            if (err) console.log(err);
-        })
+        try {
+            await fsp.unlink(tmpfile);
+        } catch (err) {
+            console.log(err);
+        }
     }
     else {
         let response = {
@@ -77,9 +77,11 @@ const uploadFile = async (file, article_id, callback) => {
         }
         const newfile = await Attachment.saveFileToDb(response);
         if (newfile) {
-            fs.unlink(tmpfile, err => {
-                if (err) console.log(err);
-            })
+            try {
+                await fsp.unlink(tmpfile);
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
     return file.originalname

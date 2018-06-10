@@ -3,49 +3,48 @@ import { formatDate } from '../../../utils/tools';
 import { Request, Response, NextFunction } from 'express';
 
 const ArticleApi = {
-    loadArticle: (req: Request, res: Response, next: NextFunction) => {
+    loadArticle: async (req: Request, res: Response, next: NextFunction) => {
         let article_id = req.query.article_id;
-        Article.getArtileByArticleid(article_id).then((result) => {
-            res.json(result)
-        }).catch((err) => {
-            res.send(err)
-        });
-    },
-
-    loadTitles: (req: Request, res: Response, next: NextFunction) => {
-        let author_id = req.query.author_id
-        Article.getTitlesByAuthorId(author_id).then(result => {
+        try {
+            let result = await Article.getArtileByArticleid(article_id);
             res.json(result);
-        }).catch(err => {
-            res.json(err)
-        })
+        } catch (err) {
+            res.status(404).json(err);
+        }
     },
 
-    loadArticles: (req: Request, res: Response, next: NextFunction) => {
+    loadTitles: async (req: Request, res: Response, next: NextFunction) => {
+        let author_id = req.query.author_id;
+        try {
+            let titles = await Article.getTitlesByAuthorId(author_id);
+            console.log(titles, 'test');
+            res.json({ titles })
+        } catch (err) {
+            res.status(404).json(err);
+        }
+    },
+
+    loadArticles: async (req: Request, res: Response, next: NextFunction) => {
         let { author_id, articleNumber } = req.query;
-        Article.getArticlesByAuthorId(author_id, articleNumber).then(result => {
-            let number = parseInt(articleNumber) + result.length
-            res.json(Object.assign({}, { articles: result }, { number }));
-        }).catch(err => {
-            res.json(err)
-        })
+        try {
+            let articles = await Article.getArticlesByAuthorId(author_id, articleNumber);
+            let number = parseInt(articleNumber) + articles.length;
+            res.json(Object.assign({}, { articles }, { number }));
+        } catch (err) {
+            res.status(404).json(err);
+        }
     },
 
     updateArticle: (req: Request, res: Response, next: NextFunction) => {
         let article = req.body;
-        let { article_id, maintext, title, figure } = article
-        // Article.updateArtileByAritcleid(article_id, maintext, title, figure).then(result => {
-        //     res.json(result)
-        // }).catch(err => {
-        //     res.json(err)
-        // })
+        let { article_id, maintext, title, figure } = article;
         Article.updateArtileByAritcleid(article_id, maintext, title, figure, (err, doc, result) => {
             if (err) res.json(err);
             if (doc) res.json(doc);
         })
     },
 
-    createArticle: (req: Request, res: Response, next: NextFunction) => {
+    createArticle: async (req: Request, res: Response, next: NextFunction) => {
         let date = new Date();
         date = formatDate(date);
         let articleInfo = {
@@ -53,16 +52,17 @@ const ArticleApi = {
             author_id: req.body.author_id,
             title: date
         }
-        Article.newAndSave(articleInfo).then(result => {
+        try {
+            let article = await Article.newAndSave(articleInfo);
             let opts = {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: false
             };
-            res.cookie('ARTICLE_EDIT', result.article_id, opts);
-            res.json({ article_id: result.article_id });
-        }).catch(err => {
-            res.json(err)
-        })
+            res.cookie('ARTICLE_EDIT', article.article_id, opts);
+            res.json({ article_id: article.article_id });
+        } catch (err) {
+            res.json(err);
+        }
     }
 }
 

@@ -46,7 +46,6 @@ export function updateArtileByAritcleid(article_id, maintext, title, images, cal
     else {
         option = Object.assign({}, option, { figure: images })
     }
-    console.log(option);
     Article.findOneAndUpdate({ article_id: article_id }, { $set: option }, callback);
 }
 

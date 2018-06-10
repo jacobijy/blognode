@@ -39,7 +39,6 @@ export default class PreviewPage extends Component {
                     </div>
                 </div>
             </div>
-
         )
     }
 }

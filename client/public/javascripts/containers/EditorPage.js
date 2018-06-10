@@ -15,9 +15,9 @@ const mapStateToProps = (state, ownProps) => {
     let author_info = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
         author_id = author_info[0],
         author_name = author_info[1],
-        article_id = getCookie('ARTICLE_EDIT'),
-        titlesResult = titles.loadData || [],
-        { maintext, title } = article.loadData || {},
+        article_id = parseInt(getCookie('ARTICLE_EDIT')),
+        titleResult = titles.loadData.titles || [],
+        { maintext = "<p><br></p>", title } = article.loadData || {},
         { edited, editing } = article.editData || {},
         { addedImages } = images.editData || {}
     return {
@@ -29,7 +29,7 @@ const mapStateToProps = (state, ownProps) => {
         addedImages,
         edited,
         editing,
-        titles: titlesResult
+        titles: titleResult
     }
 }
 

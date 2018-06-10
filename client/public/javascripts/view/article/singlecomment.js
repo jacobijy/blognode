@@ -7,7 +7,7 @@ export default class SingleComment extends Component {
 
     render() {
         const { comment, name, time } = this.props;
-        return(
+        return (
             <div className="comment">
                 <p>{name}</p><p>{time}</p>
                 <p>{comment}</p>
