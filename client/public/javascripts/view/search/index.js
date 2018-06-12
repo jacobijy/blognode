@@ -11,31 +11,34 @@ export default class Search extends Component {
     }
 
     handleChange = () => {
-        window.insert= json => {
-            this.setState({
-                keys: json.s
-            })
-        }
         Superagent
-            .get(`https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${this.input.value}&cb=insert`)
-            .use(jsonp)
+            .get(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`)
+            .use(jsonp({
+                timeout: 3000,
+                callbackName: 'cb'
+            }))
             .end((err, res) => {
-                console.log(err);
-                console.log(res);
+                this.setState({
+                    keys: res.body.s
+                })
             })
     }
 
     render() {
         return (
-            <div className="col-sm-8 offset-sm-2">
-                <form className="form-inline">
-                    <input type="text" ref={ref => this.input = ref} className="form-control" onChange={this.handleChange}></input><button className="btn btn-primary">搜索</button>
-                </form>
-                <ul>
-                {
-                    this.state.keys.map((value, index) => <li style={{display:"list-item"}} key={index}>{value}</li>)
-                }
-                </ul>
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-8 offset-sm-2">
+                        <form className="form-inline">
+                            <input type="text" ref={ref => this.input = ref} className="form-control" onChange={this.handleChange}></input><button className="btn btn-primary">搜索</button>
+                        </form>
+                        <ul className="list-group">
+                            {
+                                this.state.keys.map((value, index) => <li className="list-group-item list-unstyled" key={index}>{value}</li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         )
     }

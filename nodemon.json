@@ -6,7 +6,7 @@
   ],
   "execMap": {
     "": "node",
-    "js": "node --harmony --inspect=172.26.164.243:9229"
+    "js": "node --harmony --inspect=0.0.0.0:9229"
   },
   "events": {
   },
