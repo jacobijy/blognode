@@ -48,6 +48,9 @@ export default class TitlePanel extends Component {
 								<Link className="btn btn-dark" to="/archive">归档</Link>
 							</li>
 							<li className="nav-item">
+								<Link className="btn btn-dark" to="/search">搜索</Link>
+							</li>
+							<li className="nav-item">
 								<Link className="btn btn-dark" to="/links"><i className="icon iconfont icon-link" />友情链接</Link>
 							</li>
 							<li className="nav-item">

@@ -8,8 +8,8 @@
 		"pack": "webpack --config ./client/webpack.dev.config.js --watch --progress --colors --display-modules --mode 'development'",
 		"dev": "webpack-dev-server --config ./client/webpack.dev.config.js --watch --progress --colors --port 3000 --host '192.168.137.78' --mode 'development'",
 		"babel": "babel ./client/public/javascripts/view/main/index.js",
-        "build": "webpack --config ./client/webpack.prod.config.js --mode production",
-        "protocol": "node ./protocols.js"
+		"build": "webpack --config ./client/webpack.prod.config.js --mode production",
+		"protocol": "node ./protocols.js"
 	},
 	"dependencies": {
 		"@types/react": "^16.3.17",
@@ -47,6 +47,7 @@
 		"socket.io": "^2.1.1",
 		"socket.io-client": "^2.1.1",
 		"superagent": "^3.8.3",
+		"superagent-jsonp": "^0.2.1",
 		"utility": "^1.13.1",
 		"uuid": "^3.2.1",
 		"validator": "^9.4.1",
