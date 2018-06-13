@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     // console.log({items, state})
     let { articles = [], articleNumber = 0 } = loadData,
         articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node'))),
-        author_id = articleinfo.length >= 2 ? articleinfo[0] : 0
+        author_id = articleinfo.length >= 2 ? articleinfo[0] : '';
     return {
         articles,
         articleNumber,

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { getInfoFromCookies, getCookie } from "../../utils/clienttools";
 import PropTypes from 'prop-types';
 import LatestPanel from './latest';
 import MainArticles from './mainarticles';
@@ -16,17 +15,19 @@ export default class PreviewPage extends Component {
 
     constructor(props) {
         super(props);
-        let articleinfo = getInfoFromCookies(decodeURIComponent(getCookie('blog_node')));
-        this.author_id = articleinfo[0];
     }
 
     componentDidMount() {
         const { articleNumber, author_id } = this.props;
-        this.props.requestAction('load', 'articles', { params: { author_id, articleNumber } })
+        if (author_id !== '')
+            this.props.requestAction('load', 'articles', { params: { author_id, articleNumber } })
     }
 
     render() {
-        let { articles = [] } = this.props;
+        let { articles = [], author_id } = this.props;
+        if (author_id === 0) {
+            return null;
+        }
         return (
             <div className="container">
                 <div className="row">
