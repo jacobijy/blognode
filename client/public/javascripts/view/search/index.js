@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Superagent from 'superagent';
 import jsonp from 'superagent-jsonp';
+// import jsonpx from '../../utils/jsonp';
 
 export default class Search extends Component {
     constructor(props) {
@@ -11,6 +12,12 @@ export default class Search extends Component {
     }
 
     handleChange = () => {
+        // jsonpx(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`, {
+        //     callbackName: 'cb'
+
+        // }, res => {
+        //     console.log(res);
+        // })
         Superagent
             .get(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`)
             .use(jsonp({
