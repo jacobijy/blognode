@@ -5,7 +5,7 @@ import * as modules from '../modules';
 const mapStateToProps = (state, props) => {
     const { article, comment } = state;
     let { maintext, title, figure } = article.loadData || {},
-        comments = comment.loadData || []
+        { comments = [] } = comment.loadData || {};
     return {
         maintext,
         title,

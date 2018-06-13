@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import Superagent from 'superagent';
-import jsonp from 'superagent-jsonp';
-// import jsonpx from '../../utils/jsonp';
+import jsonp from '../../utils/jsonp';
 
 export default class Search extends Component {
     constructor(props) {
@@ -12,23 +10,24 @@ export default class Search extends Component {
     }
 
     handleChange = () => {
-        // jsonpx(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`, {
-        //     callbackName: 'cb'
-
-        // }, res => {
-        //     console.log(res);
-        // })
-        Superagent
-            .get(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`)
-            .use(jsonp({
-                timeout: 3000,
-                callbackName: 'cb'
-            }))
-            .end((err, res) => {
-                this.setState({
-                    keys: res.body.s
-                })
+        jsonp(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`, {
+            callbackName: 'cb'
+        }).then(res => {
+            this.setState({
+                keys:res.s
             })
+        })
+        // Superagent
+        //     .get(`https://www.baidu.com/su?wd=${this.input.value}&cb=cb`)
+        //     .use(jsonp({
+        //         timeout: 3000,
+        //         callbackName: 'cb'
+        //     }))
+        //     .end((err, res) => {
+        //         this.setState({
+        //             keys: res.body.s
+        //         })
+        //     })
     }
 
     render() {

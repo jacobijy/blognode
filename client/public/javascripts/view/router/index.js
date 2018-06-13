@@ -8,6 +8,7 @@ import ApiMiddleware from '../../middleware/createMiddleware';
 import asyncMiddleware from '../../middleware/asyncMiddleware';
 import rootReducers, { initialState } from '../../modules/reducer';
 import ApiClient from '../../../../../utils/apiClient';
+import * as modules from '../../modules';
 
 const logger = createLogger();
 const client = new ApiClient();
@@ -24,4 +25,7 @@ const store = __DEVELOPMENT__ ? createStore(
 	applyMiddleware(api, newapi, thunk)
 )
 
-render(<Root store={store} />, document.querySelector('#main-container'))
+const dispatch = store.dispatch;
+const requestAction = (method, prefix, data) => (dispatch(modules[prefix][method](data)))
+
+render(<Root store={Object.assign(store, { requestAction })} />, document.querySelector('#main-container'))

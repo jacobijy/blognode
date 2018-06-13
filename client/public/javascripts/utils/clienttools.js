@@ -35,4 +35,10 @@ const getSimpleText = (html) => {
     return msg;
 }
 
-export { getInfoFromCookies, getCookie, setCookie, shotenString, getSimpleText }
+export {
+    getInfoFromCookies,
+    getCookie,
+    setCookie,
+    shotenString,
+    getSimpleText
+}

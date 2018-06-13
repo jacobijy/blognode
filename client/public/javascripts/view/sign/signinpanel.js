@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 export default class SigninPanel extends Component {
 	static propTypes = {
 		redirectToMain: PropTypes.bool.isRequired,
-		SignMessage: PropTypes.string,
-		dispatch: PropTypes.func.isRequired
+		SignMessage: PropTypes.string
 	}
 
 	constructor(props) {

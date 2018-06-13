@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as modules from '../modules';
 import { getInfoFromCookies, getCookie } from '../utils/clienttools';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     const { loadData = {} } = state.articles;
     // console.log({items, state})
     let { articles = [], articleNumber = 0 } = loadData,

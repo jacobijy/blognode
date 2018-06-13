@@ -10,7 +10,7 @@ const signuperror = (msg, res: Response) => {
 }
 
 const UserApi = {
-    userSignUp: (req: Request, res: Response, next: NextFunction) => {
+    userSignUp: async (req: Request, res: Response, next: NextFunction) => {
         let username = trim(req.body.username).toLowerCase();
         let password = trim(req.body.password);
         let passwordex = trim(req.body.passwordex);
@@ -30,59 +30,44 @@ const UserApi = {
         if (password !== passwordex) {
             return signuperror('两次密码输入不一致。', res);
         }
-
-        let query = { $or: [{ loginname: username }, { email }] };
-        Users.getUsersByQuery(query, {}).then(result => {
-            if (result.length > 0) {
+        try {
+            let query = { $or: [{ loginname: username }, { email }] };
+            let users = await Users.getUsersByQuery(query, {});
+            if (users.length > 0) {
                 return signuperror('用户名或邮箱已被使用。', res);
             }
-
-            tools.bhash(password, (err, passhash) => {
-                if (err) {
-                    return next(err);
-                }
-
-                let avatarurl = Users.makerAvatarUrl(email);
-                Users.newAndSave(username, username, passhash, email, avatarurl, false).then(
-                    (result) => {
-                        res.send({ msg: 'success', result: true });
-                    },
-                    (error) => {
-                        console.error(error);
-                    })
-            })
-        }).catch(err => {
+            let passhash = await tools.bhash(password);
+            let avatarurl = Users.makerAvatarUrl(email);
+            await Users.newAndSave(username, username, passhash, email, avatarurl, false)
+        } catch (err) {
             if (err) {
-                console.error(err);
-                return;
+                next(err)
             }
-        })
+        }
     },
 
-    userSignin: (req: Request, res: Response, next: NextFunction) => {
+    userSignin: async (req: Request, res: Response, next: NextFunction) => {
         let username = trim(req.query.name).toLowerCase();
         let password = trim(req.query.password);
-        Users.getUserByName(username).then(function (json) {
-            tools.bcompare(password, json.password, (err, result) => {
-                if (err) throw err;
-                if (result) {
-                    let auth_token = json._id + '$$$$' + json.loginname; // 以后可能会存储更多信息，用 $$$$ 来分隔
-                    let opts = {
-                        maxAge: 1000 * 60 * 60 * 24 * 30,
-                        httpOnly: false
-                    };
-                    console.log(auth_token)
-                    res.cookie(config.auth_cookiename, auth_token, opts);
-                    res.send({ result: true, msg: 'success' });
-                    // res.redirect('/');
-                }
-                else {
-                    return signuperror('用户名密码不匹配', res);
-                }
-            })
-        }, function (error) {
-            console.error(error);
-        });
+        try {
+            let user = await Users.getUserByName(username);
+        let compare = await tools.bcompare(password, user.password);
+        if (compare) {
+            let auth_token = user._id + '$$$$' + user.loginname; // 以后可能会存储更多信息，用 $$$$ 来分隔
+            let opts = {
+                maxAge: 1000 * 60 * 60 * 24 * 30,
+                httpOnly: false
+            };
+            console.log(auth_token)
+            res.cookie(config.auth_cookiename, auth_token, opts);
+            res.send({ result: true, msg: 'success' });
+        }
+        else {
+            return signuperror('用户名密码不匹配', res);
+        }
+        } catch (err) {
+            console.error(err);
+        }
     }
 }
 

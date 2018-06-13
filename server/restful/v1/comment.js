@@ -7,7 +7,7 @@ const createComment = async (req: Request, res: Response, next: NextFunction) =>
         let commentResult = await Comments.newAndSave(article_id, anonymous, comment);
         res.json(commentResult)
     } catch (err) {
-        res.json({ err })
+        res.status(404).json({ err })
     }
 
 }
@@ -17,9 +17,9 @@ const loadComments = async (req: Request, res: Response, next: NextFunction) => 
     console.log(article_id);
     try {
         const comments = await Comments.getCommentsByArticleId(article_id)
-        res.json(comments)
+        res.json({ comments })
     } catch (err) {
-        res.json({ err })
+        res.status(404).json({ err })
     }
 }
 
