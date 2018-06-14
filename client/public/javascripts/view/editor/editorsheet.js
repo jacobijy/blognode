@@ -30,7 +30,7 @@ export default class EditorSheet extends Component {
         this.title.value = this.props.title;
         this.maintext = this.props.maintext;
         this.restoreSelection();
-        const files: Array<String> = this.props.addedImages || [];
+        const files: Array<string> = this.props.addedImages || [];
         files.map(value => this.insertImgElement(value));
     }
 
@@ -74,7 +74,7 @@ export default class EditorSheet extends Component {
         }
     }
 
-    onChangeFontStyle = (index, event) => {
+    onChangeFontStyle = (index:number, event) => {
         if (index == 4) {
             this.openModal();
             return;
