@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import SideTools from '../../basecomponent/sideTools';
 import Comments from './comments';
 
-export default class Article extends Component {
+export default class Article extends React.Component {
     constructor(props) {
         super(props);
         let article_id = parseInt(this.props.location.pathname.replace(/\/p\//, ''))
@@ -25,6 +25,6 @@ export default class Article extends Component {
                 <Comments comments={comments} requestAction={requestAction} article_id={this.state.article_id} />
                 <SideTools />
             </div>
-        )
+        );
     }
 }

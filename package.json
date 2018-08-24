@@ -29,6 +29,7 @@
 		"@types/node": "^10.3.2",
 		"@types/react": "^16.3.17",
 		"@types/react-dom": "^16.0.6",
+		"@types/react-redux": "^6.0.6",
 		"@types/redux": "^3.6.0",
 		"@types/socket.io": "^1.4.33",
 		"@types/superagent": "3.8.4",
