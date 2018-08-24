@@ -1,17 +1,21 @@
-import ApiClient, {methodName} from './apiClient';
+import ApiClient, { methodName } from './apiClient';
+import { AnyAction } from 'redux';
 
 const createMethod = (method: methodName, types: string[], prefix: string) =>
     ({ params, data }: { params?: object, data?: object } = {}) => ({
         types,
         promise: (client: ApiClient) => client[method](prefix, { params, data })
     });
-
-type methodFunc = ({ params, data }: { params?: object, data?: object }) => void;
-interface IMethods {
+export type methodFunc = ({ params, data }: { params?: object, data?: object }) => void;
+export interface IMethods {
     create?: methodFunc;
     load?: methodFunc;
     update?: methodFunc;
     del?: methodFunc;
+}
+export interface ISpecificAction extends AnyAction {
+    params?: any;
+    data?: any;
 }
 
 const createMethodAndConstants = (
@@ -63,7 +67,7 @@ const createMethodAndConstants = (
 //     // Objectc
 // }
 
-export interface IState {
+export interface ICommonState {
     loading?: boolean;
     loaded?: boolean;
     editting?: boolean;
@@ -86,9 +90,9 @@ export interface IAction {
 
 export default class CreateCRUD {
     methods: IMethods;
-    createReducer: (state: IState, action: IAction) => IState;
+    createReducer: (state: ICommonState, action: IAction) => ICommonState;
     constructor(prefix: string, actions: string, pagename: string) {
-        const constants: {[key: string] : string} = {};
+        const constants: { [key: string]: string } = {};
         const methods: IMethods = {};
         const actionsMap = {
             C: 'CREATE',
@@ -100,8 +104,8 @@ export default class CreateCRUD {
         [...actions].map((action: 'C' | 'R' | 'U' | 'D', index, newActions) => {
             createMethodAndConstants(prefix, newActions, action, constants, methods, actionsMap[action], pagename);
         });
-        const createReducer: (state: IState, action: IAction) => IState = (
-            state: IState = {
+        const createReducer: (state: ICommonState, action: IAction) => ICommonState = (
+            state: ICommonState = {
                 loading: false,
                 loaded: false,
                 loadData: {},

@@ -5,8 +5,11 @@ import * as titles from './titles';
 import * as articles from './articles';
 import * as urlimage from './urlimage';
 import * as comment from './comment';
+import { IMethods } from '../../../utils/createCRUD';
 
-export {
+export type ModuleMethod = 'create' | 'load' | 'update' | 'del';
+
+const modules: { [key: string]: IMethods } = {
     article,
     auth,
     images,
@@ -15,3 +18,5 @@ export {
     urlimage,
     comment
 };
+
+export default modules;

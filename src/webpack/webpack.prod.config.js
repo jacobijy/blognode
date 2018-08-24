@@ -20,22 +20,16 @@ module.exports = {
     module: {
         // 加载器配置
         rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['react']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
+            { test: /\.tsx?$/, loader: "ts-loader" },
+
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
+
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
-            }
+            },
+
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
     // 其他解决方案配置

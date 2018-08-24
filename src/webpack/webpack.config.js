@@ -18,27 +18,23 @@ module.exports = {
     module: {
         // 加载器配置
         rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['react']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
+            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+            { test: /\.tsx?$/, loader: "ts-loader" },
+
+            { test: /\.css$/, loader: 'style-loader!css-loader'},
+
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
-            }
+            },
+
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
     // 其他解决方案配置
     resolve: {
-        extensions: [' ', '.js', '.jsx', '.css', '.json', '.svg']
+        extensions: [' ', '.ts', '.tsx', '.css', '.json', '.svg']
     },
     optimization: {
 
@@ -53,7 +49,7 @@ module.exports = {
     ],
 
     devServer: {
-        contentBase: "./client",//本地服务器所加载的页面所在的目录
+        contentBase: "./views",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true//实时刷新
     }

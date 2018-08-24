@@ -1,10 +1,17 @@
 import Article from '../view/article';
 import { connect } from 'react-redux';
-import * as modules from '../modules';
+import modules, { ModuleMethod } from '../modules';
+import { Dispatch, AnyAction } from 'redux';
+import { ICommonState, ISpecificAction } from '../../../utils/createCRUD';
 
-const mapStateToProps = (state, props) => {
+interface IState {
+    article: ICommonState;
+    comment: ICommonState;
+}
+
+const mapStateToProps = (state: IState) => {
     const { article, comment } = state;
-    let { maintext, title, figure } = article.loadData || {};
+    let { maintext = '', title = '', figure = [] } = article.loadData || {};
     let { comments = [] } = comment.loadData || {};
     return {
         maintext,
@@ -14,8 +21,12 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    requestAction: (method, prefix, data) => (dispatch(modules[prefix][method](data)))
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    requestAction: (
+        method: ModuleMethod,
+        prefix: string,
+        data: ISpecificAction
+    ) => (dispatch(modules[prefix][method](data)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);

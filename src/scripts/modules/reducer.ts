@@ -7,7 +7,7 @@ import urlimage from './urlimage';
 import comment from './comment';
 import modulesConfig from './modules.json';
 import { combineReducers } from 'redux';
-import { IState } from '../../../utils/createCRUD';
+import { ICommonState } from '../../../utils/createCRUD';
 
 export default combineReducers({
     article,
@@ -22,14 +22,14 @@ export default combineReducers({
 export function initialState() {
     const modules = modulesConfig.modules;
     const state = {};
-    const defaultState: IState = {
+    const defaultState: ICommonState = {
         loading: false,
         loaded: false,
         loadData: {},
         loadError: null
     };
     modules.map(module => {
-        Object.assign(state, {[module]: Object.assign({}, defaultState)});
+        Object.assign(state, { [module]: Object.assign({}, defaultState) });
     });
     return state;
 }
