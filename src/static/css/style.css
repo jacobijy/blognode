@@ -1,0 +1,28 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+html,body, #main-container {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddddd;
+}
+
+ol li {
+  display: list-item;
+}
+
+ul li {
+  display: inline;
+}
+

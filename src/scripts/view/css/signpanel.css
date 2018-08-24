@@ -1,0 +1,27 @@
+div.container.sign {
+  width: 300px;
+}
+#signup-list {
+  margin: auto;
+}
+
+.input-message{
+  border: 2px;
+  border-radius: 5px;
+  background-color: aquamarine;
+}
+
+.option {
+  display: block;
+  margin: auto;
+  border: 5px;
+  background-color: azure;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
+}

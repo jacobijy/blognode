@@ -1,81 +1,113 @@
-const createMethod = (method, types, prefix) => ({ params, data } = {}) => ({
-    types: types,
-    promise: client => client[method](prefix, { params, data })
-})
+import ApiClient, {methodName} from './apiClient';
 
-const createMethodAndConstants = (prefix, actions: string, action, constants, methods, name, pagename) => {
-    pagename = pagename ? '-' + pagename : ''
+const createMethod = (method: methodName, types: string[], prefix: string) =>
+    ({ params, data }: { params?: object, data?: object } = {}) => ({
+        types,
+        promise: (client: ApiClient) => client[method](prefix, { params, data })
+    });
+
+type methodFunc = ({ params, data }: { params?: object, data?: object }) => void;
+interface IMethods {
+    create?: methodFunc;
+    load?: methodFunc;
+    update?: methodFunc;
+    del?: methodFunc;
+}
+
+const createMethodAndConstants = (
+    prefix: string,
+    actions: string[],
+    action: string,
+    constants: { [key: string]: any },
+    methods: IMethods,
+    name: string,
+    pagename: string) => {
+    pagename = pagename ? '-' + pagename : '';
     if (actions.includes(action)) {
         let types = [
             `${prefix}${pagename}/${name}`,
             `${prefix}${pagename}/${name}_SUCCESS`,
             `${prefix}${pagename}/${name}_FAIL`
-        ]
-        //constants
+        ];
+        // constants
         Object.assign(constants, {
             [name]: types[0],
             [name + '_SUCCESS']: types[1],
             [name + '_FAIL']: types[2]
-        })
+        });
 
         switch (action) {
             case 'C':
-                methods.create = createMethod('post', types, prefix)
+                methods.create = createMethod('post', types, prefix);
                 break;
 
             case 'R':
-                methods.load = createMethod('get', types, prefix)
+                methods.load = createMethod('get', types, prefix);
                 break;
 
             case 'U':
-                methods.update = createMethod('put', types, prefix)
+                methods.update = createMethod('put', types, prefix);
                 break;
 
             case 'D':
-                methods.del = createMethod('delete', types, prefix)
+                methods.del = createMethod('delete', types, prefix);
                 break;
 
             default:
                 break;
         }
     }
+};
+
+// interface ICommonActionType {
+//     // Objectc
+// }
+
+export interface IState {
+    loading?: boolean;
+    loaded?: boolean;
+    editting?: boolean;
+    editted?: boolean;
+    deleteing?: boolean;
+    deleted?: boolean;
+    loadData?: any;
+    loadError?: any;
+    editData?: any;
+    editError?: any;
+    deleteData?: any;
+    deleteError?: any;
 }
 
-export default class createCRUD {
-    constructor(prefix, actions: string, pagename) {
-        const constants = {};
-        const methods = {};
+export interface IAction {
+    type?: any;
+    result?: any;
+    error?: any;
+}
+
+export default class CreateCRUD {
+    methods: IMethods;
+    createReducer: (state: IState, action: IAction) => IState;
+    constructor(prefix: string, actions: string, pagename: string) {
+        const constants: {[key: string] : string} = {};
+        const methods: IMethods = {};
         const actionsMap = {
-            'C': 'CREATE',
-            'U': 'UPDATE',
-            'R': 'LOAD',
-            'D': 'DELETE'
+            C: 'CREATE',
+            U: 'UPDATE',
+            R: 'LOAD',
+            D: 'DELETE'
         };
 
-        [...actions].map((action, index, actions) => {
-            createMethodAndConstants(prefix, actions, action, constants, methods, actionsMap[action], pagename)
-        })
-
-        interface State {
-            loading: boolean,
-            loaded: boolean,
-            editting?: boolean,
-            editted?: boolean,
-            deleteing?: boolean,
-            deleted?: boolean,
-            loadData: Object,
-            loadError: Object,
-            editData?: Object,
-            editError?: Object,
-            deleteData?: Object,
-            deleteError?: Object
-        }
-        const createReducer = (state: State = {
-            loading: false,
-            loaded: false,
-            loadData: {},
-            loadError: null
-        }, action) => {
+        [...actions].map((action: 'C' | 'R' | 'U' | 'D', index, newActions) => {
+            createMethodAndConstants(prefix, newActions, action, constants, methods, actionsMap[action], pagename);
+        });
+        const createReducer: (state: IState, action: IAction) => IState = (
+            state: IState = {
+                loading: false,
+                loaded: false,
+                loadData: {},
+                loadError: null
+            },
+            action: IAction) => {
             switch (action.type) {
                 case constants.LOAD:
                     return {
@@ -144,8 +176,8 @@ export default class createCRUD {
                         deleteError: action.error
                     };
             }
-        }
+        };
 
-        return { methods, createReducer }
+        return { methods, createReducer };
     }
 }

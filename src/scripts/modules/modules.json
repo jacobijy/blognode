@@ -1,0 +1,3 @@
+{
+    "modules": ["article", "articles", "auth", "comment", "images", "titles", "urlimage"]
+}

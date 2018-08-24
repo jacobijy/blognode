@@ -1,0 +1,287 @@
+#editor-upload-image {
+	margin: auto;
+	width: auto;
+	background-color: dimgrey;
+	display: inline-block;
+}
+
+div.edit-sheet {
+	width: 400px;
+	margin: auto;
+	padding: 30px;
+	background-color: beige;
+}
+
+div.edit-sheet.p {
+	height: fit-content;
+}
+
+.tools {
+	width: 100%;
+	margin: 0px;
+	height: 40px;
+	padding-left: 0px;
+	background-color: #D9D9D9
+}
+
+ul.tools li {
+	height: 40px;
+	min-width: 35px;
+	line-height: 40px;
+	float: left;
+}
+
+ul.tools li:hover {
+	background-color: #595959
+}
+
+label {
+	display: inline-block;
+	margin: auto;
+}
+
+.fill-container {
+	height: 100%;
+}
+
+.sheet {
+	width: 100%;
+	height: calc(100% - 92px);
+}
+
+.sheet p {
+	margin: 0 0 25px;
+	word-break: break-word;
+}
+
+.sheet-title {
+	padding: 0px 80px 10px 40px;
+	width: 100%;
+	outline: none;
+	border: 0;
+}
+
+#editor {
+	height: 100%;
+	padding: 40px 40px 80px 40px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.7;
+	outline: 0;
+}
+
+#editor>p {
+	background-color: transparent;
+    color: rgb(51, 51, 51);
+    font-size: 15px;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    line-height: 25.5px;
+    margin-bottom: 15px;
+    overflow: auto;
+    white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.image-package {
+	text-align: center;
+    font-size: 0;
+}
+
+.image-package>img {
+	max-width: 100%;
+    text-align: center;
+    font-size: 0;
+}
+
+.title_panel {
+	overflow-y: scroll
+}
+
+.flex_fill {
+	height: 100%;
+	flex-flow: column;
+}
+
+.row {
+	min-height: 100%;
+}
+.row .col-4 {
+	background-color: orange
+}
+
+.row .col-8 {
+	border-radius: 5px;
+	background-color: lavender;
+	border: orangered
+}
+
+.row.no-gutters>div {
+    height: 100%;
+}
+
+p.editor-saved {
+	font-size: 0.5em;
+	margin: 0;
+	float: right
+}
+
+.icon.iconfont {
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+}
+
+.icon.iconfont.icon-addition_fill {
+    font-size: 18px
+}
+
+.editor-creator {
+    padding: 20px 20px 20px 0px;
+    cursor: pointer;
+    text-align: center;
+    height: 60px;
+    border-bottom: 1px solid #D9D9D9
+}
+
+ul.title-list {
+    padding-left: 0;
+}
+
+ul.title-list>li.title {
+    height: 90px;
+    display: list-item;
+    list-style: none;
+    border-bottom: 1px solid #D9D9D9;
+    line-height:  60px;
+    padding: 15px 60px 14px 30px;
+    border-left: 5px solid transparent
+}
+
+ul.title-list>li.title.selected {
+    border-left-color: #ec7259
+}
+
+span.title-shorten {
+	display: block;
+	height: 30px;
+	line-height: 30px
+}
+
+span.article-shorten {
+	display: block;
+	height: 30px;
+	line-height: 30px
+}
+
+li.title:hover, li.title.selected {
+    background-color: #e6e6e6
+}
+
+ul.title_panel span {
+    display: block;
+    height: 30px;
+    padding-left: 30px;
+}
+
+.collection {
+	text-align: center;
+	padding: 20px 18px 5px 18px;
+}
+
+.collection .to-main {
+	text-decoration: none;
+	display: block;
+	color: #ec7259;
+	border: 1px solid rgba(236,114,89,.8);
+	border-radius: 20px;
+	padding: 9px 0;
+}
+
+ul.collectionlist {
+    padding: 0;
+}
+
+ul.collectionlist>li {
+    display: list-item;
+    list-style: none;
+    border-left: 5px solid transparent;
+    height: 40px;
+}
+
+ul.collectionlist>li>span {
+    margin-left: 40px;
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 40px;
+}
+
+ul.collectionlist>li.selected {
+    border-left-color: #ec7259
+}
+
+ul.collectionlist>li:hover, ul.collectionlist>li.selected {
+    background-color: #666666
+}
+.modal-bg {
+    width: 412px;
+    height: 301px;
+    border-radius: 6px;
+    position: relative;
+    background: white
+}
+
+.close-bg {
+    width: 48px;
+    height: 48px;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+.modal-main-body {
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-main-body label {
+    width: 320px;
+    height: 42px;
+    line-height: 42px;
+    background-color: #555555;
+    color: white
+}
+
+.modal-type-url>span {
+	display: inline-block;
+    font-size: inherit;
+    line-height: 21px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 38px;
+}
+
+.modal-type-url>span>i {
+	font-size: inherit
+}
+
+.modal-type-url>input {
+	display: inline-block;
+    text-align: center;
+    width: 280px;
+    padding: 10px;
+    border-left: 0;
+    line-height: 21px;
+	font-size: 15px;
+	border-radius: 0;
+	outline: 0;
+}
+
+input#editor-upload-image {
+    position: absolute;
+    top: -12000px;
+    right: 0;
+    left: 0;
+}

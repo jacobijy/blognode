@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"module": "commonjs",
+		"target": "es6",
+		"allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016.array.include"
+    ],
+	},
+	"include": [
+		"**/*"
+	],
+	"exclude": [
+		"test/",
+		"dist/"
+  ],
+}
