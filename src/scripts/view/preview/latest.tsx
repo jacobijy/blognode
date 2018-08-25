@@ -9,13 +9,13 @@ export default class Latest extends Component {
     render() {
         const { articles = [] } = this.props;
         return (
-            <Panel id="latest" tag="icon-time-circle-o" tagName="最近文章">
+            <Panel id='latest' tag='icon-time-circle-o' tagName='最近文章'>
                 <ol>
                     {
                         articles.map((article, index) => (<li key={index}>{article.title}</li>))
                     }
                 </ol>
             </Panel>
-        )
+        );
     }
 }

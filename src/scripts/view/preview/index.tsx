@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LatestPanel from './latest';
 import MainArticles from './mainarticles';
@@ -11,7 +11,7 @@ export default class PreviewPage extends Component {
         articleNumber: PropTypes.number.isRequired,
         author_id: PropTypes.string.isRequired,
         requestAction: PropTypes.func.isRequired
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -19,8 +19,9 @@ export default class PreviewPage extends Component {
 
     componentDidMount() {
         const { articleNumber, author_id } = this.props;
-        if (author_id !== '')
-            this.props.requestAction('load', 'articles', { params: { author_id, articleNumber } })
+        if (author_id !== '') {
+            this.props.requestAction('load', 'articles', { params: { author_id, articleNumber } });
+        }
     }
 
     render() {
@@ -29,17 +30,17 @@ export default class PreviewPage extends Component {
             return null;
         }
         return (
-            <div className="container">
-                <div className="row">
+            <div className='container'>
+                <div className='row'>
                     <MainArticles articles={articles} />
-                    <div className="col-lg-3 col-md-3 col-sm-4 remove_padding">
-                        <div id="right-column">
+                    <div className='col-lg-3 col-md-3 col-sm-4 remove_padding'>
+                        <div id='right-column'>
                             <LatestPanel articles={articles} />
                             <Tags />
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }

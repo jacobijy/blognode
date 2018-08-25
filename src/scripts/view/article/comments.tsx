@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CommentAdd from './commentadd';
 import SingleComment from './singlecomment';
 
-interface ICommentDetail {
+export interface ICommentDetail {
     index: number;
     comment: string;
     name: string;
