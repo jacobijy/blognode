@@ -31,7 +31,7 @@ export default class Editor extends Component {
         if (!(author_id && author_name)) {
             return <Redirect to='/signin' />;
         }
-        let article_id = parseInt(getCookie('ARTICLE_EDIT')) || 0;
+        let article_id = parseInt(getCookie('ARTICLE_EDIT'), 10) || 0;
         const { files, maintext, titles = [], title = '', edited, editing, addedImages } = this.props;
         const { requestAction } = this.props;
         return (

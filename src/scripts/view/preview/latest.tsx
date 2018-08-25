@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import Panel from './sidePanel';
 
-export default class Latest extends Component {
-    constructor(props) {
+interface IArticle {
+    title: string;
+}
+
+interface ILatest {
+    articles: IArticle[];
+}
+export default class Latest extends Component<ILatest> {
+    constructor(props: ILatest) {
         super(props);
     }
 

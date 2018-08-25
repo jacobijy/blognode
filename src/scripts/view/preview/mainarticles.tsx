@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import SinglePanel from './singlepanel';
 import { getSimpleText } from '../../utils/clienttools';
 
-export default class MainArticles extends Component {
-    constructor(props) {
-        super(props);
-    }
+interface IArticleSingle {
+    maintext: string;
+    figure: string[];
+    title: string;
+    articleId: number;
+}
+interface IMainArticles {
+    articles: IArticleSingle[];
+}
 
-    renderSinglePanel(article, index) {
-        const { maintext, figure, title, article_id } = article;
+export default class MainArticles extends Component<IMainArticles> {
+
+    renderSinglePanel(article: IArticleSingle, index: number) {
+        const { maintext, figure, title, articleId } = article;
         return (
             <SinglePanel
                 key={index}
-                article_id={article_id}
+                articleId={articleId}
                 article={getSimpleText(maintext)}
                 image={figure[0]}
                 title={title}

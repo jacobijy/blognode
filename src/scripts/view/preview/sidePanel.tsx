@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 
-export default class SidePanel extends Component {
-    constructor(props) {
-        super(props);
-    }
+interface ISidePanel {
+    tag: string;
+    id: string;
+    tagName: string;
+}
+
+export default class SidePanel extends Component<ISidePanel>{
 
     render() {
         const { tag, tagName, id } = this.props;
         return (
             <div id={id} style={{ backgroundColor: '#444', color: '#bbb' }}>
                 <h5><i className={`icon iconfont ${tag}`}></i>&nbsp;{tagName}</h5>
-                <hr/>
+                <hr />
                 {this.props.children}
             </div>
         );
