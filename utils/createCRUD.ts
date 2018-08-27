@@ -1,12 +1,17 @@
 import ApiClient, { methodName } from './apiClient';
-import { AnyAction } from 'redux';
+import { AnyAction, Action } from 'redux';
 
 const createMethod = (method: methodName, types: string[], prefix: string) =>
     ({ params, data }: { params?: object, data?: object } = {}) => ({
         types,
         promise: (client: ApiClient) => client[method](prefix, { params, data })
     });
-export type methodFunc = ({ params, data }: { params?: object, data?: object }) => void;
+
+export interface ICombineActions extends Action {
+    types: string[],
+    promise: (client: ApiClient) => Promise<any>;
+}
+export type methodFunc = ({ params, data }: { params?: object, data?: object }) => ICombineActions;
 export interface IMethods {
     create?: methodFunc;
     load?: methodFunc;
@@ -63,10 +68,6 @@ const createMethodAndConstants = (
     }
 };
 
-// interface ICommonActionType {
-//     // Objectc
-// }
-
 export interface ICommonState {
     loading?: boolean;
     loaded?: boolean;
@@ -88,100 +89,96 @@ export interface IAction {
     error?: any;
 }
 
-export default class CreateCRUD {
-    methods: IMethods;
-    createReducer: (state: ICommonState, action: IAction) => ICommonState;
-    constructor(prefix: string, actions: string, pagename: string) {
-        const constants: { [key: string]: string } = {};
-        const methods: IMethods = {};
-        const actionsMap = {
-            C: 'CREATE',
-            U: 'UPDATE',
-            R: 'LOAD',
-            D: 'DELETE'
-        };
+export default function CreateCRUD(prefix: string, actions: string, pagename: string) {
+    const constants: { [key: string]: string } = {};
+    const methods: IMethods = {};
+    const actionsMap = {
+        C: 'CREATE',
+        U: 'UPDATE',
+        R: 'LOAD',
+        D: 'DELETE'
+    };
 
-        [...actions].map((action: 'C' | 'R' | 'U' | 'D', index, newActions) => {
-            createMethodAndConstants(prefix, newActions, action, constants, methods, actionsMap[action], pagename);
-        });
-        const createReducer: (state: ICommonState, action: IAction) => ICommonState = (
-            state: ICommonState = {
-                loading: false,
-                loaded: false,
-                loadData: {},
-                loadError: null
-            },
-            action: IAction) => {
-            switch (action.type) {
-                case constants.LOAD:
-                    return {
-                        ...state,
-                        loading: true
-                    };
-                case constants.LOAD_SUCCESS:
-                    return {
-                        ...state,
-                        loading: false,
-                        loaded: true,
-                        loadData: action.result,
-                        loadError: null
-                    };
-                case constants.LOAD_FAIL:
-                    return {
-                        ...state,
-                        loading: false,
-                        loaded: false,
-                        loadData: null,
-                        loadError: action.error
-                    };
-                case constants.CREATE:
-                case constants.UPDATE:
-                    return {
-                        ...state,
-                        editing: true
-                    };
-                case constants.CREATE_SUCCESS:
-                case constants.UPDATE_SUCCESS:
-                    return {
-                        ...state,
-                        editing: false,
-                        edited: true,
-                        editData: action.result,
-                        editError: null
-                    };
-                case constants.CREATE_FAIL:
-                case constants.UPDATE_FAIL:
-                    return {
-                        ...state,
-                        editing: false,
-                        edited: false,
-                        editData: null,
-                        editError: action.error
-                    };
-                case constants.DELETE:
-                    return {
-                        ...state,
-                        deleteing: true
-                    };
-                case constants.DELETE_SUCCESS:
-                    return {
-                        ...state,
-                        deleteing: false,
-                        deleted: true,
-                        deleteData: action.result,
-                        deleteError: null
-                    };
-                case constants.DELETE_FAIL:
-                    return {
-                        ...state,
-                        deleteing: false,
-                        deleted: false,
-                        deleteData: null,
-                        deleteError: action.error
-                    };
-            }
-        };
+    [...actions].map((action: 'C' | 'R' | 'U' | 'D', index, newActions) => {
+        createMethodAndConstants(prefix, newActions, action, constants, methods, actionsMap[action], pagename);
+    });
+    const createReducer: (state: ICommonState, action: IAction) => ICommonState = (
+        state: ICommonState = {
+            loading: false,
+            loaded: false,
+            loadData: {},
+            loadError: null
+        },
+        action: IAction) => {
+        switch (action.type) {
+            case constants.LOAD:
+                return {
+                    ...state,
+                    loading: true
+                };
+            case constants.LOAD_SUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    loaded: true,
+                    loadData: action.result,
+                    loadError: null
+                };
+            case constants.LOAD_FAIL:
+                return {
+                    ...state,
+                    loading: false,
+                    loaded: false,
+                    loadData: null,
+                    loadError: action.error
+                };
+            case constants.CREATE:
+            case constants.UPDATE:
+                return {
+                    ...state,
+                    editing: true
+                };
+            case constants.CREATE_SUCCESS:
+            case constants.UPDATE_SUCCESS:
+                return {
+                    ...state,
+                    editing: false,
+                    edited: true,
+                    editData: action.result,
+                    editError: null
+                };
+            case constants.CREATE_FAIL:
+            case constants.UPDATE_FAIL:
+                return {
+                    ...state,
+                    editing: false,
+                    edited: false,
+                    editData: null,
+                    editError: action.error
+                };
+            case constants.DELETE:
+                return {
+                    ...state,
+                    deleteing: true
+                };
+            case constants.DELETE_SUCCESS:
+                return {
+                    ...state,
+                    deleteing: false,
+                    deleted: true,
+                    deleteData: action.result,
+                    deleteError: null
+                };
+            case constants.DELETE_FAIL:
+                return {
+                    ...state,
+                    deleteing: false,
+                    deleted: false,
+                    deleteData: null,
+                    deleteError: action.error
+                };
+        }
+    };
 
-        return { methods, createReducer };
-    }
+    return { methods, createReducer };
 }

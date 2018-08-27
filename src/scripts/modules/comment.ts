@@ -1,6 +1,6 @@
 import createCRUD, { IAction, ICommonState } from '../../../utils/createCRUD';
 
-const { methods: { create, load, update, del }, createReducer } = new createCRUD('comment', 'CRUD', 'comment');
+const { methods: { create, load, update, del }, createReducer } = createCRUD('comment', 'CRUD', 'comment');
 
 export default function reducer(state: ICommonState = {}, action: IAction = {}) {
     return createReducer(state, action) || state;
