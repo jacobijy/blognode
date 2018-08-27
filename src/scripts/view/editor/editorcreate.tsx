@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 export default class EditorCreator extends Component<{ createNewArticle: () => void }> {
-    static propTypes = {
-        createNewArticle: PropTypes.func.isRequired
-    };
 
     render() {
         const createNewArticle = this.props.createNewArticle;

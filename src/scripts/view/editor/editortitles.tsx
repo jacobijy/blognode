@@ -2,36 +2,36 @@ import React, { Component } from 'react';
 import EditorCreator from './editorcreate';
 import { getCookie, getInfoFromCookies, shotenString } from '../../utils/clienttools';
 import { setCookie } from '../../utils/clienttools';
-import PropTypes from 'prop-types';
 
-export default class Titles extends Component {
-    static propTypes = {
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired,
-        article_id: PropTypes.number.isRequired
-    };
+interface ITitles {
+    article: string;
+    articleId: number;
+    authorId: number;
+    titles: string[];
+    onOpenTitles: () => void;
+    requestAction: (method: string, prefix: string, data: any) => void;
+}
 
-    constructor(props) {
-        super(props);
-        this.titles = [];
-    }
+export default class Titles extends Component<ITitles> {
+    titles: HTMLLIElement[] = [];
 
-    onSelectArticle = (article) => {
-        const { requestAction, article_id } = this.props;
-        if (article == article_id) { return; }
-        setCookie('ARTICLE_EDIT', article);
+    onSelectArticle = (article: number) => {
+        const { requestAction, articleId } = this.props;
+        if (article === articleId) { return; }
+        setCookie('ARTICLE_EDIT', article.toString());
         requestAction('load', 'article', { params: { article_id: article } });
     }
 
-    renderLine(value, indexli) {
-        const { article_id = 0, article } = this.props;
+    renderLine(value: { articleId: number; title: string }, indexli: number) {
+        const { articleId = 0, article } = this.props;
         return (
-            <li className={value.article_id == article_id ? 'title selected' : 'title'}
-                onClick={this.onSelectArticle.bind(this, value.article_id)}
+            <li className={value.articleId === articleId ? 'title selected' : 'title'}
+                onClick={this.onSelectArticle.bind(this, value.articleId)}
                 key={indexli}
                 ref={li => { this.titles[indexli] = li; }}
             >
                 <span className='title-shorten'>{shotenString(value.title, 20)}</span>
-                <span className='article-shorten'>{value.article_id == article_id ? article : ''}</span>
+                <span className='article-shorten'>{value.articleId === articleId ? article : ''}</span>
             </li>
         );
     }
@@ -44,12 +44,12 @@ export default class Titles extends Component {
     }
 
     render() {
-        const { titles, article_id, author_id, onOpenTitles } = this.props;
+        const { titles, articleId, authorId, onOpenTitles } = this.props;
         return (
             <div>
                 <EditorCreator
-                    article_id={article_id}
-                    author_id={author_id}
+                    article_id={articleId}
+                    author_id={authorId}
                     createNewArticle={this.createNewArticle}
                     onOpenTitles={onOpenTitles}
                 />

@@ -12,11 +12,11 @@ interface IModalProps {
     visible: boolean;
     onClose: () => void;
     Component: React.ComponentClass<IComponent>;
-    onOption: () => void;
+    onOption: (...args: any[]) => void;
 }
 
 export default class Modal extends React.Component<IModalProps> {
-    ele : HTMLDivElement;
+    ele: HTMLDivElement;
 
     UNSAFE_componentWillUpdate(nextProps: IModalProps) {
         const visible = nextProps.visible;

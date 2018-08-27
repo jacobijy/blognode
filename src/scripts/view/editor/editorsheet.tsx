@@ -14,7 +14,7 @@ interface IEditorSheetProps {
     requestAction: (method: string, prefix: string, data: any) => void;
 }
 
-export default class EditorSheet extends Component<IEditorSheetProps, {modalVisible: boolean}>{
+export default class EditorSheet extends Component<IEditorSheetProps, { modalVisible: boolean }>{
     maintext: string;
     timer: number;
     onSheetMouseDown: boolean;
@@ -48,7 +48,7 @@ export default class EditorSheet extends Component<IEditorSheetProps, {modalVisi
         clearInterval(this.timer);
     }
 
-    saveArticle = () => {
+    saveArticle() {
         const { articleId = 0, images = [], title } = this.props;
         if (articleId === 0) {
             return;
@@ -68,7 +68,7 @@ export default class EditorSheet extends Component<IEditorSheetProps, {modalVisi
         requestAction('update', 'article', { data });
     }
 
-    uploadImages = (modal, style) => {
+    uploadImages(modal: { input: { files: File[]; value: string } }, style: boolean) {
         if (!modal.input) { return; }
         if (style) {
             const files: File[] = modal.input.files;
@@ -112,51 +112,56 @@ export default class EditorSheet extends Component<IEditorSheetProps, {modalVisi
             try {
                 selection.removeAllRanges();
             } catch (ex) {
-                document.body.createTextRange().select();
-                document.getSelectRange().empty();
+                // document.body.
+                // document.createRange().selectNode();
+                document.getSelection().empty();
             }
 
             selection.addRange(this.selectedRange);
         }
     }
 
-    handleMouseUp = (event) => {
+    handleMouseUp(event: React.MouseEvent) {
         this.selectedRange = this.getCurrentRange();
     }
 
-    handlePaste = (event) => {
+    handlePaste(event: React.ClipboardEvent) {
         console.log(event);
     }
 
-    handlePasteCapture = (event) => {
+    handlePasteCapture(event: React.ClipboardEvent) {
         console.log(event);
     }
 
-    openModal = () => {
+    openModal() {
         this.setState({
             modalVisible: true
         });
     }
 
-    closeModal = () => {
+    closeModal() {
         this.setState({
             modalVisible: false
         });
     }
 
-    insertImgElement = (file) => {
+    onChangeTitle() {
+        return;
+    }
+
+    insertImgElement(file: string) {
         if (this.images.includes(file)) { return; }
-        const style = 'min-width: 200px; min-height: 200px';
+        const style = { minWidth: '200px', minHeight: '200px' };
         const src = `/public/images/tmp/${file}`;
         const img_div =
-            `<div class="image-package"><img class="uploaded-img" style="${style}" src="${src}" /></div>`;
-        $('#editor').append(img_div);
+            <div className='image-package'><img className='uploaded-img' style={style} src={src} /></div>;
+        // document.querySelector('#editor').appendChild(document.createElement(img_div));
         this.images.push(file);
     }
 
     render() {
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        let { maintext, editing, edited } = this.props;
+        let { maintext, editting, editted } = this.props;
 
         return (
             <div className='no-gutters flex_fill' style={{ overflowY: 'hidden' }}>
@@ -166,7 +171,7 @@ export default class EditorSheet extends Component<IEditorSheetProps, {modalVisi
                     onOption={this.uploadImages}
                     visible={this.state.modalVisible}
                 />
-                <p className='editor-saved'>{editing ? '···SAVING' : edited ? 'SAVED' : 'NOT SAVED'}</p>
+                <p className='editor-saved'>{editting ? '···SAVING' : editted ? 'SAVED' : 'NOT SAVED'}</p>
                 <input
                     type='text'
                     className='sheet-title'

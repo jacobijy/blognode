@@ -13,9 +13,9 @@
 	},
 	"dependencies": {
 		"debug": "~2.6.9",
-		"log4js": "^2.8.0",
-		"react": "^16.4.0",
-		"react-dom": "^16.4.0",
+		"log4js": "^2.11.0",
+		"react": "^16.4.2",
+		"react-dom": "^16.4.2",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",
 		"redux": "^4.0.0",
@@ -25,18 +25,19 @@
 	},
 	"devDependencies": {
 		"@types/node": "^10.9.2",
-		"@types/react": "^16.3.17",
-		"@types/react-dom": "^16.0.6",
+		"@types/react": "^16.4.11",
+		"@types/react-dom": "^16.0.7",
 		"@types/react-redux": "^6.0.6",
 		"@types/react-router-dom": "^4.3.0",
 		"@types/superagent": "3.8.4",
 		"css-loader": "^0.28.11",
 		"html-webpack-plugin": "^3.2.0",
 		"ts-loader": "^4.5.0",
-		"url-loader": "^1.0.1",
-		"webpack": "^4.12.0",
+		"tslib": "^1.9.3",
+		"url-loader": "^1.1.1",
+		"webpack": "^4.17.1",
 		"webpack-bundle-analyzer": "^2.13.1",
 		"webpack-cli": "^2.1.5",
-		"webpack-dev-server": "^3.1.4"
+		"webpack-dev-server": "^3.1.5"
 	}
 }

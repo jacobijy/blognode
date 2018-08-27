@@ -5,30 +5,34 @@ import Titles from './editortitles';
 import { getCookie } from '../../utils/clienttools';
 import '../../../iconfont/iconfont.css';
 import '../css/editor.css';
-import PropTypes from 'prop-types';
 import Collection from './editorcollection';
 
-export default class Editor extends Component {
-    static propTypes = {
-        article_id: PropTypes.number.isRequired,
-        maintext: PropTypes.string.isRequired,
-        author_id: PropTypes.string.isRequired,
-        author_name: PropTypes.string.isRequired,
-        requestAction: PropTypes.func.isRequired,
-        titles: PropTypes.arrayOf(PropTypes.object).isRequired
-    };
+interface IEditorProps {
+    articleId: number;
+    maintext: string;
+    authorId: number;
+    authorName: string
+    requestAction: (method: string, prefix: string, data: any) => void;
+    titles: string[];
+    files: string[];
+    title: string[];
+    edited: boolean;
+    editing: boolean;
+    addedImages: string[];
+}
 
-    constructor(props) {
+export default class Editor extends Component<IEditorProps> {
+    constructor(props: IEditorProps) {
         super(props);
-        let { author_id, article_id } = this.props;
-        this.props.requestAction('load', 'titles', { params: { author_id } });
-        this.props.requestAction('load', 'article', { params: { article_id } });
+        let { authorId, articleId } = this.props;
+        this.props.requestAction('load', 'titles', { params: { authorId } });
+        this.props.requestAction('load', 'article', { params: { articleId } });
     }
 
     render() {
-        const { author_id, author_name } = this.props;
+        const { authorId, authorName } = this.props;
         /* <input name='file' id='editor-upload-image' onClick={this.uploadImages} /> */
-        if (!(author_id && author_name)) {
+        if (!(authorId && authorName)) {
             return <Redirect to='/signin' />;
         }
         let article_id = parseInt(getCookie('ARTICLE_EDIT'), 10) || 0;
@@ -46,7 +50,7 @@ export default class Editor extends Component {
                     </div>
                     <div className='col-sm-2 title_panel'>
                         <Titles
-                            author_id={author_id}
+                            author_id={authorId}
                             maintext={maintext}
                             article_id={article_id}
                             titles={titles}
