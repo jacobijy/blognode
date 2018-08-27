@@ -1,8 +1,8 @@
 import Article from '../view/article';
 import { connect } from 'react-redux';
 import modules, { ModuleMethod } from '../modules';
-import { Dispatch, AnyAction } from 'redux';
-import { ICommonState, ISpecificAction } from '../../../utils/createCRUD';
+import { Dispatch } from 'redux';
+import { ICommonState } from '../../../utils/createCRUD';
 
 interface IState {
     article: ICommonState;
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     requestAction: (
         method: ModuleMethod,
         prefix: string,
-        data: ISpecificAction
+        data: any
     ) => (dispatch(modules[prefix][method](data)))
 });
 

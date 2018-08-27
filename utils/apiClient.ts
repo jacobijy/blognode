@@ -11,12 +11,12 @@ export function formatUrl(path: string) {
 }
 
 export default class ApiClient {
-    get?: (...args: any[]) => void;
-    post?: (...args: any[]) => void;
-    put?: (...args: any[]) => void;
-    patch?: (...args: any[]) => void;
-    del?: (...args: any[]) => void;
-    delete?: (...args: any[]) => void;
+    get?: (...args: any[]) => Promise<any>;
+    post?: (...args: any[]) => Promise<any>;
+    put?: (...args: any[]) => Promise<any>;
+    patch?: (...args: any[]) => Promise<any>;
+    del?: (...args: any[]) => Promise<any>;
+    delete?: (...args: any[]) => Promise<any>;
     constructor(req: superagent.Request) {
         methods.forEach((method) =>
             this[method] =

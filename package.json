@@ -12,14 +12,15 @@
 		"protocol": "node ./protocols.js"
 	},
 	"dependencies": {
+		"@types/redux-promise": "^0.5.28",
 		"debug": "~2.6.9",
-		"log4js": "^2.8.0",
 		"react": "^16.4.0",
 		"react-dom": "^16.4.0",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",
 		"redux": "^4.0.0",
 		"redux-logger": "^3.0.6",
+		"redux-promise": "^0.6.0",
 		"redux-thunk": "^2.3.0",
 		"superagent": "^3.8.3"
 	},
