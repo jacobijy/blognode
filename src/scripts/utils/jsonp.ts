@@ -1,6 +1,6 @@
 export default function jsonp(
     url: string,
-    option: { callbackName: string, timeout: number } = { callbackName: 'jsonp', timeout: 0 }) {
+    option: { callbackName?: string, timeout?: number } = { callbackName: 'jsonp', timeout: 0 }) {
     let callbackName = option.callbackName;
     let timeout = option.timeout;
     let target = document.getElementsByTagName('script')[0] || document.head;

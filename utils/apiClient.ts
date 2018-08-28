@@ -17,7 +17,7 @@ export default class ApiClient {
     patch?: (...args: any[]) => Promise<any>;
     del?: (...args: any[]) => Promise<any>;
     delete?: (...args: any[]) => Promise<any>;
-    constructor(req: superagent.Request) {
+    constructor(req?: superagent.Request) {
         methods.forEach((method) =>
             this[method] =
             (

@@ -7,7 +7,7 @@ const createMethod = (method: methodName, types: string[], prefix: string) =>
         promise: (client: ApiClient) => client[method](prefix, { params, data })
     });
 
-export interface ICombineActions extends Action {
+export interface ICombineActions {
     types: string[],
     promise: (client: ApiClient) => Promise<any>;
 }
@@ -84,7 +84,7 @@ export interface ICommonState {
 }
 
 export interface IAction {
-    type?: any;
+    type?: string | symbol;
     result?: any;
     error?: any;
 }

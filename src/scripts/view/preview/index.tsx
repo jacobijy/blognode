@@ -5,6 +5,11 @@ import MainArticles from './mainarticles';
 import Tags from './tags';
 import '../css/article.css';
 
+interface IPreviewPage {
+    articleNumber: number;
+    requestAction: 
+}
+
 export default class PreviewPage extends Component {
     static propTypes = {
         articles: PropTypes.arrayOf(PropTypes.object),

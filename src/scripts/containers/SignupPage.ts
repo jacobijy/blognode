@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import SignupPanel from '../view/sign/signuppanel';
 import * as modules from '../modules';
 
@@ -7,11 +7,11 @@ const mapStateToProps = (state) => {
     return {
         redirectToLogin: result,
         SignMessage: msg
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     requestAction: (method, prefix, data) => (dispatch(modules[prefix][method](data)))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPanel);
